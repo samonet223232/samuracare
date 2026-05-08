@@ -12,7 +12,7 @@ export default function GuideDetail() {
     return (
       <main className="pt-32 text-center">
         <p className="text-neutral-500">المدخل غير موجود.</p>
-        <Link to="/guide" className="text-blush-400 mt-4 inline-block">← العودة إلى الدليل</Link>
+        <Link to="/guide" className="text-olive-500 mt-4 inline-block">← العودة إلى الدليل</Link>
       </main>
     );
   }
@@ -36,21 +36,21 @@ export default function GuideDetail() {
       </section>
 
       <div className="max-w-5xl mx-auto px-6 py-12">
-        <Link to="/guide" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-blush-400 transition-colors mb-10">
+        <Link to="/guide" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-olive-500 transition-colors mb-10">
           <ArrowRight size={15} /> العودة إلى دليل صانعي الجمال
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <FadeInSection>
-              <p className="font-serif text-xl italic text-blush-400 mb-6">"{entry.taglineAr}"</p>
+              <p className="font-serif text-xl italic text-olive-500 mb-6">"{entry.taglineAr}"</p>
 
               <div className="mb-8">
                 <h2 className="font-serif text-2xl text-neutral-800 mb-4">الفوائد</h2>
                 <ul className="space-y-2.5">
                   {entry.benefits.map(b => (
                     <li key={b} className="flex items-start gap-3 text-sm text-neutral-600">
-                      <CheckCircle size={15} className="text-sage-400 mt-0.5 shrink-0" />
+                      <CheckCircle size={15} className="text-olive-400 mt-0.5 shrink-0" />
                       {b}
                     </li>
                   ))}
@@ -62,7 +62,7 @@ export default function GuideDetail() {
                 <p className="text-sm text-neutral-600 leading-relaxed">{entry.usage}</p>
               </div>
 
-              <div className="bg-sage-50 border border-sage-100 rounded-xl p-6 mb-6">
+              <div className="bg-olive-50 border border-olive-100 rounded-xl p-6 mb-6">
                 <h3 className="font-serif text-lg text-neutral-800 mb-3">مناسب لـ</h3>
                 <p className="text-sm text-neutral-600">{entry.suitability}</p>
               </div>
@@ -107,7 +107,7 @@ export default function GuideDetail() {
                   <div className="space-y-3">
                     {relatedArticles.map(a => (
                       <Link key={a.id} to={`/articles/${a.slug}`} className="group block hover:bg-cream-50 -mx-2 px-2 py-2 rounded-lg transition-colors">
-                        <p className="text-sm font-serif text-neutral-700 group-hover:text-blush-400 transition-colors leading-snug">{a.title}</p>
+                        <p className="text-sm font-serif text-neutral-700 group-hover:text-olive-500 transition-colors leading-snug">{a.title}</p>
                         <span className="text-xs text-neutral-400 flex items-center gap-1 mt-1 group-hover:gap-1.5 transition-all">
                           <ArrowLeft size={10} /> اقرأي
                         </span>
@@ -130,7 +130,7 @@ export default function GuideDetail() {
                     <img src={e.image} alt={e.nameAr} className="w-20 h-20 object-cover shrink-0" />
                     <div className="p-3">
                       <h4 className="font-serif text-base text-neutral-800">{e.nameAr}</h4>
-                      <p className="text-xs text-blush-400 mt-1">{e.taglineAr}</p>
+                      <p className="text-xs text-olive-500 mt-1">{e.taglineAr}</p>
                     </div>
                   </Link>
                 ))}

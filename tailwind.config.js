@@ -17,25 +17,17 @@ export default {
           200: '#f5e8d0',
           300: '#edd9b4',
         },
-        blush: {
-          50: '#fdf4f4',
-          100: '#fce8e8',
-          200: '#f8cfcf',
-          300: '#f2a8a8',
-          400: '#e87878',
-          500: '#d95555',
+        // Primary brand color: Muted Olive Green #4D5C4A
+        olive: {
+          50:  '#f4f5f3',   // near-white tint — safe for section backgrounds
+          100: '#e6e9e5',   // very light olive — hover fills, subtle cards
+          200: '#c9d0c7',   // soft — decorative borders, dividers
+          300: '#a4b0a1',   // medium-light — labels on dark backgrounds
+          400: '#718d6d',   // medium — secondary accents
+          500: '#4D5C4A',   // PRIMARY BRAND COLOR
+          600: '#3d4a39',   // slightly darker — hover on buttons
+          700: '#2e3828',   // dark — strong text accents
         },
-        sage: {
-          50: '#f4f7f4',
-          100: '#e7efe7',
-          200: '#cfe0cf',
-          300: '#a8c7a8',
-          400: '#78a878',
-          500: '#4d894d',
-        },
-        stone: {
-          warm: '#8c7b6b',
-        }
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

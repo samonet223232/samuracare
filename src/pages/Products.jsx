@@ -16,7 +16,7 @@ export default function Products() {
       {/* Page header */}
       <section className="bg-cream-100 py-20 px-6 text-center">
         <FadeInSection>
-          <p className="text-xs font-sans tracking-[0.3em] uppercase text-blush-400 mb-3">Small Batches · Pure Ingredients</p>
+          <p className="text-xs font-sans tracking-[0.3em] uppercase text-olive-500 mb-3">Small Batches · Pure Ingredients</p>
           <h1 className="font-serif text-5xl md:text-6xl font-light text-neutral-800 mb-4">Our Products</h1>
           <p className="text-xs text-neutral-400 font-sans mb-5">منتجاتنا الطبيعية</p>
           <p className="text-neutral-500 max-w-xl mx-auto text-base">
@@ -82,7 +82,7 @@ export default function Products() {
                       </span>
                     )}
                   </div>
-                  <span className="text-sm text-blush-400 font-sans font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <span className="text-sm text-olive-500 font-sans font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                     View Details <ArrowRight size={14} />
                   </span>
                 </div>

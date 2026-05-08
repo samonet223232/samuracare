@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="mb-4">
               <span className="font-serif text-2xl font-semibold text-white">
-                سامورا<span className="text-blush-300">كير</span>
+                سامورا<span className="text-olive-300">كير</span>
               </span>
               <p className="text-sm text-neutral-500 mt-0.5 font-sans tracking-widest">SAMURACARE</p>
             </div>
@@ -19,15 +19,15 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                className="p-2 bg-neutral-800 rounded-full hover:bg-blush-400 transition-colors">
+                className="p-2 bg-neutral-800 rounded-full hover:bg-olive-500 transition-colors">
                 <Instagram size={16} />
               </a>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                className="p-2 bg-neutral-800 rounded-full hover:bg-blush-400 transition-colors">
+                className="p-2 bg-neutral-800 rounded-full hover:bg-olive-500 transition-colors">
                 <Facebook size={16} />
               </a>
               <a href="mailto:hello@samuracare.com"
-                className="p-2 bg-neutral-800 rounded-full hover:bg-blush-400 transition-colors">
+                className="p-2 bg-neutral-800 rounded-full hover:bg-olive-500 transition-colors">
                 <Mail size={16} />
               </a>
             </div>
@@ -50,11 +50,11 @@ export default function Footer() {
             <h4 className="text-white font-sans text-sm font-medium tracking-widest uppercase mb-4">تواصل معنا</h4>
             <ul className="space-y-3 text-sm text-neutral-400">
               <li className="flex items-start gap-2">
-                <Mail size={14} className="mt-1 text-blush-300 shrink-0" />
+                <Mail size={14} className="mt-1 text-olive-300 shrink-0" />
                 <a href="mailto:hello@samuracare.com" className="hover:text-white transition-colors">hello@samuracare.com</a>
               </li>
               <li className="flex items-start gap-2">
-                <MapPin size={14} className="mt-1 text-blush-300 shrink-0" />
+                <MapPin size={14} className="mt-1 text-olive-300 shrink-0" />
                 <span>samuracare.com</span>
               </li>
             </ul>

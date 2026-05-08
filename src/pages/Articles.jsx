@@ -13,9 +13,9 @@ export default function Articles() {
 
   return (
     <main className="pt-24">
-      <section className="bg-sage-50 py-20 px-6 text-center">
+      <section className="bg-olive-50 py-20 px-6 text-center">
         <FadeInSection>
-          <p className="text-xs font-sans tracking-widest text-sage-500 mb-3">معرفة الجمال</p>
+          <p className="text-xs font-sans tracking-widest text-olive-500 mb-3">معرفة الجمال</p>
           <h1 className="font-serif text-5xl md:text-6xl font-semibold text-neutral-800 mb-4">المقالات والأدلة</h1>
           <p className="text-xs text-neutral-400 font-sans mb-5">Articles & Beauty Guides</p>
           <p className="text-neutral-500 max-w-xl mx-auto text-base">
@@ -31,7 +31,7 @@ export default function Articles() {
               key={cat}
               onClick={() => setActive(cat)}
               className={`px-4 py-1.5 rounded-full text-xs font-sans font-medium transition-all duration-200 ${
-                active === cat ? 'bg-neutral-800 text-white' : 'bg-cream-100 text-neutral-600 hover:bg-cream-200'
+                active === cat ? 'bg-olive-500 text-white' : 'bg-cream-100 text-neutral-600 hover:bg-cream-200'
               }`}
             >
               {cat}
@@ -47,14 +47,14 @@ export default function Articles() {
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div className="relative overflow-hidden h-72 md:h-auto">
                   <img src={featured.image} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <span className="absolute top-4 right-4 bg-white/90 text-blush-400 text-xs font-sans font-medium px-3 py-1 rounded-full">مميّز</span>
+                  <span className="absolute top-4 right-4 bg-white/90 text-olive-500 text-xs font-sans font-medium px-3 py-1 rounded-full">مميّز</span>
                 </div>
                 <div className="p-8 md:p-12 flex flex-col justify-center">
-                  <span className="text-xs text-sage-500 font-sans mb-3">{featured.category}</span>
+                  <span className="text-xs text-olive-500 font-sans mb-3">{featured.category}</span>
                   <h2 className="font-serif text-3xl md:text-4xl text-neutral-800 mb-3 leading-snug">{featured.title}</h2>
                   <p className="text-base text-neutral-600 leading-relaxed mb-6">{featured.excerpt}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-blush-400 font-sans font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                    <span className="text-sm text-olive-500 font-sans font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                       <ArrowLeft size={14} /> اقرأي المزيد
                     </span>
                     <span className="text-xs text-neutral-400 flex items-center gap-1">
@@ -76,12 +76,12 @@ export default function Articles() {
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs text-sage-500 font-sans">{article.category}</span>
+                    <span className="text-xs text-olive-500 font-sans">{article.category}</span>
                     <span className="text-xs text-neutral-400 flex items-center gap-1"><Clock size={11} /> {article.readTime}</span>
                   </div>
                   <h3 className="font-serif text-xl text-neutral-800 mb-3 leading-snug">{article.title}</h3>
                   <p className="text-sm text-neutral-600 leading-relaxed mb-4">{article.excerpt}</p>
-                  <span className="text-sm text-blush-400 font-sans font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <span className="text-sm text-olive-500 font-sans font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                     <ArrowLeft size={14} /> اقرأي المزيد
                   </span>
                 </div>

@@ -12,7 +12,7 @@ export default function ProductDetail() {
     return (
       <main className="pt-32 text-center">
         <p className="text-neutral-500">Product not found.</p>
-        <Link to="/products" className="text-blush-400 mt-4 inline-block">← Back to Products</Link>
+        <Link to="/products" className="text-olive-500 mt-4 inline-block">← Back to Products</Link>
       </main>
     );
   }
@@ -24,7 +24,7 @@ export default function ProductDetail() {
     <main className="pt-24">
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Back */}
-        <Link to="/products" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-blush-400 transition-colors mb-10">
+        <Link to="/products" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-olive-500 transition-colors mb-10">
           <ArrowLeft size={15} /> Back to Products
         </Link>
 
@@ -38,7 +38,7 @@ export default function ProductDetail() {
 
           <FadeInSection delay={100}>
             <div>
-              <span className="text-xs font-sans tracking-widest uppercase text-blush-400">{product.category}</span>
+              <span className="text-xs font-sans tracking-widest uppercase text-olive-500">{product.category}</span>
               <h1 className="font-serif text-4xl md:text-5xl font-light text-neutral-800 mt-2 mb-1">{product.name}</h1>
               <p className="text-sm text-neutral-400 font-sans mb-6">{product.arabicName}</p>
               <p className="text-base text-neutral-600 leading-relaxed mb-8">{product.description}</p>
@@ -49,7 +49,7 @@ export default function ProductDetail() {
                 <ul className="space-y-2">
                   {product.benefits.map(b => (
                     <li key={b} className="flex items-center gap-2.5 text-sm text-neutral-600">
-                      <CheckCircle size={15} className="text-sage-400 shrink-0" />
+                      <CheckCircle size={15} className="text-olive-400 shrink-0" />
                       {b}
                     </li>
                   ))}
@@ -63,8 +63,8 @@ export default function ProductDetail() {
               </div>
 
               {/* Usage */}
-              <div className="bg-sage-50 border border-sage-100 rounded-xl p-5">
-                <p className="text-xs font-sans font-medium uppercase tracking-widest text-sage-500 mb-1">How to Use</p>
+              <div className="bg-olive-50 border border-olive-100 rounded-xl p-5">
+                <p className="text-xs font-sans font-medium uppercase tracking-widest text-olive-500 mb-1">How to Use</p>
                 <p className="text-sm text-neutral-700 leading-relaxed">{product.usage}</p>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function ProductDetail() {
                     <div>
                       <h4 className="font-serif text-base text-neutral-800">{entry.name}</h4>
                       <p className="text-xs text-neutral-400 mt-0.5 mb-2">{entry.tagline}</p>
-                      <span className="text-xs text-blush-400 flex items-center gap-1 group-hover:gap-2 transition-all">
+                      <span className="text-xs text-olive-500 flex items-center gap-1 group-hover:gap-2 transition-all">
                         View in Guide <ArrowRight size={11} />
                       </span>
                     </div>

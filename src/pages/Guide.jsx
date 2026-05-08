@@ -28,7 +28,7 @@ export default function Guide() {
         <div className="absolute inset-0 bg-neutral-900/75" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <FadeInSection>
-            <p className="text-xs font-sans tracking-widest text-blush-300 mb-3">مكتبة المرجع</p>
+            <p className="text-xs font-sans tracking-widest text-olive-300 mb-3">مكتبة المرجع</p>
             <h1 className="font-serif text-5xl md:text-6xl font-semibold text-white mb-4">دليل صانعي الجمال</h1>
             <p className="text-sm text-neutral-400 font-sans mb-3">Beauty Makers Guide</p>
             <p className="text-neutral-300 max-w-xl mx-auto text-base mb-8">
@@ -41,7 +41,7 @@ export default function Guide() {
                 placeholder="ابحثي عن زيت، مكوّن، أو وصفة..."
                 value={query}
                 onChange={e => setQuery(e.target.value)}
-                className="w-full pr-11 pl-5 py-3.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white placeholder-neutral-400 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-blush-300"
+                className="w-full pr-11 pl-5 py-3.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white placeholder-neutral-400 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-olive-300"
               />
             </div>
           </FadeInSection>
@@ -53,7 +53,7 @@ export default function Guide() {
           <button
             onClick={() => setCategory('all')}
             className={`px-4 py-1.5 rounded-full text-xs font-sans font-medium transition-all ${
-              categoryParam === 'all' ? 'bg-neutral-800 text-white' : 'bg-cream-100 text-neutral-600 hover:bg-cream-200'
+              categoryParam === 'all' ? 'bg-olive-500 text-white' : 'bg-cream-100 text-neutral-600 hover:bg-cream-200'
             }`}
           >
             جميع المداخل
@@ -63,7 +63,7 @@ export default function Guide() {
               key={cat.id}
               onClick={() => setCategory(cat.id)}
               className={`px-4 py-1.5 rounded-full text-xs font-sans font-medium transition-all ${
-                categoryParam === cat.id ? 'bg-neutral-800 text-white' : 'bg-cream-100 text-neutral-600 hover:bg-cream-200'
+                categoryParam === cat.id ? 'bg-olive-500 text-white' : 'bg-cream-100 text-neutral-600 hover:bg-cream-200'
               }`}
             >
               {cat.icon} {cat.titleAr}
@@ -80,7 +80,7 @@ export default function Guide() {
                 <button
                   key={cat.id}
                   onClick={() => setCategory(cat.id)}
-                  className="group text-right bg-white rounded-2xl p-6 border border-cream-200 hover:border-blush-200 hover:shadow-md transition-all"
+                  className="group text-right bg-white rounded-2xl p-6 border border-cream-200 hover:border-olive-200 hover:shadow-md transition-all"
                 >
                   <div className="text-3xl mb-3">{cat.icon}</div>
                   <h3 className="font-serif text-xl text-neutral-800 mb-2">{cat.titleAr}</h3>
@@ -104,8 +104,8 @@ export default function Guide() {
                     <img src={entry.image} alt={entry.nameAr} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute top-3 right-3">
                       <span className={`text-xs font-sans px-2.5 py-1 rounded-full font-medium ${
-                        entry.category === 'oils' ? 'bg-sage-100 text-sage-600' :
-                        entry.category === 'ingredients' ? 'bg-blush-100 text-blush-500' :
+                        entry.category === 'oils' ? 'bg-olive-100 text-olive-600' :
+                        entry.category === 'ingredients' ? 'bg-olive-100 text-olive-600' :
                         'bg-cream-200 text-neutral-600'
                       }`}>
                         {guideCategories.find(c => c.id === entry.category)?.titleAr}
@@ -115,14 +115,14 @@ export default function Guide() {
                   <div className="p-6">
                     <h3 className="font-serif text-xl text-neutral-800 mb-0.5">{entry.nameAr}</h3>
                     <p className="text-xs text-neutral-400 font-sans mb-2">{entry.name}</p>
-                    <p className="text-sm text-blush-400 italic mb-3">{entry.taglineAr}</p>
+                    <p className="text-sm text-olive-500 italic mb-3">{entry.taglineAr}</p>
                     <p className="text-xs text-neutral-400 mb-3">الموطن الأصلي: <span className="text-neutral-600">{entry.origin}</span></p>
                     <div className="flex flex-wrap gap-1 mb-4">
                       {entry.benefits.slice(0, 2).map(b => (
                         <span key={b} className="text-xs bg-cream-100 text-neutral-500 px-2 py-0.5 rounded-full">{b}</span>
                       ))}
                     </div>
-                    <span className="inline-flex items-center gap-1 text-sm text-blush-400 font-sans font-medium group-hover:gap-2 transition-all">
+                    <span className="inline-flex items-center gap-1 text-sm text-olive-500 font-sans font-medium group-hover:gap-2 transition-all">
                       <ArrowLeft size={14} /> اقرأي المدخل
                     </span>
                   </div>

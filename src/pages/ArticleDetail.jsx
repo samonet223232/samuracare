@@ -29,7 +29,7 @@ export default function ArticleDetail() {
     return (
       <main className="pt-32 text-center">
         <p className="text-neutral-500">المقال غير موجود.</p>
-        <Link to="/articles" className="text-blush-400 mt-4 inline-block">← العودة إلى المقالات</Link>
+        <Link to="/articles" className="text-olive-500 mt-4 inline-block">← العودة إلى المقالات</Link>
       </main>
     );
   }
@@ -43,14 +43,14 @@ export default function ArticleDetail() {
         <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
         <div className="absolute bottom-0 right-0 left-0 px-6 pb-8 max-w-4xl mx-auto">
-          <span className="bg-blush-400 text-white text-xs font-sans px-3 py-1 rounded-full">
+          <span className="bg-olive-500 text-white text-xs font-sans px-3 py-1 rounded-full">
             {article.category}
           </span>
         </div>
       </section>
 
       <article className="max-w-4xl mx-auto px-6 py-12">
-        <Link to="/articles" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-blush-400 transition-colors mb-8">
+        <Link to="/articles" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-olive-500 transition-colors mb-8">
           <ArrowRight size={15} /> العودة إلى المقالات
         </Link>
 
@@ -61,7 +61,7 @@ export default function ArticleDetail() {
             <span className="flex items-center gap-1.5"><Calendar size={12} /> {new Date(article.date).toLocaleDateString('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </div>
 
-          <p className="text-lg text-neutral-500 italic border-r-4 border-blush-200 pr-5 mb-10 leading-relaxed">
+          <p className="text-lg text-neutral-500 italic border-r-4 border-olive-200 pr-5 mb-10 leading-relaxed">
             {article.excerpt}
           </p>
 
@@ -76,13 +76,13 @@ export default function ArticleDetail() {
               <h2 className="font-serif text-2xl text-neutral-800 mb-6">في دليل صانعي الجمال</h2>
               <div className="flex flex-wrap gap-4">
                 {relatedGuide.map(entry => (
-                  <Link key={entry.id} to={`/guide/${entry.slug}`} className="group flex items-center gap-3 bg-cream-50 border border-cream-200 rounded-xl px-4 py-3 hover:border-blush-300 transition-colors">
+                  <Link key={entry.id} to={`/guide/${entry.slug}`} className="group flex items-center gap-3 bg-cream-50 border border-cream-200 rounded-xl px-4 py-3 hover:border-olive-300 transition-colors">
                     <img src={entry.image} alt={entry.nameAr} className="w-10 h-10 rounded-lg object-cover" />
                     <div>
-                      <p className="text-sm font-sans font-medium text-neutral-700 group-hover:text-blush-400 transition-colors">{entry.nameAr}</p>
+                      <p className="text-sm font-sans font-medium text-neutral-700 group-hover:text-olive-500 transition-colors">{entry.nameAr}</p>
                       <p className="text-xs text-neutral-400">{entry.taglineAr}</p>
                     </div>
-                    <ArrowLeft size={13} className="text-neutral-400 mr-2 group-hover:text-blush-400 transition-colors" />
+                    <ArrowLeft size={13} className="text-neutral-400 mr-2 group-hover:text-olive-500 transition-colors" />
                   </Link>
                 ))}
               </div>
@@ -100,7 +100,7 @@ export default function ArticleDetail() {
                     <img src={a.image} alt={a.title} className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="p-4">
                       <h4 className="font-serif text-base text-neutral-800 mb-2 leading-snug">{a.title}</h4>
-                      <span className="text-xs text-blush-400 flex items-center gap-1 group-hover:gap-2 transition-all">
+                      <span className="text-xs text-olive-500 flex items-center gap-1 group-hover:gap-2 transition-all">
                         <ArrowLeft size={11} /> اقرأي المزيد
                       </span>
                     </div>

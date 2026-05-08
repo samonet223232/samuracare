@@ -31,7 +31,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className="flex flex-col leading-none">
           <span className="font-serif text-2xl font-semibold tracking-wide text-neutral-800">
-            سامورا<span className="text-blush-400">كير</span>
+            سامورا<span className="text-olive-500">كير</span>
           </span>
           <span className="text-xs font-sans text-neutral-400 tracking-widest mt-0.5">
             SAMURACARE
@@ -44,9 +44,9 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm font-sans font-medium transition-colors duration-200 hover:text-blush-400 ${
+              className={`text-sm font-sans font-medium transition-colors duration-200 hover:text-olive-500 ${
                 location.pathname.startsWith(link.to)
-                  ? 'text-blush-400'
+                  ? 'text-olive-500'
                   : 'text-neutral-600'
               }`}
             >
@@ -55,7 +55,7 @@ export default function Navbar() {
           ))}
           <Link
             to="/guide"
-            className="bg-neutral-800 text-white text-sm px-5 py-2.5 rounded-full hover:bg-blush-400 transition-colors duration-300"
+            className="bg-olive-500 text-white text-sm px-5 py-2.5 rounded-full hover:bg-olive-600 transition-colors duration-300"
           >
             استكشف الدليل
           </Link>
@@ -78,14 +78,14 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className="text-base font-sans text-neutral-700 hover:text-blush-400 transition-colors py-1"
+              className="text-base font-sans text-neutral-700 hover:text-olive-500 transition-colors py-1"
             >
               {link.label}
             </Link>
           ))}
           <Link
             to="/guide"
-            className="mt-2 bg-neutral-800 text-white text-sm px-5 py-3 rounded-full text-center hover:bg-blush-400 transition-colors"
+            className="mt-2 bg-olive-500 text-white text-sm px-5 py-3 rounded-full text-center hover:bg-olive-600 transition-colors"
           >
             استكشف الدليل
           </Link>
