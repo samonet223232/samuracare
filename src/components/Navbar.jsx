@@ -16,7 +16,9 @@ export default function Navbar() {
   const searchRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+
   const isHome = location.pathname === '/';
+  const transparent = isHome && !scrolled && !open;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -43,25 +45,29 @@ export default function Navbar() {
     }
   };
 
-  // Transparent only on home page before scrolling
-  const isTransparent = isHome && !scrolled && !open;
-
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isTransparent ? 'bg-transparent' : 'bg-white shadow-sm border-b border-neutral-100'
-    }`}>
+    <header
+      style={{
+        background: transparent ? 'transparent' : '#ffffff',
+        boxShadow: transparent ? 'none' : '0 1px 3px rgba(0,0,0,0.08)',
+        borderBottom: transparent ? 'none' : '1px solid #f0f0f0',
+      }}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
 
-        {/* Logo — right side in RTL */}
+        {/* Logo */}
         <Link to="/" className="flex flex-col leading-none shrink-0">
-          <span className={`font-serif text-xl font-semibold tracking-wide transition-colors duration-300 ${
-            isTransparent ? 'text-white' : 'text-neutral-800'
-          }`}>
+          <span
+            style={{ color: transparent ? '#ffffff' : '#1a1a1a' }}
+            className="font-serif text-xl font-semibold tracking-wide transition-colors duration-300"
+          >
             سامورا<span className="text-olive-500">كير</span>
           </span>
-          <span className={`text-[10px] font-sans tracking-widest transition-colors duration-300 ${
-            isTransparent ? 'text-white/50' : 'text-neutral-400'
-          }`}>
+          <span
+            style={{ color: transparent ? 'rgba(255,255,255,0.5)' : '#9ca3af' }}
+            className="text-[10px] font-sans tracking-widest transition-colors duration-300"
+          >
             SAMURACARE
           </span>
         </Link>
@@ -74,32 +80,35 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative text-sm font-sans font-medium pb-0.5 transition-colors duration-200 ${
-                  isActive
-                    ? isTransparent ? 'text-white' : 'text-olive-600'
-                    : isTransparent ? 'text-white/75 hover:text-white' : 'text-neutral-600 hover:text-olive-500'
-                }`}
+                className="relative pb-1 text-sm font-sans font-medium transition-colors duration-200"
+                style={{
+                  color: isActive
+                    ? (transparent ? '#ffffff' : '#3d4a39')
+                    : (transparent ? 'rgba(255,255,255,0.75)' : '#525252'),
+                }}
               >
                 {link.label}
+                {/* Active indicator underline */}
                 {isActive && (
-                  <span className={`absolute -bottom-0.5 right-0 left-0 h-[2px] rounded-full transition-colors duration-300 ${
-                    isTransparent ? 'bg-white' : 'bg-olive-500'
-                  }`} />
+                  <span
+                    className="absolute bottom-0 right-0 left-0 h-[2px] rounded-full"
+                    style={{ background: transparent ? '#ffffff' : '#4D5C4A' }}
+                  />
                 )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Right side actions — search + CTA */}
-        <div className="hidden md:flex items-center gap-2 shrink-0">
-
+        {/* Right side: search + CTA */}
+        <div className="hidden md:flex items-center gap-3 shrink-0">
           {/* Expandable search */}
-          <div className="flex items-center gap-1">
-            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
-              searchOpen ? 'w-48 opacity-100 mr-1' : 'w-0 opacity-0'
-            }`}>
-              <form onSubmit={handleSearch}>
+          <div className="flex items-center">
+            <div
+              className="overflow-hidden transition-all duration-300 ease-in-out"
+              style={{ width: searchOpen ? '180px' : '0px', opacity: searchOpen ? 1 : 0 }}
+            >
+              <form onSubmit={handleSearch} className="pr-2">
                 <input
                   ref={searchRef}
                   type="text"
@@ -107,24 +116,23 @@ export default function Navbar() {
                   onChange={e => setSearchQuery(e.target.value)}
                   onKeyDown={e => e.key === 'Escape' && setSearchOpen(false)}
                   placeholder="ابحثي في الدليل..."
-                  className={`w-full py-1.5 pr-4 pl-3 text-sm rounded-full border focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent transition-all ${
-                    isTransparent
-                      ? 'bg-white/15 border-white/30 text-white placeholder-white/50'
-                      : 'bg-neutral-100 border-neutral-200 text-neutral-800 placeholder-neutral-400'
-                  }`}
+                  className="w-full py-1.5 pr-4 pl-3 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent"
+                  style={{
+                    background: transparent ? 'rgba(255,255,255,0.15)' : '#f5f5f5',
+                    border: transparent ? '1px solid rgba(255,255,255,0.3)' : '1px solid #e5e5e5',
+                    color: transparent ? '#ffffff' : '#1a1a1a',
+                  }}
                 />
               </form>
             </div>
             <button
               onClick={() => setSearchOpen(!searchOpen)}
               aria-label="بحث"
-              className={`w-9 h-9 flex items-center justify-center rounded-full transition-all duration-200 ${
-                searchOpen
-                  ? 'bg-olive-500 text-white'
-                  : isTransparent
-                    ? 'text-white/80 hover:text-white hover:bg-white/15'
-                    : 'text-neutral-500 hover:text-olive-600 hover:bg-olive-50'
-              }`}
+              className="w-9 h-9 flex items-center justify-center rounded-full transition-all duration-200"
+              style={{
+                color: searchOpen ? '#ffffff' : (transparent ? 'rgba(255,255,255,0.8)' : '#525252'),
+                background: searchOpen ? '#4D5C4A' : 'transparent',
+              }}
             >
               {searchOpen ? <X size={16} /> : <Search size={16} />}
             </button>
@@ -143,25 +151,23 @@ export default function Navbar() {
           <button
             onClick={() => setSearchOpen(!searchOpen)}
             aria-label="بحث"
-            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
-              isTransparent ? 'text-white/80 hover:text-white' : 'text-neutral-600 hover:bg-neutral-100'
-            }`}
+            className="w-9 h-9 flex items-center justify-center rounded-full transition-colors"
+            style={{ color: transparent ? 'rgba(255,255,255,0.85)' : '#525252' }}
           >
             <Search size={19} />
           </button>
           <button
             onClick={() => setOpen(!open)}
             aria-label="القائمة"
-            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
-              isTransparent ? 'text-white/80 hover:text-white' : 'text-neutral-600 hover:bg-neutral-100'
-            }`}
+            className="w-9 h-9 flex items-center justify-center rounded-full transition-colors"
+            style={{ color: transparent ? 'rgba(255,255,255,0.85)' : '#525252' }}
           >
             {open ? <X size={21} /> : <Menu size={21} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile search */}
+      {/* Mobile search bar */}
       {searchOpen && (
         <div className="md:hidden bg-white border-t border-neutral-100 px-5 py-3">
           <form onSubmit={handleSearch} className="relative">
