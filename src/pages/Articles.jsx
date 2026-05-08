@@ -12,7 +12,7 @@ export default function Articles() {
   const [featured, ...rest] = filtered;
 
   return (
-    <main className="pt-24">
+    <main className="pt-28">
       {/* Header */}
       <section className="bg-cream-50 py-20 px-6 text-center border-b border-cream-200">
         <FadeInSection>

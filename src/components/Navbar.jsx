@@ -54,33 +54,33 @@ export default function Navbar() {
       }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between gap-8">
 
         {/* Logo */}
         <Link to="/" className="flex flex-col leading-none shrink-0">
           <span
             style={{ color: transparent ? '#ffffff' : '#1a1a1a' }}
-            className="font-serif text-xl font-semibold tracking-wide transition-colors duration-300"
+            className="font-serif text-2xl font-semibold tracking-wide transition-colors duration-300"
           >
             سامورا<span className="text-olive-500">كير</span>
           </span>
           <span
             style={{ color: transparent ? 'rgba(255,255,255,0.5)' : '#9ca3af' }}
-            className="text-[10px] font-sans tracking-widest transition-colors duration-300"
+            className="text-xs font-sans tracking-widest transition-colors duration-300"
           >
             SAMURACARE
           </span>
         </Link>
 
         {/* Desktop nav — centered */}
-        <nav className="hidden md:flex items-center gap-8 flex-1 justify-center">
+        <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
           {navLinks.map((link) => {
             const isActive = location.pathname.startsWith(link.to);
             return (
               <Link
                 key={link.to}
                 to={link.to}
-                className="relative pb-1 text-sm font-sans font-medium transition-colors duration-200"
+                className="relative pb-1 text-base font-sans font-medium transition-colors duration-200"
                 style={{
                   color: isActive
                     ? (transparent ? '#ffffff' : '#3d4a39')
@@ -128,13 +128,13 @@ export default function Navbar() {
             <button
               onClick={() => setSearchOpen(!searchOpen)}
               aria-label="بحث"
-              className="w-9 h-9 flex items-center justify-center rounded-full transition-all duration-200"
+              className="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200"
               style={{
                 color: searchOpen ? '#ffffff' : (transparent ? 'rgba(255,255,255,0.8)' : '#525252'),
                 background: searchOpen ? '#4D5C4A' : 'transparent',
               }}
             >
-              {searchOpen ? <X size={16} /> : <Search size={16} />}
+              {searchOpen ? <X size={18} /> : <Search size={18} />}
             </button>
           </div>
 

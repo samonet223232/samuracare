@@ -22,7 +22,7 @@ export default function Guide() {
   const setCategory = (id) => setSearchParams(id === 'all' ? {} : { category: id });
 
   return (
-    <main className="pt-24">
+    <main className="pt-28">
       {/* Header */}
       <section className="relative py-28 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=1400&q=80)' }} />
@@ -40,7 +40,7 @@ export default function Guide() {
       </section>
 
       {/* Sticky filter + search bar */}
-      <section className="sticky top-16 z-30 bg-white shadow-md border-b border-neutral-200 py-3 px-6">
+      <section className="sticky top-20 z-30 bg-white shadow-md border-b border-neutral-200 py-3 px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-3">
           {/* Search */}
           <div className="relative w-full sm:w-64 shrink-0">

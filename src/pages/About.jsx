@@ -36,7 +36,7 @@ const timeline = [
 
 export default function About() {
   return (
-    <main className="pt-24">
+    <main className="pt-28">
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1400&q=80)' }} />
