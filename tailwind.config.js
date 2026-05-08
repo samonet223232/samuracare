@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"El Messiri"', 'Georgia', 'serif'],
+        serif: ['"Cairo"', 'system-ui', 'sans-serif'],
         sans: ['"Cairo"', 'system-ui', 'sans-serif'],
       },
       colors: {
