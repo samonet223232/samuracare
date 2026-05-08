@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { to: '/products', label: 'Products', ar: 'المنتجات' },
   { to: '/articles', label: 'Articles', ar: 'المقالات' },
   { to: '/guide', label: 'Beauty Makers Guide', ar: 'دليل الجمال' },
   { to: '/about', label: 'About', ar: 'عنّا' },
@@ -55,10 +54,10 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
-            to="/products"
+            to="/guide"
             className="bg-neutral-800 text-white text-sm px-5 py-2.5 rounded-full hover:bg-blush-400 transition-colors duration-300 tracking-wide"
           >
-            Shop Now
+            Explore Guide
           </Link>
         </nav>
 
@@ -86,10 +85,10 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
-            to="/products"
+            to="/guide"
             className="mt-2 bg-neutral-800 text-white text-sm px-5 py-3 rounded-full text-center hover:bg-blush-400 transition-colors"
           >
-            Shop Now
+            Explore Guide
           </Link>
         </div>
       )}

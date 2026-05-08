@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-neutral-900 text-neutral-300">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="mb-4">
@@ -15,7 +15,7 @@ export default function Footer() {
               <p className="text-sm text-neutral-500 mt-0.5 font-sans tracking-widest">سامورا كير</p>
             </div>
             <p className="text-sm text-neutral-400 leading-relaxed mb-5">
-              Handmade natural beauty products crafted with care, honesty, and a love for the earth.
+              Natural beauty knowledge, honest content, and handcrafted care — all in one place.
             </p>
             <div className="flex gap-4">
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
@@ -33,21 +33,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Shop */}
-          <div>
-            <h4 className="text-white font-sans text-sm font-medium tracking-widest uppercase mb-4">Shop</h4>
-            <ul className="space-y-2 text-sm">
-              {['Face Care', 'Body Care', 'Hair Care', 'Serums', 'Cleansers'].map(cat => (
-                <li key={cat}>
-                  <Link to="/products" className="text-neutral-400 hover:text-white transition-colors">{cat}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Learn */}
           <div>
-            <h4 className="text-white font-sans text-sm font-medium tracking-widest uppercase mb-4">Learn</h4>
+            <h4 className="text-white font-sans text-sm font-medium tracking-widest uppercase mb-4">Explore</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/articles" className="text-neutral-400 hover:text-white transition-colors">Beauty Articles</Link></li>
               <li><Link to="/guide" className="text-neutral-400 hover:text-white transition-colors">Beauty Makers Guide</Link></li>

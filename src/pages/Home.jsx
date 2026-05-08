@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, Sparkles, BookOpen } from 'lucide-react';
-import { products } from '../data/products';
 import { articles } from '../data/articles';
 import { guideCategories, guideEntries } from '../data/guide';
 import FadeInSection from '../components/FadeInSection';
 
 export default function Home() {
-  const featuredProducts = products.slice(0, 4);
   const featuredArticles = articles.slice(0, 5);
   const featuredGuide = guideEntries.slice(0, 3);
 
@@ -24,28 +22,28 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-cream-100/50 to-blush-50/60" />
         <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
           <p className="text-xs font-sans font-medium tracking-[0.3em] uppercase text-blush-400 mb-4 animate-fade-in">
-            Handmade · Natural · Honest — سامورا كير
+            Natural · Honest · Educational — سامورا كير
           </p>
           <h1 className="font-serif text-5xl md:text-7xl font-light text-neutral-800 leading-tight mb-6 animate-fade-up">
             Natural Beauty,<br />
             <em className="not-italic text-blush-400">Made with Care</em>
           </h1>
           <p className="text-lg text-neutral-600 font-sans font-light leading-relaxed mb-10 max-w-xl mx-auto animate-fade-up">
-            Discover handcrafted beauty essentials made from pure natural ingredients —
-            blended with knowledge, intention, and love.
+            Discover the world of natural beauty ingredients, honest skincare knowledge,
+            and handcrafted recipes — all in one place.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up">
             <Link
-              to="/products"
+              to="/guide"
               className="bg-neutral-800 text-white px-8 py-4 rounded-full text-sm font-sans font-medium tracking-wide hover:bg-blush-400 transition-colors duration-300"
             >
-              Shop Products
+              Explore the Guide
             </Link>
             <Link
               to="/articles"
               className="border border-neutral-400 text-neutral-700 px-8 py-4 rounded-full text-sm font-sans font-medium tracking-wide hover:border-blush-300 hover:text-blush-400 transition-colors duration-300"
             >
-              Explore Articles
+              Read Articles
             </Link>
           </div>
         </div>
@@ -63,7 +61,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
             {[
               { icon: <Leaf size={20} />, title: '100% Natural', sub: 'No harmful additives' },
-              { icon: <Sparkles size={20} />, title: 'Handmade', sub: 'Crafted in small batches' },
+              { icon: <Sparkles size={20} />, title: 'Handmade', sub: 'Crafted with intention' },
               { icon: <BookOpen size={20} />, title: 'Educational', sub: 'Know what you apply' },
             ].map((item) => (
               <div key={item.title} className="flex items-center justify-center gap-3">
@@ -77,59 +75,6 @@ export default function Home() {
           </div>
         </section>
       </FadeInSection>
-
-      {/* ── Products ── */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <FadeInSection>
-          <div className="text-center mb-14">
-            <p className="text-xs font-sans tracking-[0.3em] uppercase text-blush-400 mb-3">Handcrafted with Purpose</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-light text-neutral-800">Our Products</h2>
-            <div className="mt-4 w-12 h-px bg-blush-300 mx-auto" />
-          </div>
-        </FadeInSection>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredProducts.map((product, i) => (
-            <FadeInSection key={product.id} delay={i * 100}>
-              <Link
-                to={`/products/${product.slug}`}
-                className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="relative overflow-hidden h-56">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
-                    <span className="inline-block bg-white text-neutral-800 text-xs font-sans font-medium px-4 py-2 rounded-full">
-                      View Details
-                    </span>
-                  </div>
-                </div>
-                <div className="p-5">
-                  <p className="text-xs text-blush-400 font-sans tracking-wide mb-1">{product.category}</p>
-                  <h3 className="font-serif text-lg text-neutral-800 mb-1">{product.name}</h3>
-                  <p className="text-xs text-neutral-500 font-sans mb-2">{product.arabicName}</p>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{product.tagline}</p>
-                </div>
-              </Link>
-            </FadeInSection>
-          ))}
-        </div>
-
-        <FadeInSection>
-          <div className="text-center mt-12">
-            <Link
-              to="/products"
-              className="inline-flex items-center gap-2 border border-neutral-300 text-neutral-700 px-8 py-3.5 rounded-full text-sm font-sans font-medium hover:border-blush-300 hover:text-blush-400 transition-colors"
-            >
-              View All Products <ArrowRight size={15} />
-            </Link>
-          </div>
-        </FadeInSection>
-      </section>
 
       {/* ── Articles ── */}
       <section className="bg-cream-50 py-24">
@@ -241,9 +186,8 @@ export default function Home() {
                 traditional plant remedies from the Arab world and beyond.
               </p>
               <p className="text-neutral-600 text-base leading-relaxed mb-8">
-                Every product is handcrafted in small batches, using ingredients I trust
-                and understand. My mission is simple: give you the knowledge to care for
-                yourself naturally, honestly, and with joy.
+                My mission is simple: give you the knowledge to care for yourself naturally,
+                honestly, and with joy.
               </p>
               <Link
                 to="/about"
@@ -332,7 +276,7 @@ export default function Home() {
               Beauty Wisdom, Delivered Naturally
             </h2>
             <p className="text-neutral-500 text-sm mb-8">
-              Join our community for new articles, seasonal recipes, and product launches.
+              Join our community for new articles, seasonal recipes, and beauty guides.
             </p>
             <form
               className="flex flex-col sm:flex-row gap-3 justify-center"
