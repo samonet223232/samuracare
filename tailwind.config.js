@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['"El Messiri"', 'Georgia', 'serif'],
+        sans: ['"Cairo"', 'system-ui', 'sans-serif'],
       },
       colors: {
         cream: {

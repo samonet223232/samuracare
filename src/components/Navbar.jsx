@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { to: '/articles', label: 'Articles', ar: 'المقالات' },
-  { to: '/guide', label: 'Beauty Makers Guide', ar: 'دليل الجمال' },
-  { to: '/about', label: 'About', ar: 'عنّا' },
+  { to: '/articles', label: 'المقالات' },
+  { to: '/guide', label: 'دليل الجمال' },
+  { to: '/about', label: 'عنّا' },
 ];
 
 export default function Navbar() {
@@ -30,11 +30,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex flex-col leading-none">
-          <span className="font-serif text-2xl font-light tracking-widest text-neutral-800">
-            SAMURA<span className="text-blush-400">CARE</span>
+          <span className="font-serif text-2xl font-semibold tracking-wide text-neutral-800">
+            سامورا<span className="text-blush-400">كير</span>
           </span>
           <span className="text-xs font-sans text-neutral-400 tracking-widest mt-0.5">
-            سامورا كير
+            SAMURACARE
           </span>
         </Link>
 
@@ -44,7 +44,7 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm font-sans font-medium tracking-wide transition-colors duration-200 hover:text-blush-400 ${
+              className={`text-sm font-sans font-medium transition-colors duration-200 hover:text-blush-400 ${
                 location.pathname.startsWith(link.to)
                   ? 'text-blush-400'
                   : 'text-neutral-600'
@@ -55,9 +55,9 @@ export default function Navbar() {
           ))}
           <Link
             to="/guide"
-            className="bg-neutral-800 text-white text-sm px-5 py-2.5 rounded-full hover:bg-blush-400 transition-colors duration-300 tracking-wide"
+            className="bg-neutral-800 text-white text-sm px-5 py-2.5 rounded-full hover:bg-blush-400 transition-colors duration-300"
           >
-            Explore Guide
+            استكشف الدليل
           </Link>
         </nav>
 
@@ -65,7 +65,7 @@ export default function Navbar() {
         <button
           className="md:hidden p-2 text-neutral-700"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label="فتح القائمة"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -81,14 +81,13 @@ export default function Navbar() {
               className="text-base font-sans text-neutral-700 hover:text-blush-400 transition-colors py-1"
             >
               {link.label}
-              <span className="text-sm text-neutral-400 ml-2 font-sans">{link.ar}</span>
             </Link>
           ))}
           <Link
             to="/guide"
             className="mt-2 bg-neutral-800 text-white text-sm px-5 py-3 rounded-full text-center hover:bg-blush-400 transition-colors"
           >
-            Explore Guide
+            استكشف الدليل
           </Link>
         </div>
       )}

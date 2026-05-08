@@ -5,14 +5,22 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    direction: rtl;
   }
 
   body {
     @apply bg-cream-50 text-neutral-800 font-sans antialiased;
+    direction: rtl;
+    text-align: right;
   }
 
   h1, h2, h3, h4 {
     @apply font-serif;
+  }
+
+  input, textarea, select {
+    direction: rtl;
+    text-align: right;
   }
 }
 

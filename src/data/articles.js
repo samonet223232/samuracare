@@ -2,184 +2,172 @@ export const articles = [
   {
     id: 1,
     slug: 'benefits-of-argan-oil-for-skin',
-    title: 'The Golden Oil: Benefits of Argan for Skin & Hair',
-    arabicTitle: 'الذهب السائل: فوائد زيت الأرغان للبشرة والشعر',
-    excerpt: 'Discover why argan oil has been treasured by Moroccan women for centuries — and how to use it in your daily beauty ritual.',
-    content: `Argan oil, often called "liquid gold," is extracted from the kernels of the argan tree native to Morocco. Rich in vitamin E, fatty acids, and antioxidants, it has been a beauty secret for generations.
+    title: 'الذهب السائل: فوائد زيت الأرغان للبشرة والشعر',
+    excerpt: 'اكتشفي سبب تقدير نساء المغرب لزيت الأرغان عبر القرون — وكيف تستخدمينه في روتين عنايتكِ اليومي.',
+    content: `زيت الأرغان، المعروف بـ"الذهب السائل"، يُستخرج من نواة شجرة الأرغان الأصيلة في المغرب. غني بفيتامين E والأحماض الدهنية ومضادات الأكسدة، وقد ظل سر جمال المرأة عبر الأجيال.
 
-**Benefits for Skin**
-- Deeply moisturizes without clogging pores
-- Reduces appearance of fine lines and wrinkles
-- Helps heal acne and minimize scars
-- Provides antioxidant protection against environmental damage
+**فوائده للبشرة**
+- يرطّب بعمق دون أن يسدّ المسام
+- يقلّل من ظهور خطوط الترهل والتجاعيد
+- يساعد على شفاء حبوب الشباب وتخفيف الندوب
+- يوفر حماية من أضرار البيئة بفضل مضادات الأكسدة
 
-**Benefits for Hair**
-- Tames frizz and adds brilliant shine
-- Strengthens hair fiber reducing breakage
-- Conditions dry, damaged, or color-treated hair
-- Soothes a dry, itchy scalp
+**فوائده للشعر**
+- يُلطّف الشعر المجعّد ويمنحه لمعاناً باهراً
+- يقوّي خيوط الشعر ويقلل من تقصّفها
+- يُعالج الشعر الجاف والتالف والمصبوغ
+- يُهدّئ فروة الرأس الجافة والمتهيّجة
 
-**How to Use**
-For skin, apply 2–3 drops after cleansing as a serum or mix into your moisturizer. For hair, warm a few drops in palms and apply to damp or dry hair.
+**طريقة الاستخدام**
+للبشرة: ضعي 2-3 قطرات بعد التنظيف كسيروم أو امزجيه بالمرطّب. للشعر: سخّني بضع قطرات بين كفّيكِ وضعيها على الشعر الرطب أو الجاف.
 
-*Note: This article is for educational purposes only. Conduct a patch test before using any new oil.*`,
+*ملاحظة: هذا المقال لأغراض تعليمية فقط. أجري اختبار حساسية قبل استخدام أي زيت جديد.*`,
     image: 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=800&q=80',
-    category: 'Ingredients',
-    readTime: '5 min',
+    category: 'المكونات',
+    readTime: '5 دقائق',
     date: '2026-04-10',
-    relatedProducts: ['argan-rose-face-cream'],
     relatedGuide: ['argan-oil'],
     featured: true,
   },
   {
     id: 2,
     slug: 'diy-rose-water-toner',
-    title: 'How to Make Your Own Rose Water Toner at Home',
-    arabicTitle: 'كيف تصنعين ماء الورد في المنزل',
-    excerpt: 'A simple, beautiful recipe to create a pure rose water toner that balances your skin and smells divine.',
-    content: `Rose water is one of the oldest beauty ingredients known to humanity. It balances pH, calms redness, and leaves skin feeling refreshed.
+    title: 'كيف تصنعين ماء الورد في المنزل',
+    excerpt: 'وصفة بسيطة وجميلة لصنع تونر ماء الورد النقي الذي يوازن بشرتكِ ورائحته رائعة.',
+    content: `ماء الورد من أقدم مكونات التجميل في التاريخ. يوازن درجة حموضة البشرة، يهدّئ الاحمرار، ويمنحها الانتعاش.
 
-**What You Need**
-- Fresh or dried rose petals (chemical-free)
-- Distilled water
-- A pot and lid
+**المكوّنات**
+- بتلات ورد طازجة أو مجففة (خالية من المبيدات)
+- ماء مقطّر
+- قدر وغطاء
 
-**Method**
-1. Place rose petals in a pot and add just enough distilled water to cover them.
-2. Simmer on low heat until the petals lose their color (about 20–30 minutes).
-3. Strain the liquid and let it cool.
-4. Pour into a clean glass bottle with a spray top.
+**طريقة التحضير**
+1. ضعي بتلات الورد في القدر وأضيفي ماء مقطّراً يكفي لتغطيتها.
+2. اتركيها على نار هادئة حتى تفقد البتلات لونها (نحو 20-30 دقيقة).
+3. صفّي السائل واتركيه يبرد.
+4. صبّيه في زجاجة نظيفة برأس رذاذ.
 
-**How to Use**
-Spritz on clean skin after cleansing as a toner, or use as a facial mist throughout the day.
+**طريقة الاستخدام**
+رشّيه على البشرة النظيفة كتونر بعد التنظيف، أو استخدميه كبخاخ منعش على مدار اليوم.
 
-*Note: Homemade rose water has no preservatives. Store in the refrigerator and use within 1–2 weeks.*`,
+*ملاحظة: ماء الورد المنزلي لا يحتوي على مواد حافظة. احفظيه في الثلاجة واستخدميه خلال أسبوع إلى أسبوعين.*`,
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-    category: 'DIY',
-    readTime: '4 min',
+    category: 'وصفات منزلية',
+    readTime: '4 دقائق',
     date: '2026-04-05',
-    relatedProducts: [],
     relatedGuide: ['rose-water'],
   },
   {
     id: 3,
     slug: 'shea-butter-guide',
-    title: 'Everything You Need to Know About Shea Butter',
-    arabicTitle: 'كل ما تحتاجين معرفته عن زبدة الشيا',
-    excerpt: 'From the African shea tree to your skincare routine — the complete guide to this powerhouse natural butter.',
-    content: `Shea butter comes from the nuts of the shea tree, native to West Africa. Unrefined shea is ivory or yellowish, rich in vitamins A, E, and F, and deeply nourishing.
+    title: 'كل ما تحتاجين معرفته عن زبدة الشيا',
+    excerpt: 'من شجرة الشيا الأفريقية إلى روتين عنايتكِ — الدليل الشامل لهذه الزبدة الطبيعية القوية.',
+    content: `تأتي زبدة الشيا من مكسّرات شجرة الشيا الموطن الأصلي لغرب أفريقيا. الزبدة الخام كريمية أو صفراء اللون، وغنية بفيتامينات A وE وF، وعميقة التغذية.
 
-**Key Properties**
-- Emollient: creates a moisture barrier on skin
-- Anti-inflammatory: soothes eczema, psoriasis, and dry patches
-- Non-comedogenic: safe for most skin types including oily
+**خصائصها الأساسية**
+- مُرطّبة: تُشكّل حاجزاً للرطوبة على البشرة
+- مضادة للالتهاب: تُهدّئ الأكزيما، الصدفية، والبقع الجافة
+- غير مُسدّة للمسام: آمنة لمعظم أنواع البشرة بما فيها الدهنية
 
-**Uses in Beauty**
-- Body moisturizer and lip balm base
-- Hair conditioning treatment
-- Soothing balm for dry elbows and heels
-- Baby skin care
+**استخداماتها في التجميل**
+- مرطّب للجسم وأساس لبلسم الشفاه
+- علاج مكثّف لتغذية الشعر
+- بلسم مُهدّئ للمرفقين والكعبين الجافّين
+- عناية بلطيفة لبشرة الرضّع
 
-*Note: Choose unrefined, raw shea butter for maximum benefit. Refined shea has a longer shelf life but fewer active properties.*`,
+*ملاحظة: اختاري زبدة الشيا الخام غير المكرّرة للحصول على أقصى فائدة. الزبدة المكرّرة لها عمر أطول لكن خصائصها أقل.*`,
     image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-    category: 'Ingredients',
-    readTime: '6 min',
+    category: 'المكونات',
+    readTime: '6 دقائق',
     date: '2026-03-28',
-    relatedProducts: ['shea-honey-body-butter'],
     relatedGuide: ['shea-butter'],
   },
   {
     id: 4,
     slug: 'building-a-natural-skincare-routine',
-    title: 'Building a Simple Natural Skincare Routine',
-    arabicTitle: 'بناء روتين عناية طبيعي بسيط',
-    excerpt: 'You don\'t need dozens of products. Here\'s how to build an effective, natural skincare routine with just a few ingredients.',
-    content: `A minimal, natural skincare routine focuses on a few high-quality ingredients rather than a crowded shelf of products.
+    title: 'كيف تبنين روتين عناية طبيعي بسيط',
+    excerpt: 'لا تحتاجين إلى عشرات المنتجات. إليكِ كيف تبنين روتيناً طبيعياً فعّالاً بمكونات قليلة مختارة.',
+    content: `الروتين الطبيعي البسيط يعتمد على عدد محدود من المكونات عالية الجودة بدلاً من رف مزدحم بالمنتجات.
 
-**Morning Routine**
-1. Gentle cleanser or simply rinse with cool water
-2. Toner (rose water or witch hazel)
-3. Light oil or serum (rosehip or argan)
-4. SPF protection
+**روتين الصباح**
+1. منظّف لطيف أو الاكتفاء بالغسل بالماء البارد
+2. تونر (ماء الورد أو ماء الهاماميليس)
+3. زيت خفيف أو سيروم (زيت الورد أو الأرغان)
+4. واقٍ من الشمس
 
-**Evening Routine**
-1. Double cleanse (oil cleanser + gentle soap)
-2. Toner
-3. Treatment serum or facial oil
-4. Rich moisturizer or face cream
+**روتين المساء**
+1. تنظيف مزدوج (منظّف زيتي + صابون لطيف)
+2. تونر
+3. سيروم أو زيت للعلاج
+4. مرطّب غني أو كريم للوجه
 
-**Weekly**
-- Exfoliate with oat flour + honey mask
-- Deep condition hair with an oil blend
-- Face steam with herbs
+**أسبوعياً**
+- تقشير بقناع دقيق الشوفان والعسل
+- تغذية عميقة للشعر بمزيج زيوت
+- بخار الوجه بالأعشاب
 
-*Consistency is more important than the number of products you use.*`,
+*الاستمرارية أهم من عدد المنتجات التي تستخدمينها.*`,
     image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80',
-    category: 'Guides',
-    readTime: '7 min',
+    category: 'أدلة',
+    readTime: '7 دقائق',
     date: '2026-03-15',
-    relatedProducts: ['argan-rose-face-cream', 'lavender-oat-soap'],
     relatedGuide: [],
   },
   {
     id: 5,
     slug: 'black-seed-oil-ancient-remedy',
-    title: 'Black Seed Oil: The Ancient Remedy for Modern Life',
-    arabicTitle: 'زيت الحبة السوداء: علاج الماضي لحياة اليوم',
-    excerpt: 'Called "a cure for everything except death," black seed oil is one of the most researched natural remedies. Here\'s what the science says.',
-    content: `Black seed (Nigella sativa) has been used in Middle Eastern and South Asian medicine for thousands of years. Its active compound, thymoquinone, is the subject of extensive modern research.
+    title: 'زيت الحبة السوداء: علاج الماضي لحياة اليوم',
+    excerpt: 'يُقال إنه "شفاء من كل داء إلا الموت" — إليكِ ما يقوله العلم الحديث عن هذا الكنز الطبيعي.',
+    content: `الحبة السوداء (Nigella sativa) مستخدمة في الطب الشرقي والجنوب آسيوي منذ آلاف السنين. مادتها الفعّالة، الثيموكينون، موضوع أبحاث علمية مكثّفة.
 
-**Skin Benefits**
-- Strong anti-inflammatory properties
-- Helps reduce acne and blemishes
-- Fades hyperpigmentation
-- Improves overall skin tone
+**فوائدها للبشرة**
+- مضادة قوية للالتهاب
+- تُساعد على تقليل حبوب الشباب والبقع
+- تُخفّف التصبّغ وتوحّد لون البشرة
+- تُحسّن مظهر البشرة العام
 
-**Hair Benefits**
-- Promotes hair growth by nourishing hair follicles
-- Reduces dandruff and scalp inflammation
-- Adds shine and strength to hair strands
+**فوائدها للشعر**
+- تُحفّز نمو الشعر بتغذية بصيلاته
+- تُقلّل من القشرة والتهاب فروة الرأس
+- تُضيف لمعاناً وقوةً لخيوط الشعر
 
-**Usage Tips**
-Mix a few drops with a carrier oil like jojoba before applying to skin. For hair, use pure or blend with castor oil for an overnight mask.
+**نصائح الاستخدام**
+امزجي بضع قطرات بزيت حامل كالجوجوبا قبل وضعها على البشرة. للشعر، استخدميها نقية أو امزجيها بزيت الخروع لقناع ليلي.
 
-*Note: Black seed oil is potent. Always dilute and do a patch test. Not suitable during pregnancy.*`,
+*تنبيه: زيت الحبة السوداء قوي. خفّفيه دائماً وأجري اختبار حساسية. غير مناسب أثناء الحمل.*`,
     image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80',
-    category: 'Ingredients',
-    readTime: '5 min',
+    category: 'المكونات',
+    readTime: '5 دقائق',
     date: '2026-03-01',
-    relatedProducts: ['black-seed-hair-oil'],
     relatedGuide: ['black-seed'],
   },
   {
     id: 6,
     slug: 'natural-ingredients-glossary',
-    title: 'A Beginner\'s Glossary of Natural Beauty Ingredients',
-    arabicTitle: 'قاموس مكونات العناية الطبيعية للمبتدئين',
-    excerpt: 'Confused by carrier oils, essential oils, and butters? This quick guide explains the difference and what each category does.',
-    content: `Natural beauty can feel overwhelming at first. Here are the main categories to understand:
+    title: 'قاموس مكونات العناية الطبيعية للمبتدئين',
+    excerpt: 'مرتبكة من الزيوت الحاملة والزيوت العطرية والزبدات؟ هذا الدليل السريع يشرح الفرق وما تفعله كل فئة.',
+    content: `قد يبدو عالم التجميل الطبيعي مربكاً في البداية. إليكِ الفئات الرئيسية التي يجب أن تعرفيها:
 
-**Carrier Oils**
-Base oils used to dilute essential oils and moisturize skin. Examples: argan, jojoba, almond, rosehip, castor.
+**الزيوت الحاملة**
+زيوت أساسية تُستخدم لتخفيف الزيوت العطرية وترطيب البشرة. أمثلة: الأرغان، الجوجوبا، اللوز، الورد، الخروع.
 
-**Essential Oils**
-Highly concentrated aromatic plant extracts. Always dilute before skin use. Examples: lavender, tea tree, rosemary.
+**الزيوت العطرية**
+مستخلصات نباتية عطرية مركّزة للغاية. خفّفيها دائماً قبل وضعها على البشرة. أمثلة: اللافندر، شجرة الشاي، إكليل الجبل.
 
-**Butters**
-Solid or semi-solid plant fats. Rich and emollient. Examples: shea, cocoa, mango butter.
+**الزبدات**
+دهون نباتية صلبة أو شبه صلبة. غنية ومُرطّبة. أمثلة: الشيا، الكاكاو، زبدة المانجو.
 
-**Hydrosols / Floral Waters**
-Byproducts of steam distillation, gentler than essential oils. Examples: rose water, lavender water.
+**الهيدروسولات / مياه الزهور**
+منتجات ثانوية للتقطير البخاري، ألطف من الزيوت العطرية. أمثلة: ماء الورد، ماء اللافندر.
 
-**Clays**
-Drawing and detoxifying powders for masks. Examples: kaolin, bentonite.
+**الطين**
+مساحيق ساحبة ومُنقّية للأقنعة. أمثلة: الطين الكاولين، البنتونيت.
 
-*Start simple. Master a few ingredients well before adding more.*`,
+*ابدأي ببساطة. أتقني مكونات قليلة قبل إضافة المزيد.*`,
     image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&q=80',
-    category: 'Guides',
-    readTime: '4 min',
+    category: 'أدلة',
+    readTime: '4 دقائق',
     date: '2026-02-20',
-    relatedProducts: [],
     relatedGuide: ['argan-oil', 'rose-water', 'shea-butter'],
   },
 ];
