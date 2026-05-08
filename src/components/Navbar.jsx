@@ -18,10 +18,11 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const isHome = location.pathname === '/';
+  // Only go transparent on home hero, before scroll
   const transparent = isHome && !scrolled && !open;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -30,6 +31,8 @@ export default function Navbar() {
     setOpen(false);
     setSearchOpen(false);
     setSearchQuery('');
+    // Reset scroll state when navigating away from home
+    setScrolled(window.scrollY > 40);
   }, [location]);
 
   useEffect(() => {
@@ -47,32 +50,50 @@ export default function Navbar() {
 
   return (
     <header
+      className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: transparent ? 'transparent' : '#ffffff',
-        boxShadow: transparent ? 'none' : '0 1px 3px rgba(0,0,0,0.08)',
-        borderBottom: transparent ? 'none' : '1px solid #f0f0f0',
+        background: transparent
+          ? 'transparent'
+          : 'rgba(255, 255, 255, 0.97)',
+        backdropFilter: transparent ? 'none' : 'blur(12px)',
+        WebkitBackdropFilter: transparent ? 'none' : 'blur(12px)',
+        boxShadow: transparent
+          ? 'none'
+          : '0 1px 0 rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04)',
+        transition: 'background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease',
       }}
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
-      <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between gap-8">
+      <div
+        className="max-w-7xl mx-auto px-8 flex items-center justify-between gap-8"
+        style={{
+          height: transparent ? '80px' : '68px',
+          transition: 'height 0.4s ease',
+        }}
+      >
 
         {/* Logo */}
         <Link to="/" className="flex flex-col leading-none shrink-0">
           <span
-            style={{ color: transparent ? '#ffffff' : '#1a1a1a' }}
-            className="font-serif text-2xl font-semibold tracking-wide transition-colors duration-300"
+            className="font-serif text-2xl font-semibold tracking-wide"
+            style={{
+              color: transparent ? '#ffffff' : '#1a1a1a',
+              transition: 'color 0.4s ease',
+            }}
           >
-            سامورا<span className="text-olive-500">كير</span>
+            سامورا<span style={{ color: '#4D5C4A' }}>كير</span>
           </span>
           <span
-            style={{ color: transparent ? 'rgba(255,255,255,0.5)' : '#9ca3af' }}
-            className="text-xs font-sans tracking-widest transition-colors duration-300"
+            className="text-xs font-sans tracking-widest"
+            style={{
+              color: transparent ? 'rgba(255,255,255,0.45)' : '#a0a0a0',
+              transition: 'color 0.4s ease',
+            }}
           >
             SAMURACARE
           </span>
         </Link>
 
-        {/* Desktop nav — centered */}
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
           {navLinks.map((link) => {
             const isActive = location.pathname.startsWith(link.to);
@@ -80,35 +101,50 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className="relative pb-1 text-base font-sans font-medium transition-colors duration-200"
+                className="relative pb-1 text-base font-sans font-medium"
                 style={{
                   color: isActive
-                    ? (transparent ? '#ffffff' : '#3d4a39')
-                    : (transparent ? 'rgba(255,255,255,0.75)' : '#525252'),
+                    ? transparent ? '#ffffff' : '#4D5C4A'
+                    : transparent ? 'rgba(255,255,255,0.72)' : '#3a3a3a',
+                  fontWeight: isActive ? '600' : '500',
+                  transition: 'color 0.3s ease',
                 }}
               >
                 {link.label}
-                {/* Active indicator underline */}
-                {isActive && (
-                  <span
-                    className="absolute bottom-0 right-0 left-0 h-[2px] rounded-full"
-                    style={{ background: transparent ? '#ffffff' : '#4D5C4A' }}
-                  />
-                )}
+                {/* Active underline */}
+                <span
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    height: '2px',
+                    borderRadius: '2px',
+                    background: isActive
+                      ? transparent ? '#ffffff' : '#4D5C4A'
+                      : 'transparent',
+                    transition: 'background 0.3s ease',
+                  }}
+                />
               </Link>
             );
           })}
         </nav>
 
-        {/* Right side: search + CTA */}
-        <div className="hidden md:flex items-center gap-3 shrink-0">
-          {/* Expandable search */}
-          <div className="flex items-center">
+        {/* Search + mobile icons */}
+        <div className="flex items-center gap-2 shrink-0">
+
+          {/* Desktop expandable search */}
+          <div className="hidden md:flex items-center">
             <div
-              className="overflow-hidden transition-all duration-300 ease-in-out"
-              style={{ width: searchOpen ? '180px' : '0px', opacity: searchOpen ? 1 : 0 }}
+              style={{
+                width: searchOpen ? '180px' : '0px',
+                opacity: searchOpen ? 1 : 0,
+                overflow: 'hidden',
+                transition: 'width 0.35s ease, opacity 0.25s ease',
+              }}
             >
-              <form onSubmit={handleSearch} className="pr-2">
+              <form onSubmit={handleSearch} className="pl-2">
                 <input
                   ref={searchRef}
                   type="text"
@@ -116,11 +152,12 @@ export default function Navbar() {
                   onChange={e => setSearchQuery(e.target.value)}
                   onKeyDown={e => e.key === 'Escape' && setSearchOpen(false)}
                   placeholder="ابحثي في الدليل..."
-                  className="w-full py-1.5 pr-4 pl-3 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent"
+                  className="w-full py-2 pr-4 pl-3 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-olive-400"
                   style={{
-                    background: transparent ? 'rgba(255,255,255,0.15)' : '#f5f5f5',
-                    border: transparent ? '1px solid rgba(255,255,255,0.3)' : '1px solid #e5e5e5',
+                    background: transparent ? 'rgba(255,255,255,0.18)' : '#f2f2f2',
+                    border: transparent ? '1px solid rgba(255,255,255,0.35)' : '1px solid #e0e0e0',
                     color: transparent ? '#ffffff' : '#1a1a1a',
+                    transition: 'background 0.3s ease, border 0.3s ease',
                   }}
                 />
               </form>
@@ -128,33 +165,39 @@ export default function Navbar() {
             <button
               onClick={() => setSearchOpen(!searchOpen)}
               aria-label="بحث"
-              className="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200"
+              className="w-10 h-10 flex items-center justify-center rounded-full"
               style={{
-                color: searchOpen ? '#ffffff' : (transparent ? 'rgba(255,255,255,0.8)' : '#525252'),
+                color: searchOpen ? '#ffffff' : transparent ? 'rgba(255,255,255,0.8)' : '#3a3a3a',
                 background: searchOpen ? '#4D5C4A' : 'transparent',
+                transition: 'color 0.3s ease, background 0.3s ease',
               }}
             >
-              {searchOpen ? <X size={18} /> : <Search size={18} />}
+              {searchOpen ? <X size={17} /> : <Search size={17} />}
             </button>
           </div>
 
-        </div>
-
-        {/* Mobile icons */}
-        <div className="md:hidden flex items-center gap-1">
+          {/* Mobile search */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
             aria-label="بحث"
-            className="w-9 h-9 flex items-center justify-center rounded-full transition-colors"
-            style={{ color: transparent ? 'rgba(255,255,255,0.85)' : '#525252' }}
+            className="md:hidden w-9 h-9 flex items-center justify-center rounded-full"
+            style={{
+              color: transparent ? 'rgba(255,255,255,0.85)' : '#3a3a3a',
+              transition: 'color 0.3s ease',
+            }}
           >
             <Search size={19} />
           </button>
+
+          {/* Mobile menu toggle */}
           <button
             onClick={() => setOpen(!open)}
             aria-label="القائمة"
-            className="w-9 h-9 flex items-center justify-center rounded-full transition-colors"
-            style={{ color: transparent ? 'rgba(255,255,255,0.85)' : '#525252' }}
+            className="md:hidden w-9 h-9 flex items-center justify-center rounded-full"
+            style={{
+              color: transparent ? 'rgba(255,255,255,0.85)' : '#3a3a3a',
+              transition: 'color 0.3s ease',
+            }}
           >
             {open ? <X size={21} /> : <Menu size={21} />}
           </button>
@@ -187,10 +230,10 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`py-2.5 px-3 rounded-xl text-sm font-sans font-medium transition-colors ${
+                className={`py-3 px-4 rounded-xl text-base font-sans font-medium transition-colors ${
                   isActive
-                    ? 'text-olive-600 bg-olive-50 font-semibold'
-                    : 'text-neutral-700 hover:text-olive-500 hover:bg-neutral-50'
+                    ? 'text-white bg-olive-500 font-semibold'
+                    : 'text-neutral-700 hover:bg-neutral-50'
                 }`}
               >
                 {link.label}
