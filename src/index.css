@@ -10,12 +10,13 @@
 
   body {
     @apply bg-cream-50 text-neutral-800 font-sans antialiased;
+    font-family: 'Cairo', system-ui, sans-serif !important;
     direction: rtl;
     text-align: right;
   }
 
   h1, h2, h3, h4 {
-    @apply font-serif;
+    font-family: 'Cairo', system-ui, sans-serif !important;
   }
 
   input, textarea, select {
