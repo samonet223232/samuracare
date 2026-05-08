@@ -70,7 +70,7 @@ export default function Navbar() {
           <span
             className="font-serif font-semibold tracking-wide"
             style={{
-              fontSize: '22px',
+              fontSize: '26px',
               color: transparent ? '#ffffff' : '#1a1a1a',
               transition: 'color 0.4s ease',
             }}
@@ -99,7 +99,7 @@ export default function Navbar() {
                 to={link.to}
                 className="relative pb-1"
                 style={{
-                  fontSize: '17px',
+                  fontSize: '19px',
                   fontWeight: isActive ? '700' : '500',
                   color: isActive
                     ? transparent ? '#ffffff' : '#4D5C4A'
