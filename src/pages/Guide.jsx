@@ -32,45 +32,53 @@ export default function Guide() {
             <p className="text-xs font-sans tracking-widest text-olive-300 mb-3">مكتبة المرجع</p>
             <h1 className="font-serif text-5xl md:text-6xl font-semibold text-white mb-4">دليل صانعي الجمال</h1>
             <p className="text-sm text-olive-300 font-sans mb-3">Beauty Makers Guide</p>
-            <p className="text-neutral-200 max-w-xl mx-auto text-base mb-8">
+            <p className="text-neutral-200 max-w-xl mx-auto text-base">
               موسوعة حيّة لمكونات الجمال الطبيعي. اعرفي ما تستخدمينه — أصله، فوائده، طريقة استخدامه، وأي تحذيرات ضرورية.
             </p>
-            <div className="relative max-w-md mx-auto">
-              <Search size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-olive-300" />
-              <input
-                type="text"
-                placeholder="ابحثي عن زيت، مكوّن، أو وصفة..."
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                className="w-full pr-11 pl-5 py-3.5 rounded-full bg-white/10 backdrop-blur border border-olive-400/50 text-white placeholder-neutral-400 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-olive-400"
-              />
-            </div>
           </FadeInSection>
         </div>
       </section>
 
-      {/* Filter */}
-      <section className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-neutral-200 py-4 px-6">
-        <div className="max-w-7xl mx-auto flex items-center gap-2 flex-wrap">
-          <button
-            onClick={() => setCategory('all')}
-            className={`px-4 py-1.5 rounded-full text-xs font-sans font-medium transition-all ${
-              categoryParam === 'all' ? 'bg-olive-500 text-white shadow-sm' : 'bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-400'
-            }`}
-          >
-            جميع المداخل
-          </button>
-          {guideCategories.map((cat) => (
+      {/* Sticky filter + search bar */}
+      <section className="sticky top-16 z-30 bg-white shadow-md border-b border-neutral-200 py-3 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-3">
+          {/* Search */}
+          <div className="relative w-full sm:w-64 shrink-0">
+            <Search size={15} className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+            <input
+              type="text"
+              placeholder="ابحثي عن مكوّن..."
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              className="w-full pr-9 pl-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 text-sm font-sans text-neutral-700 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent transition-all"
+            />
+          </div>
+          {/* Category pills */}
+          <div className="flex items-center gap-2 flex-wrap">
             <button
-              key={cat.id}
-              onClick={() => setCategory(cat.id)}
-              className={`px-4 py-1.5 rounded-full text-xs font-sans font-medium transition-all ${
-                categoryParam === cat.id ? 'bg-olive-500 text-white shadow-sm' : 'bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-400'
+              onClick={() => setCategory('all')}
+              className={`px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all ${
+                categoryParam === 'all'
+                  ? 'bg-olive-600 text-white shadow-sm ring-2 ring-olive-300'
+                  : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
               }`}
             >
-              {cat.icon} {cat.titleAr}
+              جميع المداخل
             </button>
-          ))}
+            {guideCategories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setCategory(cat.id)}
+                className={`px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all ${
+                  categoryParam === cat.id
+                    ? 'bg-olive-600 text-white shadow-sm ring-2 ring-olive-300'
+                    : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                }`}
+              >
+                {cat.icon} {cat.titleAr}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
