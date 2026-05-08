@@ -138,12 +138,6 @@ export default function Navbar() {
             </button>
           </div>
 
-          <Link
-            to="/guide"
-            className="bg-olive-500 text-white text-sm px-5 py-2 rounded-full hover:bg-olive-600 transition-colors duration-200 whitespace-nowrap"
-          >
-            استكشف الدليل
-          </Link>
         </div>
 
         {/* Mobile icons */}
@@ -203,12 +197,6 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <Link
-            to="/guide"
-            className="mt-3 bg-olive-500 text-white text-sm px-5 py-3 rounded-full text-center hover:bg-olive-600 transition-colors"
-          >
-            استكشف الدليل
-          </Link>
         </div>
       )}
     </header>
