@@ -131,17 +131,23 @@ export default function Navbar() {
         {/* Search + mobile icons */}
         <div className="flex items-center gap-2 shrink-0">
 
-          {/* Desktop expandable search */}
-          <div className="hidden md:flex items-center gap-2">
-            <div
-              style={{
-                width: searchOpen ? '200px' : '0px',
-                opacity: searchOpen ? 1 : 0,
-                overflow: 'hidden',
-                transition: 'width 0.35s ease, opacity 0.25s ease',
-              }}
-            >
-              <form onSubmit={handleSearch}>
+          {/* Desktop search */}
+          <div className="hidden md:flex items-center">
+            {searchOpen ? (
+              <form
+                onSubmit={handleSearch}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#f2f2f2',
+                  border: '1.5px solid #4D5C4A',
+                  borderRadius: '999px',
+                  padding: '4px 6px 4px 12px',
+                  boxShadow: '0 0 0 3px rgba(77,92,74,0.15)',
+                  transition: 'all 0.3s ease',
+                }}
+              >
                 <input
                   ref={searchRef}
                   type="text"
@@ -150,41 +156,50 @@ export default function Navbar() {
                   onKeyDown={e => e.key === 'Escape' && setSearchOpen(false)}
                   placeholder="بحث"
                   style={{
-                    width: '100%',
-                    padding: '6px 16px',
-                    fontSize: '15px',
-                    borderRadius: '999px',
+                    border: 'none',
                     outline: 'none',
-                    background: transparent ? 'rgba(255,255,255,0.15)' : '#f2f2f2',
-                    border: transparent ? '1px solid rgba(255,255,255,0.4)' : '1px solid #e0e0e0',
-                    color: transparent ? '#ffffff' : '#1a1a1a',
-                    transition: 'background 0.3s ease, border 0.3s ease',
-                    boxShadow: 'none',
+                    background: 'transparent',
+                    fontSize: '15px',
+                    color: '#1a1a1a',
+                    width: '180px',
+                    direction: 'rtl',
                   }}
-                  onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.3)'; e.target.style.borderColor = '#4D5C4A'; }}
-                  onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = transparent ? 'rgba(255,255,255,0.4)' : '#e0e0e0'; }}
                 />
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(false)}
+                  style={{
+                    width: '28px', height: '28px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    borderRadius: '999px',
+                    background: '#4D5C4A',
+                    color: '#fff',
+                    border: 'none',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                  }}
+                >
+                  <X size={14} />
+                </button>
               </form>
-            </div>
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              aria-label="بحث"
-              style={{
-                width: '36px',
-                height: '36px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '999px',
-                border: 'none',
-                cursor: 'pointer',
-                color: searchOpen ? '#ffffff' : transparent ? 'rgba(255,255,255,0.85)' : '#1a1a1a',
-                background: searchOpen ? '#4D5C4A' : 'transparent',
-                transition: 'color 0.3s ease, background 0.3s ease',
-              }}
-            >
-              {searchOpen ? <X size={16} /> : <Search size={17} />}
-            </button>
+            ) : (
+              <button
+                onClick={() => setSearchOpen(true)}
+                aria-label="بحث"
+                style={{
+                  width: '36px', height: '36px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: '999px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: transparent ? 'rgba(255,255,255,0.85)' : '#1a1a1a',
+                  background: 'transparent',
+                  transition: 'color 0.3s ease',
+                }}
+              >
+                <Search size={18} />
+              </button>
+            )}
           </div>
 
           {/* Mobile search button */}
