@@ -132,16 +132,16 @@ export default function Navbar() {
         <div className="flex items-center gap-2 shrink-0">
 
           {/* Desktop expandable search */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center gap-2">
             <div
               style={{
-                width: searchOpen ? '180px' : '0px',
+                width: searchOpen ? '200px' : '0px',
                 opacity: searchOpen ? 1 : 0,
                 overflow: 'hidden',
                 transition: 'width 0.35s ease, opacity 0.25s ease',
               }}
             >
-              <form onSubmit={handleSearch} className="pl-2">
+              <form onSubmit={handleSearch}>
                 <input
                   ref={searchRef}
                   type="text"
@@ -151,32 +151,39 @@ export default function Navbar() {
                   placeholder="بحث"
                   style={{
                     width: '100%',
-                    padding: '7px 14px',
-                    fontSize: '14px',
+                    padding: '6px 16px',
+                    fontSize: '15px',
                     borderRadius: '999px',
                     outline: 'none',
-                    background: transparent ? 'rgba(255,255,255,0.18)' : '#f2f2f2',
-                    border: transparent ? '1px solid rgba(255,255,255,0.35)' : '1px solid #e0e0e0',
+                    background: transparent ? 'rgba(255,255,255,0.15)' : '#f2f2f2',
+                    border: transparent ? '1px solid rgba(255,255,255,0.4)' : '1px solid #e0e0e0',
                     color: transparent ? '#ffffff' : '#1a1a1a',
                     transition: 'background 0.3s ease, border 0.3s ease',
                     boxShadow: 'none',
                   }}
-                  onFocus={e => { e.target.style.outline = 'none'; e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.35)'; e.target.style.borderColor = '#4D5C4A'; }}
-                  onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = transparent ? 'rgba(255,255,255,0.35)' : '#e0e0e0'; }}
+                  onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.3)'; e.target.style.borderColor = '#4D5C4A'; }}
+                  onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = transparent ? 'rgba(255,255,255,0.4)' : '#e0e0e0'; }}
                 />
               </form>
             </div>
             <button
               onClick={() => setSearchOpen(!searchOpen)}
               aria-label="بحث"
-              className="w-10 h-10 flex items-center justify-center rounded-full"
               style={{
+                width: '36px',
+                height: '36px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '999px',
+                border: 'none',
+                cursor: 'pointer',
                 color: searchOpen ? '#ffffff' : transparent ? 'rgba(255,255,255,0.85)' : '#1a1a1a',
                 background: searchOpen ? '#4D5C4A' : 'transparent',
                 transition: 'color 0.3s ease, background 0.3s ease',
               }}
             >
-              {searchOpen ? <X size={17} /> : <Search size={18} />}
+              {searchOpen ? <X size={16} /> : <Search size={17} />}
             </button>
           </div>
 
