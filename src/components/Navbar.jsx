@@ -134,20 +134,8 @@ export default function Navbar() {
           {/* Desktop search */}
           <div className="hidden md:flex items-center">
             {searchOpen ? (
-              <form
-                onSubmit={handleSearch}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  background: '#f2f2f2',
-                  border: '1.5px solid #4D5C4A',
-                  borderRadius: '999px',
-                  padding: '4px 6px 4px 12px',
-                  boxShadow: '0 0 0 3px rgba(77,92,74,0.15)',
-                  transition: 'all 0.3s ease',
-                }}
-              >
+              <form onSubmit={handleSearch} style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <Search size={15} style={{ position: 'absolute', right: '12px', color: '#a0a0a0', pointerEvents: 'none' }} />
                 <input
                   ref={searchRef}
                   type="text"
@@ -156,31 +144,27 @@ export default function Navbar() {
                   onKeyDown={e => e.key === 'Escape' && setSearchOpen(false)}
                   placeholder="بحث"
                   style={{
-                    border: 'none',
-                    outline: 'none',
-                    background: 'transparent',
+                    width: '200px',
+                    padding: '7px 36px 7px 36px',
                     fontSize: '15px',
+                    borderRadius: '999px',
+                    background: '#f2f2f2',
+                    border: '1px solid #e0e0e0',
                     color: '#1a1a1a',
-                    width: '180px',
+                    outline: 'none',
+                    boxShadow: 'none',
                     direction: 'rtl',
-                    padding: '2px 4px',
+                    transition: 'border 0.2s ease, box-shadow 0.2s ease',
                   }}
+                  onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.15)'; e.target.style.borderColor = '#4D5C4A'; }}
+                  onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = '#e0e0e0'; }}
                 />
                 <button
                   type="button"
                   onClick={() => setSearchOpen(false)}
-                  style={{
-                    width: '28px', height: '28px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    borderRadius: '999px',
-                    background: '#4D5C4A',
-                    color: '#fff',
-                    border: 'none',
-                    cursor: 'pointer',
-                    flexShrink: 0,
-                  }}
+                  style={{ position: 'absolute', left: '8px', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', background: '#4D5C4A', color: '#fff', border: 'none', cursor: 'pointer' }}
                 >
-                  <X size={14} />
+                  <X size={12} />
                 </button>
               </form>
             ) : (
@@ -190,9 +174,7 @@ export default function Navbar() {
                 style={{
                   width: '36px', height: '36px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  borderRadius: '999px',
-                  border: 'none',
-                  cursor: 'pointer',
+                  borderRadius: '999px', border: 'none', cursor: 'pointer',
                   color: transparent ? 'rgba(255,255,255,0.85)' : '#1a1a1a',
                   background: 'transparent',
                   transition: 'color 0.3s ease',
