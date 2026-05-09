@@ -50,7 +50,9 @@ export default function Guide() {
               placeholder="ابحثي عن مكوّن..."
               value={query}
               onChange={e => setQuery(e.target.value)}
-              className="w-full pr-9 pl-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 text-sm font-sans text-neutral-700 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent transition-all"
+              className="w-full pr-9 pl-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 text-sm font-sans text-neutral-700 placeholder-neutral-400 outline-none transition-all"
+              onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.35)'; e.target.style.borderColor = '#4D5C4A'; }}
+              onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = '#e5e7eb'; }}
             />
           </div>
           {/* Category pills */}

@@ -161,7 +161,7 @@ export default function Navbar() {
                     transition: 'background 0.3s ease, border 0.3s ease',
                     boxShadow: 'none',
                   }}
-                  onFocus={e => { e.target.style.outline = 'none'; e.target.style.boxShadow = '0 0 0 2px #4D5C4A55'; e.target.style.borderColor = '#4D5C4A'; }}
+                  onFocus={e => { e.target.style.outline = 'none'; e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.35)'; e.target.style.borderColor = '#4D5C4A'; }}
                   onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = transparent ? 'rgba(255,255,255,0.35)' : '#e0e0e0'; }}
                 />
               </form>
@@ -229,7 +229,7 @@ export default function Navbar() {
                 color: '#1a1a1a',
                 outline: 'none',
               }}
-              onFocus={e => { e.target.style.boxShadow = '0 0 0 2px #4D5C4A55'; e.target.style.borderColor = '#4D5C4A'; }}
+              onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.35)'; e.target.style.borderColor = '#4D5C4A'; }}
               onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = '#e0e0e0'; }}
             />
           </form>
