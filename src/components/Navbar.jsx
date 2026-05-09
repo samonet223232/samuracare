@@ -163,6 +163,7 @@ export default function Navbar() {
                     color: '#1a1a1a',
                     width: '180px',
                     direction: 'rtl',
+                    padding: '2px 4px',
                   }}
                 />
                 <button
@@ -230,11 +231,11 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile search bar — closes on scroll via useEffect */}
+      {/* Mobile search bar */}
       {searchOpen && (
         <div className="md:hidden bg-white border-t border-neutral-100 px-5 py-3">
           <form onSubmit={handleSearch} className="relative">
-            <Search size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+            <Search size={15} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
@@ -243,15 +244,17 @@ export default function Navbar() {
               autoFocus
               style={{
                 width: '100%',
-                padding: '10px 40px 10px 16px',
+                padding: '7px 36px 7px 16px',
                 fontSize: '15px',
                 borderRadius: '999px',
                 background: '#f2f2f2',
                 border: '1px solid #e0e0e0',
                 color: '#1a1a1a',
                 outline: 'none',
+                boxShadow: 'none',
+                transition: 'border 0.2s ease, box-shadow 0.2s ease',
               }}
-              onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.35)'; e.target.style.borderColor = '#4D5C4A'; }}
+              onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.15)'; e.target.style.borderColor = '#4D5C4A'; }}
               onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = '#e0e0e0'; }}
             />
           </form>

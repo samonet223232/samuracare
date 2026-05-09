@@ -47,12 +47,23 @@ export default function Guide() {
             <Search size={15} className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
             <input
               type="text"
-              placeholder="ابحثي عن مكوّن..."
+              placeholder="بحث"
               value={query}
               onChange={e => setQuery(e.target.value)}
-              className="w-full pr-9 pl-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 text-sm font-sans text-neutral-700 placeholder-neutral-400 outline-none transition-all"
-              onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.35)'; e.target.style.borderColor = '#4D5C4A'; }}
-              onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = '#e5e7eb'; }}
+              style={{
+                width: '100%',
+                padding: '7px 36px 7px 16px',
+                fontSize: '15px',
+                borderRadius: '999px',
+                background: '#f2f2f2',
+                border: '1px solid #e0e0e0',
+                color: '#1a1a1a',
+                outline: 'none',
+                boxShadow: 'none',
+                transition: 'border 0.2s ease, box-shadow 0.2s ease',
+              }}
+              onFocus={e => { e.target.style.boxShadow = '0 0 0 3px rgba(77,92,74,0.15)'; e.target.style.borderColor = '#4D5C4A'; }}
+              onBlur={e => { e.target.style.boxShadow = 'none'; e.target.style.borderColor = '#e0e0e0'; }}
             />
           </div>
           {/* Category pills */}
