@@ -63,7 +63,7 @@ export default function Navbar() {
     >
       <div
         className="max-w-7xl mx-auto px-8 flex items-center justify-between gap-8"
-        style={{ height: transparent ? '80px' : '68px', transition: 'height 0.4s ease' }}
+        style={{ height: transparent ? '84px' : '72px', transition: 'height 0.4s ease' }}
       >
         {/* Logo */}
         <Link to="/" className="flex flex-col leading-none shrink-0">
@@ -99,7 +99,7 @@ export default function Navbar() {
                 to={link.to}
                 className="relative pb-1"
                 style={{
-                  fontSize: '19px',
+                  fontSize: '21px',
                   fontWeight: isActive ? '700' : '500',
                   color: isActive
                     ? transparent ? '#ffffff' : '#4D5C4A'
