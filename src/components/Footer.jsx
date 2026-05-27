@@ -8,19 +8,23 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="mb-4 flex items-center gap-1">
-              <div style={{
-                width: '56px', height: '56px', flexShrink: 0,
-                backgroundImage: 'url(/logo-icon.png)',
-                backgroundSize: '240%', backgroundPosition: '50% 44%', backgroundRepeat: 'no-repeat',
-                filter: 'brightness(0) invert(1)',
-              }} />
-              <div style={{
-                width: '148px', height: '40px',
-                backgroundImage: 'url(/logo-text.png)',
-                backgroundSize: '310%', backgroundPosition: '50% 48%', backgroundRepeat: 'no-repeat',
-                filter: 'brightness(0) invert(1)',
-              }} />
+            <div className="mb-4 flex items-center gap-2">
+              <div style={{ width: '58px', height: '58px', overflow: 'hidden', flexShrink: 0 }}>
+                <img src="/logo-icon.png" alt="Samura Care" style={{
+                  width: '145px', height: '145px',
+                  marginTop: '-32px', marginRight: '-43px',
+                  filter: 'brightness(0) invert(1)',
+                  display: 'block',
+                }} />
+              </div>
+              <div style={{ width: '150px', height: '46px', overflow: 'hidden' }}>
+                <img src="/logo-text.png" alt="SAMURA CARE" style={{
+                  width: '300px', height: '300px',
+                  marginTop: '-114px', marginRight: '-75px',
+                  filter: 'brightness(0) invert(1)',
+                  display: 'block',
+                }} />
+              </div>
             </div>
             <p className="text-sm text-neutral-400 leading-relaxed mb-5">
               معرفة الجمال الطبيعي، محتوى صادق، وعناية مصنوعة بقلب — كل ذلك في مكان واحد.

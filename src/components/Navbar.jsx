@@ -66,34 +66,51 @@ export default function Navbar() {
         style={{ height: transparent ? '84px' : '72px', transition: 'height 0.4s ease' }}
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-1 shrink-0" style={{ textDecoration: 'none' }}>
-          {/* Icon — cropped via background-image to remove whitespace */}
-          <div
-            style={{
-              width: transparent ? '62px' : '52px',
-              height: transparent ? '62px' : '52px',
-              flexShrink: 0,
-              backgroundImage: 'url(/logo-icon.png)',
-              backgroundSize: '240%',
-              backgroundPosition: '50% 44%',
-              backgroundRepeat: 'no-repeat',
-              filter: transparent ? 'brightness(0) invert(1)' : 'brightness(1)',
-              transition: 'width 0.4s ease, height 0.4s ease, filter 0.4s ease',
-            }}
-          />
-          {/* Text + slogan — cropped via background-image */}
-          <div
-            style={{
-              width: transparent ? '160px' : '136px',
-              height: transparent ? '44px' : '36px',
-              backgroundImage: 'url(/logo-text.png)',
-              backgroundSize: '310%',
-              backgroundPosition: '50% 48%',
-              backgroundRepeat: 'no-repeat',
-              filter: transparent ? 'brightness(0) invert(1)' : 'brightness(1)',
-              transition: 'width 0.4s ease, height 0.4s ease, filter 0.4s ease',
-            }}
-          />
+        <Link to="/" className="flex items-center gap-2 shrink-0" style={{ textDecoration: 'none' }}>
+          {/* Icon — clip container removes whitespace from the PNG */}
+          <div style={{
+            width: transparent ? '68px' : '58px',
+            height: transparent ? '68px' : '58px',
+            overflow: 'hidden',
+            flexShrink: 0,
+            transition: 'width 0.4s ease, height 0.4s ease',
+          }}>
+            <img
+              src="/logo-icon.png"
+              alt="Samura Care"
+              style={{
+                width: transparent ? '170px' : '145px',
+                height: transparent ? '170px' : '145px',
+                marginTop: transparent ? '-37px' : '-32px',
+                marginRight: transparent ? '-51px' : '-43px',
+                filter: transparent ? 'brightness(0) invert(1)' : 'brightness(1)',
+                transition: 'all 0.4s ease',
+                display: 'block',
+              }}
+            />
+          </div>
+
+          {/* Text + slogan — clip container removes whitespace from the PNG */}
+          <div style={{
+            width: transparent ? '175px' : '150px',
+            height: transparent ? '54px' : '46px',
+            overflow: 'hidden',
+            transition: 'width 0.4s ease, height 0.4s ease',
+          }}>
+            <img
+              src="/logo-text.png"
+              alt="SAMURA CARE — Wild Roots. Honest Beauty."
+              style={{
+                width: transparent ? '350px' : '300px',
+                height: transparent ? '350px' : '300px',
+                marginTop: transparent ? '-133px' : '-114px',
+                marginRight: transparent ? '-88px' : '-75px',
+                filter: transparent ? 'brightness(0) invert(1)' : 'brightness(1)',
+                transition: 'all 0.4s ease',
+                display: 'block',
+              }}
+            />
+          </div>
         </Link>
 
         {/* Desktop nav */}
