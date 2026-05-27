@@ -66,27 +66,51 @@ export default function Navbar() {
         style={{ height: transparent ? '84px' : '72px', transition: 'height 0.4s ease' }}
       >
         {/* Logo */}
-        <Link to="/" className="flex flex-col leading-none shrink-0">
-          <span
-            className="font-serif font-semibold tracking-wide"
+        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          {/* Icon mark */}
+          <img
+            src="/logo-icon.png"
+            alt="Samura Care"
             style={{
-              fontSize: '26px',
-              color: transparent ? '#ffffff' : '#1a1a1a',
-              transition: 'color 0.4s ease',
+              height: transparent ? '52px' : '42px',
+              width: 'auto',
+              transition: 'height 0.4s ease, filter 0.4s ease',
+              filter: transparent
+                ? 'brightness(0) invert(1)'
+                : 'brightness(1)',
+              objectFit: 'contain',
             }}
-          >
-            سامورا<span style={{ color: '#4D5C4A' }}>كير</span>
-          </span>
-          <span
-            className="font-sans tracking-widest"
-            style={{
-              fontSize: '10px',
-              color: transparent ? 'rgba(255,255,255,0.45)' : '#a0a0a0',
-              transition: 'color 0.4s ease',
-            }}
-          >
-            SAMURACARE
-          </span>
+          />
+          {/* Brand text */}
+          <div className="flex flex-col leading-none">
+            <span
+              style={{
+                fontFamily: '"Times New Roman", Georgia, serif',
+                fontSize: transparent ? '18px' : '16px',
+                fontWeight: '600',
+                letterSpacing: '0.15em',
+                color: transparent ? '#ffffff' : '#1a1a1a',
+                transition: 'color 0.4s ease, font-size 0.4s ease',
+                textTransform: 'uppercase',
+              }}
+            >
+              SAMURA CARE
+            </span>
+            <span
+              style={{
+                fontFamily: 'Georgia, serif',
+                fontSize: '9.5px',
+                fontWeight: '400',
+                letterSpacing: '0.08em',
+                fontStyle: 'italic',
+                color: transparent ? 'rgba(255,255,255,0.6)' : '#b8956a',
+                transition: 'color 0.4s ease',
+                marginTop: '2px',
+              }}
+            >
+              Wild Roots. Honest Beauty.
+            </span>
+          </div>
         </Link>
 
         {/* Desktop nav */}

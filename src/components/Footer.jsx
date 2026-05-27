@@ -8,11 +8,20 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="mb-4">
-              <span className="font-serif text-2xl font-semibold text-white">
-                سامورا<span className="text-olive-300">كير</span>
-              </span>
-              <p className="text-sm text-neutral-500 mt-0.5 font-sans tracking-widest">SAMURACARE</p>
+            <div className="mb-4 flex items-center gap-3">
+              <img
+                src="/logo-icon.png"
+                alt="Samura Care"
+                style={{ height: '48px', width: 'auto', filter: 'brightness(0) invert(1) sepia(1) saturate(0.4) hue-rotate(10deg)', opacity: 0.85 }}
+              />
+              <div className="flex flex-col leading-none">
+                <span style={{ fontFamily: '"Times New Roman", Georgia, serif', fontSize: '16px', fontWeight: '600', letterSpacing: '0.15em', color: '#ffffff', textTransform: 'uppercase' }}>
+                  SAMURA CARE
+                </span>
+                <span style={{ fontFamily: 'Georgia, serif', fontSize: '9px', fontStyle: 'italic', letterSpacing: '0.06em', color: '#b8956a', marginTop: '3px' }}>
+                  Wild Roots. Honest Beauty.
+                </span>
+              </div>
             </div>
             <p className="text-sm text-neutral-400 leading-relaxed mb-5">
               معرفة الجمال الطبيعي، محتوى صادق، وعناية مصنوعة بقلب — كل ذلك في مكان واحد.
