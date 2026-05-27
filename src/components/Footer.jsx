@@ -8,20 +8,21 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="mb-4 flex items-center gap-3">
-              <div style={{ position: 'relative', width: '58px', height: '58px', overflow: 'hidden', flexShrink: 0 }}>
+            <div className="mb-4 flex items-center gap-2">
+              <div style={{ position: 'relative', width: '56px', height: '56px', overflow: 'hidden', flexShrink: 0 }}>
                 <img src="/logo-icon.png" alt="Samura Care" style={{
-                  position: 'absolute', width: '130px', height: '130px',
-                  top: '-28px', right: '-36px',
-                  filter: 'brightness(0) invert(1)',
+                  position: 'absolute', width: '120px', height: '120px',
+                  top: '-20px', right: '-32px',
+                  filter: 'brightness(10)',
                 }} />
               </div>
-              <div style={{ position: 'relative', width: '158px', height: '50px', overflow: 'hidden' }}>
-                <img src="/logo-text.png" alt="SAMURA CARE" style={{
-                  position: 'absolute', width: '260px', height: '260px',
-                  top: '-98px', right: '-52px',
-                  filter: 'brightness(0) invert(1)',
-                }} />
+              <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+                <span style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontSize: '17px', fontWeight: '700', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#ffffff', whiteSpace: 'nowrap' }}>
+                  SAMURA CARE
+                </span>
+                <span style={{ fontFamily: 'Georgia, serif', fontSize: '9.5px', fontStyle: 'italic', letterSpacing: '0.05em', color: '#c9a96e', marginTop: '3px', whiteSpace: 'nowrap' }}>
+                  Wild Roots. Honest Beauty.
+                </span>
               </div>
             </div>
             <p className="text-sm text-neutral-400 leading-relaxed mb-5">
