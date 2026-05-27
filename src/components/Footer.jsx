@@ -8,11 +8,6 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="mb-4">
-              <span style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontSize: '20px', fontWeight: '700', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#ffffff', whiteSpace: 'nowrap' }}>
-                SAMURA CARE
-              </span>
-            </div>
             <p className="text-sm text-neutral-400 leading-relaxed mb-5">
               معرفة الجمال الطبيعي، محتوى صادق، وعناية مصنوعة بقلب — كل ذلك في مكان واحد.
             </p>

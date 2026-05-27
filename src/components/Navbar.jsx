@@ -66,20 +66,7 @@ export default function Navbar() {
         style={{ height: transparent ? '84px' : '72px', transition: 'height 0.4s ease' }}
       >
         {/* Logo */}
-        <Link to="/" className="shrink-0" style={{ textDecoration: 'none' }}>
-          <span style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
-            fontSize: '20px',
-            fontWeight: '700',
-            letterSpacing: '0.13em',
-            textTransform: 'uppercase',
-            color: transparent ? '#ffffff' : '#1a1a1a',
-            transition: 'color 0.4s ease',
-            whiteSpace: 'nowrap',
-          }}>
-            SAMURA CARE
-          </span>
-        </Link>
+        <Link to="/" className="shrink-0" style={{ textDecoration: 'none' }} />
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
