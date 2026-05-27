@@ -66,51 +66,34 @@ export default function Navbar() {
         style={{ height: transparent ? '84px' : '72px', transition: 'height 0.4s ease' }}
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          {/* Icon mark */}
-          <img
-            src="/logo-icon.png"
-            alt="Samura Care"
+        <Link to="/" className="flex items-center gap-1 shrink-0" style={{ textDecoration: 'none' }}>
+          {/* Icon — cropped via background-image to remove whitespace */}
+          <div
             style={{
-              height: transparent ? '52px' : '42px',
-              width: 'auto',
-              transition: 'height 0.4s ease, filter 0.4s ease',
-              filter: transparent
-                ? 'brightness(0) invert(1)'
-                : 'brightness(1)',
-              objectFit: 'contain',
+              width: transparent ? '62px' : '52px',
+              height: transparent ? '62px' : '52px',
+              flexShrink: 0,
+              backgroundImage: 'url(/logo-icon.png)',
+              backgroundSize: '240%',
+              backgroundPosition: '50% 44%',
+              backgroundRepeat: 'no-repeat',
+              filter: transparent ? 'brightness(0) invert(1)' : 'brightness(1)',
+              transition: 'width 0.4s ease, height 0.4s ease, filter 0.4s ease',
             }}
           />
-          {/* Brand text */}
-          <div className="flex flex-col leading-none">
-            <span
-              style={{
-                fontFamily: '"Times New Roman", Georgia, serif',
-                fontSize: transparent ? '18px' : '16px',
-                fontWeight: '600',
-                letterSpacing: '0.15em',
-                color: transparent ? '#ffffff' : '#1a1a1a',
-                transition: 'color 0.4s ease, font-size 0.4s ease',
-                textTransform: 'uppercase',
-              }}
-            >
-              SAMURA CARE
-            </span>
-            <span
-              style={{
-                fontFamily: 'Georgia, serif',
-                fontSize: '9.5px',
-                fontWeight: '400',
-                letterSpacing: '0.08em',
-                fontStyle: 'italic',
-                color: transparent ? 'rgba(255,255,255,0.6)' : '#b8956a',
-                transition: 'color 0.4s ease',
-                marginTop: '2px',
-              }}
-            >
-              Wild Roots. Honest Beauty.
-            </span>
-          </div>
+          {/* Text + slogan — cropped via background-image */}
+          <div
+            style={{
+              width: transparent ? '160px' : '136px',
+              height: transparent ? '44px' : '36px',
+              backgroundImage: 'url(/logo-text.png)',
+              backgroundSize: '310%',
+              backgroundPosition: '50% 48%',
+              backgroundRepeat: 'no-repeat',
+              filter: transparent ? 'brightness(0) invert(1)' : 'brightness(1)',
+              transition: 'width 0.4s ease, height 0.4s ease, filter 0.4s ease',
+            }}
+          />
         </Link>
 
         {/* Desktop nav */}
