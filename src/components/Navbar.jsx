@@ -66,57 +66,19 @@ export default function Navbar() {
         style={{ height: transparent ? '84px' : '72px', transition: 'height 0.4s ease' }}
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 shrink-0" style={{ textDecoration: 'none' }}>
-          {/* Icon — clip box removes PNG whitespace */}
-          <div style={{
-            position: 'relative',
-            width: '56px',
-            height: '56px',
-            overflow: 'hidden',
-            flexShrink: 0,
+        <Link to="/" className="shrink-0" style={{ textDecoration: 'none' }}>
+          <span style={{
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: '20px',
+            fontWeight: '700',
+            letterSpacing: '0.13em',
+            textTransform: 'uppercase',
+            color: transparent ? '#ffffff' : '#1a1a1a',
+            transition: 'color 0.4s ease',
+            whiteSpace: 'nowrap',
           }}>
-            <img
-              src="/logo-icon.png"
-              alt="Samura Care"
-              style={{
-                position: 'absolute',
-                width: '120px',
-                height: '120px',
-                top: '-20px',
-                right: '-32px',
-                transition: 'filter 0.4s ease',
-                filter: transparent ? 'brightness(10)' : 'none',
-              }}
-            />
-          </div>
-
-          {/* Brand text — HTML for reliable rendering */}
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-            <span style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              fontSize: '17px',
-              fontWeight: '700',
-              letterSpacing: '0.13em',
-              textTransform: 'uppercase',
-              color: transparent ? '#ffffff' : '#1a1a1a',
-              transition: 'color 0.4s ease',
-              whiteSpace: 'nowrap',
-            }}>
-              SAMURA CARE
-            </span>
-            <span style={{
-              fontFamily: 'Georgia, serif',
-              fontSize: '9.5px',
-              fontStyle: 'italic',
-              letterSpacing: '0.05em',
-              color: transparent ? 'rgba(255,255,255,0.65)' : '#b8956a',
-              transition: 'color 0.4s ease',
-              marginTop: '3px',
-              whiteSpace: 'nowrap',
-            }}>
-              Wild Roots. Honest Beauty.
-            </span>
-          </div>
+            SAMURA CARE
+          </span>
         </Link>
 
         {/* Desktop nav */}
