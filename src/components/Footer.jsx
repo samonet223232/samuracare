@@ -8,21 +8,19 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="mb-4 flex items-center gap-2">
-              <div style={{ width: '58px', height: '58px', overflow: 'hidden', flexShrink: 0 }}>
+            <div className="mb-4 flex items-center gap-3">
+              <div style={{ position: 'relative', width: '58px', height: '58px', overflow: 'hidden', flexShrink: 0 }}>
                 <img src="/logo-icon.png" alt="Samura Care" style={{
-                  width: '145px', height: '145px',
-                  marginTop: '-32px', marginRight: '-43px',
+                  position: 'absolute', width: '130px', height: '130px',
+                  top: '-28px', right: '-36px',
                   filter: 'brightness(0) invert(1)',
-                  display: 'block',
                 }} />
               </div>
-              <div style={{ width: '150px', height: '46px', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', width: '158px', height: '50px', overflow: 'hidden' }}>
                 <img src="/logo-text.png" alt="SAMURA CARE" style={{
-                  width: '300px', height: '300px',
-                  marginTop: '-114px', marginRight: '-75px',
+                  position: 'absolute', width: '260px', height: '260px',
+                  top: '-98px', right: '-52px',
                   filter: 'brightness(0) invert(1)',
-                  display: 'block',
                 }} />
               </div>
             </div>
