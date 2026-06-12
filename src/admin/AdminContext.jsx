@@ -285,7 +285,6 @@ export function AdminProvider({ children }) {
       deleteCategory,
       updateHomepage,
       updateAbout,
-      pages,
       addPage,
       updatePage,
       deletePage,
