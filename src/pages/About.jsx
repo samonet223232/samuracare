@@ -9,7 +9,7 @@ export default function About() {
   const { about } = useAdmin();
 
   return (
-    <main className="pt-28">
+    <main>
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${about.heroImage})` }} />

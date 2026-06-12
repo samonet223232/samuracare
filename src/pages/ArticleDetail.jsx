@@ -38,7 +38,7 @@ export default function ArticleDetail() {
   const moreArticles = articles.filter(a => a.id !== article.id && a.category === article.category).slice(0, 3);
 
   return (
-    <main className="pt-28">
+    <main>
       <section className="relative h-72 md:h-96 overflow-hidden">
         <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />

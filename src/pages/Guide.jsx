@@ -23,7 +23,7 @@ export default function Guide() {
   const setCategory = (id) => setSearchParams(id === 'all' ? {} : { category: id });
 
   return (
-    <main className="pt-28">
+    <main>
       {/* Header */}
       <section className="relative py-28 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${guidePage.heroImage})` }} />
