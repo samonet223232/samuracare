@@ -18,6 +18,7 @@ import GuideManager, { GuideEntryEditor } from './admin/pages/GuideManager';
 import CategoriesManager from './admin/pages/CategoriesManager';
 import HomepageManager from './admin/pages/HomepageManager';
 import AboutManager from './admin/pages/AboutManager';
+import UsersManager from './admin/pages/UsersManager';
 import Login from './admin/pages/Login';
 
 function ScrollToTop() {
@@ -49,6 +50,7 @@ function AdminRoutes() {
           <Route path="/categories" element={<CategoriesManager />} />
           <Route path="/homepage" element={<HomepageManager />} />
           <Route path="/about" element={<AboutManager />} />
+          <Route path="/users" element={<UsersManager />} />
         </Routes>
       </AdminLayout>
     </ProtectedRoute>

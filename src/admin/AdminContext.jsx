@@ -4,6 +4,7 @@ import { guideCategories as defaultCategories, guideEntries as defaultEntries } 
 
 const ADMIN_KEY = 'samura-admin-auth';
 const STORE_KEY = 'samura-content';
+const USERS_KEY = 'samura-users';
 
 const defaultHomepage = {
   heroTitle: 'اكتشفي جمالاً طبيعياً،<br/>صُنع بعناية',
@@ -51,6 +52,21 @@ function saveStore(data) {
   localStorage.setItem(STORE_KEY, JSON.stringify(data));
 }
 
+function loadUsers() {
+  try {
+    const raw = localStorage.getItem(USERS_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch {}
+  return [{ id: 1, username: 'admin', password: 'admin123', role: 'admin' }];
+}
+
+function saveUsers(users) {
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
 function getInitialState() {
   const saved = loadStore();
   if (saved) return saved;
@@ -67,25 +83,36 @@ const AdminContext = createContext(null);
 
 export function AdminProvider({ children }) {
   const [data, setData] = useState(getInitialState);
+  const [users, setUsers] = useState(loadUsers);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return sessionStorage.getItem(ADMIN_KEY) === 'true';
   });
+  const [currentUser, setCurrentUser] = useState(() => {
+    const raw = sessionStorage.getItem('samura-current-user');
+    return raw ? JSON.parse(raw) : null;
+  });
 
-  // Persist to localStorage
+  // Persist
   useEffect(() => { saveStore(data); }, [data]);
+  useEffect(() => { saveUsers(users); }, [users]);
 
-  const login = useCallback((password) => {
-    if (password === 'admin123') {
+  const login = useCallback((username, password) => {
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
       setIsAuthenticated(true);
+      setCurrentUser(user);
       sessionStorage.setItem(ADMIN_KEY, 'true');
+      sessionStorage.setItem('samura-current-user', JSON.stringify(user));
       return true;
     }
     return false;
-  }, []);
+  }, [users]);
 
   const logout = useCallback(() => {
     setIsAuthenticated(false);
+    setCurrentUser(null);
     sessionStorage.removeItem(ADMIN_KEY);
+    sessionStorage.removeItem('samura-current-user');
   }, []);
 
   const resetData = useCallback(() => {
@@ -99,6 +126,32 @@ export function AdminProvider({ children }) {
     setData(fresh);
     saveStore(fresh);
   }, []);
+
+  // ---- User Management ----
+  const addUser = useCallback((user) => {
+    setUsers(prev => [...prev, { ...user, id: Date.now() }]);
+  }, []);
+
+  const updateUser = useCallback((id, updates) => {
+    setUsers(prev => prev.map(u => u.id === id ? { ...u, ...updates } : u));
+    // If updating current user's own record, sync session
+    if (currentUser && currentUser.id === id) {
+      const updated = users.find(u => u.id === id);
+      if (updated) {
+        const synced = { ...updated, ...updates };
+        setCurrentUser(synced);
+        sessionStorage.setItem('samura-current-user', JSON.stringify(synced));
+      }
+    }
+  }, [currentUser, users]);
+
+  const deleteUser = useCallback((id) => {
+    setUsers(prev => prev.filter(u => u.id !== id));
+    // Log out if deleting own account
+    if (currentUser && currentUser.id === id) {
+      logout();
+    }
+  }, [currentUser, logout]);
 
   // ---- Articles ----
   const addArticle = useCallback((article) => {
@@ -185,10 +238,15 @@ export function AdminProvider({ children }) {
   return (
     <AdminContext.Provider value={{
       ...data,
+      users,
+      currentUser,
       isAuthenticated,
       login,
       logout,
       resetData,
+      addUser,
+      updateUser,
+      deleteUser,
       addArticle,
       updateArticle,
       deleteArticle,
