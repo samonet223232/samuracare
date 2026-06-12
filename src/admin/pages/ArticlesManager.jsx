@@ -4,12 +4,7 @@ import { Plus, Edit3, Trash2, ArrowLeft } from 'lucide-react';
 import { useAdmin } from '../AdminContext';
 
 function slugify(text) {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim() || 'untitled';
+  return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim() || 'untitled';
 }
 
 function ArticleForm({ article, onSave, onCancel }) {
@@ -47,25 +42,25 @@ function ArticleForm({ article, onSave, onCancel }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-5">
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">العنوان</label>
-            <input className={inputClass} value={form.title} onChange={e => handleChange('title', e.target.value)} placeholder="عنوان المقال" required />
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Title</label>
+            <input className={inputClass} value={form.title} onChange={e => handleChange('title', e.target.value)} placeholder="Article title" required />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">الرابط (Slug)</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Slug</label>
             <input className={inputClass} value={form.slug} onChange={e => handleChange('slug', e.target.value)} placeholder="article-slug" dir="ltr" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">الملخص</label>
-            <textarea className={inputClass + ' h-20'} value={form.excerpt} onChange={e => handleChange('excerpt', e.target.value)} placeholder="نبذة قصيرة عن المقال" />
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Excerpt</label>
+            <textarea className={inputClass + ' h-20'} value={form.excerpt} onChange={e => handleChange('excerpt', e.target.value)} placeholder="Brief description" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">المحتوى (يدعم Markdown)</label>
-            <textarea className={inputClass + ' h-64'} value={form.content} onChange={e => handleChange('content', e.target.value)} placeholder="محتوى المقال..." required />
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Content (Markdown supported)</label>
+            <textarea className={inputClass + ' h-64'} value={form.content} onChange={e => handleChange('content', e.target.value)} placeholder="Article content..." required />
           </div>
         </div>
         <div className="space-y-5">
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">التصنيف</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Category</label>
             <select className={inputClass} value={form.category} onChange={e => handleChange('category', e.target.value)}>
               <option value="المكونات">المكونات</option>
               <option value="وصفات منزلية">وصفات منزلية</option>
@@ -73,30 +68,30 @@ function ArticleForm({ article, onSave, onCancel }) {
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">وقت القراءة</label>
-            <input className={inputClass} value={form.readTime} onChange={e => handleChange('readTime', e.target.value)} placeholder="مثال: 5 دقائق" />
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Read Time</label>
+            <input className={inputClass} value={form.readTime} onChange={e => handleChange('readTime', e.target.value)} placeholder="e.g. 5 min" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">التاريخ</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Date</label>
             <input className={inputClass} type="date" value={form.date} onChange={e => handleChange('date', e.target.value)} />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">رابط الصورة</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Image URL</label>
             <input className={inputClass} value={form.image} onChange={e => handleChange('image', e.target.value)} placeholder="https://..." dir="ltr" />
             {form.image && <img src={form.image} alt="" className="mt-2 w-full h-32 rounded-xl object-cover" />}
           </div>
           <label className="flex items-center gap-3 cursor-pointer">
             <input type="checkbox" checked={form.featured} onChange={e => handleChange('featured', e.target.checked)} className="w-4 h-4 rounded border-neutral-300 text-olive-500 focus:ring-olive-400" />
-            <span className="text-sm text-neutral-700">مقال مميّز</span>
+            <span className="text-sm text-neutral-700">Featured article</span>
           </label>
         </div>
       </div>
       <div className="flex items-center gap-3 pt-4 border-t border-neutral-100">
         <button type="submit" className="px-6 py-2.5 bg-olive-500 text-white rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
-          {article ? 'حفظ التغييرات' : 'إضافة المقال'}
+          {article ? 'Save Changes' : 'Add Article'}
         </button>
         <button type="button" onClick={onCancel} className="px-6 py-2.5 bg-neutral-100 text-neutral-600 rounded-xl hover:bg-neutral-200 transition-colors text-sm font-medium">
-          إلغاء
+          Cancel
         </button>
       </div>
     </form>
@@ -104,9 +99,8 @@ function ArticleForm({ article, onSave, onCancel }) {
 }
 
 export default function ArticlesManager() {
-  const { articles, addArticle, updateArticle, deleteArticle } = useAdmin();
+  const { articles, deleteArticle } = useAdmin();
   const [deleteConfirm, setDeleteConfirm] = useState(null);
-  const navigate = useNavigate();
 
   const handleDelete = (id) => {
     deleteArticle(id);
@@ -117,27 +111,27 @@ export default function ArticlesManager() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-800">إدارة المقالات</h1>
-          <p className="text-sm text-neutral-500 mt-1">{articles.length} مقال</p>
+          <h1 className="text-2xl font-bold text-neutral-800">Manage Articles</h1>
+          <p className="text-sm text-neutral-500 mt-1">{articles.length} article{articles.length !== 1 ? 's' : ''}</p>
         </div>
         <Link to="/admin/articles/new" className="flex items-center gap-2 bg-olive-500 text-white px-5 py-2.5 rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
-          <Plus size={16} /> مقال جديد
+          <Plus size={16} /> New Article
         </Link>
       </div>
 
       <div className="bg-white rounded-2xl border border-neutral-100 overflow-hidden">
         {articles.length === 0 ? (
-          <p className="text-center text-neutral-400 py-12">لا توجد مقالات. أضف مقالك الأول!</p>
+          <p className="text-center text-neutral-400 py-12">No articles yet. Add your first one!</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-neutral-100 bg-neutral-50">
-                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">المقال</th>
-                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">التصنيف</th>
-                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">التاريخ</th>
-                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">مميّز</th>
-                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">إجراءات</th>
+                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">Article</th>
+                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">Category</th>
+                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">Date</th>
+                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">Featured</th>
+                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -157,7 +151,7 @@ export default function ArticlesManager() {
                     </td>
                     <td className="px-5 py-4 text-neutral-500">{a.date}</td>
                     <td className="px-5 py-4">
-                      {a.featured ? <span className="text-xs bg-amber-50 text-amber-600 px-2 py-1 rounded-full">مميّز</span> : '—'}
+                      {a.featured ? <span className="text-xs bg-amber-50 text-amber-600 px-2 py-1 rounded-full">Featured</span> : '—'}
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex items-center justify-end gap-2">
@@ -177,19 +171,14 @@ export default function ArticlesManager() {
         )}
       </div>
 
-      {/* Delete confirmation */}
       {deleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
           <div className="bg-white rounded-2xl p-6 shadow-xl max-w-sm mx-4 w-full">
-            <h3 className="text-lg font-bold text-neutral-800 mb-2">تأكيد الحذف</h3>
-            <p className="text-sm text-neutral-500 mb-6">هل أنت متأكدة من حذف هذا المقال؟ لا يمكن التراجع عن هذا الإجراء.</p>
+            <h3 className="text-lg font-bold text-neutral-800 mb-2">Confirm Deletion</h3>
+            <p className="text-sm text-neutral-500 mb-6">Are you sure you want to delete this article? This action cannot be undone.</p>
             <div className="flex gap-3 justify-end">
-              <button onClick={() => setDeleteConfirm(null)} className="px-5 py-2.5 bg-neutral-100 text-neutral-600 rounded-xl hover:bg-neutral-200 text-sm font-medium">
-                إلغاء
-              </button>
-              <button onClick={() => handleDelete(deleteConfirm)} className="px-5 py-2.5 bg-red-500 text-white rounded-xl hover:bg-red-600 text-sm font-medium">
-                حذف
-              </button>
+              <button onClick={() => setDeleteConfirm(null)} className="px-5 py-2.5 bg-neutral-100 text-neutral-600 rounded-xl hover:bg-neutral-200 text-sm font-medium">Cancel</button>
+              <button onClick={() => handleDelete(deleteConfirm)} className="px-5 py-2.5 bg-red-500 text-white rounded-xl hover:bg-red-600 text-sm font-medium">Delete</button>
             </div>
           </div>
         </div>
@@ -206,7 +195,7 @@ export function ArticleEditor() {
   const article = isNew ? null : articles.find(a => String(a.id) === id);
 
   if (!isNew && !article) {
-    return <p className="text-neutral-400 py-10 text-center">المقال غير موجود</p>;
+    return <p className="text-neutral-400 py-10 text-center">Article not found</p>;
   }
 
   const handleSave = (data) => {
@@ -224,7 +213,7 @@ export function ArticleEditor() {
         <Link to="/admin/articles" className="p-2 rounded-lg text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-all">
           <ArrowLeft size={18} />
         </Link>
-        <h1 className="text-2xl font-bold text-neutral-800">{isNew ? 'مقال جديد' : 'تعديل المقال'}</h1>
+        <h1 className="text-2xl font-bold text-neutral-800">{isNew ? 'New Article' : 'Edit Article'}</h1>
       </div>
       <div className="bg-white rounded-2xl border border-neutral-100 p-6">
         <ArticleForm article={article} onSave={handleSave} onCancel={() => navigate('/admin/articles')} />

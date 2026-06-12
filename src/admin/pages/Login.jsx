@@ -20,19 +20,19 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-cream-50 flex items-center justify-center p-6" dir="rtl">
+    <div className="min-h-screen bg-cream-50 flex items-center justify-center p-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <div className="w-14 h-14 rounded-full bg-olive-500 flex items-center justify-center mx-auto mb-4">
-            <span className="text-white text-xl font-bold">أ</span>
+            <span className="text-white text-xl font-bold">A</span>
           </div>
-          <h1 className="font-serif text-2xl font-semibold text-neutral-800">لوحة الإدارة</h1>
-          <p className="text-sm text-neutral-500 mt-1">سامورا كير</p>
+          <h1 className="font-serif text-2xl font-semibold text-neutral-800">Admin Panel</h1>
+          <p className="text-sm text-neutral-500 mt-1">Samura Care</p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 shadow-sm border border-neutral-100">
           <div className="mb-4">
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">كلمة المرور</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Password</label>
             <input
               type="password"
               value={password}
@@ -44,18 +44,18 @@ export default function Login() {
           </div>
 
           {error && (
-            <p className="text-xs text-red-500 mb-3">كلمة المرور غير صحيحة. حاول مرة أخرى.</p>
+            <p className="text-xs text-red-500 mb-3">Incorrect password. Please try again.</p>
           )}
 
           <button
             type="submit"
             className="w-full py-2.5 bg-olive-500 text-white rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium"
           >
-            دخول
+            Sign In
           </button>
 
           <p className="text-center text-xs text-neutral-400 mt-4">
-            كلمة المرور الافتراضية: <span className="font-mono text-neutral-500">admin123</span>
+            Default password: <span className="font-mono text-neutral-500">admin123</span>
           </p>
         </form>
       </div>

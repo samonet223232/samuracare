@@ -53,43 +53,43 @@ function GuideForm({ entry, onSave, onCancel }) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="space-y-5">
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">الاسم (عربي)</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Name (Arabic)</label>
             <input className={inputClass} value={form.nameAr} onChange={e => handleChange('nameAr', e.target.value)} placeholder="زيت الأرغان" required />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">الاسم (إنجليزي)</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Name (English)</label>
             <input className={inputClass} value={form.name} onChange={e => handleChange('name', e.target.value)} placeholder="Argan Oil" dir="ltr" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">المعرف (ID)</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">ID</label>
             <input className={inputClass} value={form.id} onChange={e => handleChange('id', e.target.value)} dir="ltr" required />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">الرابط (Slug)</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Slug</label>
             <input className={inputClass} value={form.slug} onChange={e => handleChange('slug', e.target.value)} dir="ltr" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">التصنيف</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Category</label>
             <select className={inputClass} value={form.category} onChange={e => handleChange('category', e.target.value)}>
-              <option value="">اختر تصنيفاً</option>
+              <option value="">Select a category</option>
               {guideCategories.map(c => (
                 <option key={c.id} value={c.id}>{c.titleAr}</option>
               ))}
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">الموطن الأصلي</label>
-            <input className={inputClass} value={form.origin} onChange={e => handleChange('origin', e.target.value)} placeholder="المغرب" />
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Origin</label>
+            <input className={inputClass} value={form.origin} onChange={e => handleChange('origin', e.target.value)} placeholder="Morocco" />
           </div>
         </div>
         <div className="space-y-5">
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">الوصف</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Tagline</label>
             <textarea className={inputClass + ' h-20'} value={form.taglineAr} onChange={e => handleChange('taglineAr', e.target.value)} placeholder="الذهب السائل من المغرب" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">الفوائد (سطر واحد لكل فائدة)</label>
-            <textarea className={inputClass + ' h-28'} value={form.benefits} onChange={e => handleChange('benefits', e.target.value)} placeholder="غني بفيتامين E والأحماض الدهنية&#10;يُرطّب البشرة بعمق&#10;..." />
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Benefits (one per line)</label>
+            <textarea className={inputClass + ' h-28'} value={form.benefits} onChange={e => handleChange('benefits', e.target.value)} placeholder="Rich in vitamin E and fatty acids&#10;Deeply moisturizes skin and hair&#10;..." />
             {benefitsArr.length > 0 && (
               <div className="flex flex-wrap gap-1 mt-2">
                 {benefitsArr.map((b, i) => <span key={i} className="text-xs bg-olive-50 text-olive-600 px-2 py-0.5 rounded-full">{b}</span>)}
@@ -97,35 +97,35 @@ function GuideForm({ entry, onSave, onCancel }) {
             )}
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">طريقة الاستخدام</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Usage Instructions</label>
             <textarea className={inputClass + ' h-20'} value={form.usage} onChange={e => handleChange('usage', e.target.value)} placeholder="..." />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">مناسب لـ</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Suitable For</label>
             <textarea className={inputClass + ' h-16'} value={form.suitability} onChange={e => handleChange('suitability', e.target.value)} />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">تحذيرات</label>
+            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Warnings</label>
             <textarea className={inputClass + ' h-16'} value={form.warnings} onChange={e => handleChange('warnings', e.target.value)} />
           </div>
         </div>
       </div>
       <div>
-        <label className="block text-xs font-medium text-neutral-500 mb-1.5">رابط الصورة</label>
+        <label className="block text-xs font-medium text-neutral-500 mb-1.5">Image URL</label>
         <input className={inputClass} value={form.image} onChange={e => handleChange('image', e.target.value)} placeholder="https://..." dir="ltr" />
         {form.image && <img src={form.image} alt="" className="mt-2 h-28 rounded-xl object-cover" />}
       </div>
       <div>
-        <label className="block text-xs font-medium text-neutral-500 mb-1.5">المقالات المرتبطة (slug واحد لكل سطر)</label>
+        <label className="block text-xs font-medium text-neutral-500 mb-1.5">Related Articles (one slug per line)</label>
         <input className={inputClass} value={form.relatedArticles} onChange={e => handleChange('relatedArticles', e.target.value)} placeholder="benefits-of-argan-oil-for-skin" dir="ltr" />
       </div>
 
       <div className="flex items-center gap-3 pt-4 border-t border-neutral-100">
         <button type="submit" className="px-6 py-2.5 bg-olive-500 text-white rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
-          {entry ? 'حفظ التغييرات' : 'إضافة المدخل'}
+          {entry ? 'Save Changes' : 'Add Entry'}
         </button>
         <button type="button" onClick={onCancel} className="px-6 py-2.5 bg-neutral-100 text-neutral-600 rounded-xl hover:bg-neutral-200 transition-colors text-sm font-medium">
-          إلغاء
+          Cancel
         </button>
       </div>
     </form>
@@ -145,26 +145,26 @@ export default function GuideManager() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-800">إدارة دليل الجمال</h1>
-          <p className="text-sm text-neutral-500 mt-1">{guideEntries.length} مدخل</p>
+          <h1 className="text-2xl font-bold text-neutral-800">Manage Beauty Guide</h1>
+          <p className="text-sm text-neutral-500 mt-1">{guideEntries.length} entr{guideEntries.length !== 1 ? 'ies' : 'y'}</p>
         </div>
         <Link to="/admin/guide/new" className="flex items-center gap-2 bg-olive-500 text-white px-5 py-2.5 rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
-          <Plus size={16} /> مدخل جديد
+          <Plus size={16} /> New Entry
         </Link>
       </div>
 
       <div className="bg-white rounded-2xl border border-neutral-100 overflow-hidden">
         {guideEntries.length === 0 ? (
-          <p className="text-center text-neutral-400 py-12">لا توجد مدخلات بعد</p>
+          <p className="text-center text-neutral-400 py-12">No entries yet</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-neutral-100 bg-neutral-50">
-                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">المدخل</th>
-                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">التصنيف</th>
-                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">ID</th>
-                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">إجراءات</th>
+                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">Entry</th>
+                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">Category</th>
+                  <th className="text-left px-5 py-3 font-medium text-neutral-500 text-xs">ID</th>
+                  <th className="text-right px-5 py-3 font-medium text-neutral-500 text-xs">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -202,11 +202,11 @@ export default function GuideManager() {
       {deleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
           <div className="bg-white rounded-2xl p-6 shadow-xl max-w-sm mx-4 w-full">
-            <h3 className="text-lg font-bold text-neutral-800 mb-2">تأكيد الحذف</h3>
-            <p className="text-sm text-neutral-500 mb-6">هل أنت متأكد من حذف هذا المدخل؟ لا يمكن التراجع عن هذا الإجراء.</p>
+            <h3 className="text-lg font-bold text-neutral-800 mb-2">Confirm Deletion</h3>
+            <p className="text-sm text-neutral-500 mb-6">Are you sure you want to delete this entry? This action cannot be undone.</p>
             <div className="flex gap-3 justify-end">
-              <button onClick={() => setDeleteConfirm(null)} className="px-5 py-2.5 bg-neutral-100 text-neutral-600 rounded-xl hover:bg-neutral-200 text-sm font-medium">إلغاء</button>
-              <button onClick={() => handleDelete(deleteConfirm)} className="px-5 py-2.5 bg-red-500 text-white rounded-xl hover:bg-red-600 text-sm font-medium">حذف</button>
+              <button onClick={() => setDeleteConfirm(null)} className="px-5 py-2.5 bg-neutral-100 text-neutral-600 rounded-xl hover:bg-neutral-200 text-sm font-medium">Cancel</button>
+              <button onClick={() => handleDelete(deleteConfirm)} className="px-5 py-2.5 bg-red-500 text-white rounded-xl hover:bg-red-600 text-sm font-medium">Delete</button>
             </div>
           </div>
         </div>
@@ -223,7 +223,7 @@ export function GuideEntryEditor() {
   const entry = isNew ? null : guideEntries.find(e => e.id === id);
 
   if (!isNew && !entry) {
-    return <p className="text-neutral-400 py-10 text-center">المدخل غير موجود</p>;
+    return <p className="text-neutral-400 py-10 text-center">Entry not found</p>;
   }
 
   const handleSave = (data) => {
@@ -241,7 +241,7 @@ export function GuideEntryEditor() {
         <Link to="/admin/guide" className="p-2 rounded-lg text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-all">
           <ArrowLeft size={18} />
         </Link>
-        <h1 className="text-2xl font-bold text-neutral-800">{isNew ? 'مدخل جديد' : 'تعديل المدخل'}</h1>
+        <h1 className="text-2xl font-bold text-neutral-800">{isNew ? 'New Entry' : 'Edit Entry'}</h1>
       </div>
       <div className="bg-white rounded-2xl border border-neutral-100 p-6">
         <GuideForm entry={entry} onSave={handleSave} onCancel={() => navigate('/admin/guide')} />

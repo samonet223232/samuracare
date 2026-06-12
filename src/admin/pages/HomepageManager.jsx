@@ -41,77 +41,67 @@ export default function HomepageManager() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-800">إدارة الصفحة الرئيسية</h1>
-          <p className="text-sm text-neutral-500 mt-1">تعديل محتوى الصفحة الرئيسية</p>
+          <h1 className="text-2xl font-bold text-neutral-800">Homepage Settings</h1>
+          <p className="text-sm text-neutral-500 mt-1">Manage homepage content</p>
         </div>
         <button onClick={handleSave} className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all ${saved ? 'bg-green-500 text-white' : 'bg-olive-500 text-white hover:bg-olive-600'}`}>
-          {saved ? '✓ تم الحفظ' : 'حفظ التغييرات'}
+          {saved ? '✓ Saved' : 'Save Changes'}
         </button>
       </div>
 
       <div className="space-y-6">
-        {/* Hero Section */}
+        {/* Hero */}
         <div className="bg-white rounded-2xl border border-neutral-100 p-6">
-          <h2 className="font-bold text-neutral-800 mb-4">قسم الهيرو (Hero)</h2>
+          <h2 className="font-bold text-neutral-800 mb-4">Hero Section</h2>
           <div className="space-y-4">
             <div>
-              <label className={labelClass}>العنوان الرئيسي (يدعم HTML)</label>
+              <label className={labelClass}>Title (supports HTML)</label>
               <input className={inputClass} value={form.heroTitle} onChange={e => handleChange('heroTitle', e.target.value)} />
             </div>
             <div>
-              <label className={labelClass}>النص الفرعي</label>
+              <label className={labelClass}>Subtitle</label>
               <textarea className={inputClass + ' h-20'} value={form.heroSubtitle} onChange={e => handleChange('heroSubtitle', e.target.value)} />
             </div>
           </div>
         </div>
 
-        {/* Trust Bar */}
+        {/* About preview */}
         <div className="bg-white rounded-2xl border border-neutral-100 p-6">
-          <h2 className="font-bold text-neutral-800 mb-4">شريط الثقة (Trust Bar)</h2>
-          <div>
-            <label className={labelClass}>النص</label>
-            <input className={inputClass} value={form.trustBarText} onChange={e => handleChange('trustBarText', e.target.value)} />
-          </div>
-        </div>
-
-        {/* About preview section */}
-        <div className="bg-white rounded-2xl border border-neutral-100 p-6">
-          <h2 className="font-bold text-neutral-800 mb-4">معاينة قسم "عنا"</h2>
+          <h2 className="font-bold text-neutral-800 mb-4">About Preview Section</h2>
           <div className="space-y-4">
             <div>
-              <label className={labelClass}>العنوان</label>
+              <label className={labelClass}>Title</label>
               <input className={inputClass} value={form.aboutTitle} onChange={e => handleChange('aboutTitle', e.target.value)} />
             </div>
             <div>
-              <label className={labelClass}>النص</label>
+              <label className={labelClass}>Text</label>
               <textarea className={inputClass + ' h-24'} value={form.aboutText} onChange={e => handleChange('aboutText', e.target.value)} />
             </div>
           </div>
 
-          {/* Stats */}
-          <h3 className="font-semibold text-neutral-700 mt-6 mb-3 text-sm">الإحصائيات</h3>
+          <h3 className="font-semibold text-neutral-700 mt-6 mb-3 text-sm">Statistics</h3>
           <div className="space-y-3">
             {form.stats.map((stat, i) => (
               <div key={i} className="flex items-center gap-3">
-                <input className={inputClass + ' flex-1'} value={stat.number} onChange={e => handleStatsChange(i, 'number', e.target.value)} placeholder="الرقم (مثال: ٤٠+)" />
-                <input className={inputClass + ' flex-1'} value={stat.label} onChange={e => handleStatsChange(i, 'label', e.target.value)} placeholder="التصنيف" />
+                <input className={inputClass + ' flex-1'} value={stat.number} onChange={e => handleStatsChange(i, 'number', e.target.value)} placeholder="Number (e.g. 40+)" />
+                <input className={inputClass + ' flex-1'} value={stat.label} onChange={e => handleStatsChange(i, 'label', e.target.value)} placeholder="Label" />
                 <button onClick={() => removeStat(i)} className="p-2.5 text-neutral-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
               </div>
             ))}
-            <button onClick={addStat} className="text-sm text-olive-500 font-medium hover:text-olive-600">+ إضافة إحصائية</button>
+            <button onClick={addStat} className="text-sm text-olive-500 font-medium hover:text-olive-600">+ Add statistic</button>
           </div>
         </div>
 
         {/* Newsletter */}
         <div className="bg-white rounded-2xl border border-neutral-100 p-6">
-          <h2 className="font-bold text-neutral-800 mb-4">قسم النشرة البريدية</h2>
+          <h2 className="font-bold text-neutral-800 mb-4">Newsletter Section</h2>
           <div className="space-y-4">
             <div>
-              <label className={labelClass}>العنوان</label>
+              <label className={labelClass}>Title</label>
               <input className={inputClass} value={form.newsletterTitle} onChange={e => handleChange('newsletterTitle', e.target.value)} />
             </div>
             <div>
-              <label className={labelClass}>النص</label>
+              <label className={labelClass}>Text</label>
               <textarea className={inputClass + ' h-16'} value={form.newsletterText} onChange={e => handleChange('newsletterText', e.target.value)} />
             </div>
           </div>
