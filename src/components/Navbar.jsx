@@ -30,6 +30,13 @@ export default function Navbar() {
   const isHome = location.pathname === '/';
   const transparent = isHome && !scrolled && !open;
 
+  const handleHomeClick = (e) => {
+    if (isHome) {
+      e.preventDefault();
+      window.location.reload();
+    }
+  };
+
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
@@ -76,7 +83,7 @@ export default function Navbar() {
         style={{ height: transparent ? '84px' : '72px', transition: 'height 0.4s ease' }}
       >
         {/* Logo */}
-        <Link to="/" className="shrink-0" style={{ textDecoration: 'none' }} />
+        <Link to="/" onClick={handleHomeClick} className="shrink-0" style={{ textDecoration: 'none' }} />
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
@@ -86,6 +93,7 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
+                onClick={link.to === '/' ? handleHomeClick : undefined}
                 className="relative pb-1"
                 style={{
                   fontSize: '21px',
@@ -241,6 +249,7 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
+                onClick={link.to === '/' ? handleHomeClick : undefined}
                 className="py-3 px-4 rounded-xl font-sans font-medium transition-colors"
                 style={{
                   fontSize: '16px',
