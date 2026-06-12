@@ -106,20 +106,22 @@ export default function Navbar() {
                 }}
               >
                 {link.label}
-                <span
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    height: '2px',
-                    borderRadius: '2px',
-                    background: isActive
-                      ? transparent ? '#ffffff' : '#4D5C4A'
-                      : 'transparent',
-                    transition: 'background 0.3s ease',
-                  }}
-                />
+                {isHome && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      height: '2px',
+                      borderRadius: '2px',
+                      background: isActive
+                        ? transparent ? '#ffffff' : '#4D5C4A'
+                        : 'transparent',
+                      transition: 'background 0.3s ease',
+                    }}
+                  />
+                )}
               </Link>
             );
           })}
