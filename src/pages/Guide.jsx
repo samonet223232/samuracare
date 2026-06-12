@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Search } from 'lucide-react';
-import { guideCategories, guideEntries } from '../data/guide';
+import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
 
 export default function Guide() {
+  const { guideCategories, guideEntries } = useAdmin();
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const categoryParam = searchParams.get('category') || 'all';

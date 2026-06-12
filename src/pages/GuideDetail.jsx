@@ -1,10 +1,10 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle } from 'lucide-react';
-import { guideEntries, guideCategories } from '../data/guide';
-import { articles } from '../data/articles';
+import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
 
 export default function GuideDetail() {
+  const { guideEntries, guideCategories, articles } = useAdmin();
   const { slug } = useParams();
   const entry = guideEntries.find(e => e.slug === slug);
 

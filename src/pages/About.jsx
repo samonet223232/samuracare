@@ -1,40 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Heart, Leaf, BookOpen, Shield } from 'lucide-react';
+import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
 
-const values = [
-  {
-    icon: <Leaf size={22} />,
-    title: 'الطبيعة أولاً',
-    desc: 'نستخدم فقط مكوّنات من الطبيعة. لا عطور صناعية، لا باراباين، لا مواد ضارة — أبداً.',
-  },
-  {
-    icon: <BookOpen size={22} />,
-    title: 'المعرفة قوة',
-    desc: 'نؤمن بأن كل شخص يستحق أن يعرف ما يضعه على بشرته. التعليم هو قلب ما نقدّمه.',
-  },
-  {
-    icon: <Heart size={22} />,
-    title: 'مصنوعة بحب',
-    desc: 'كل منتج يُصنع في دفعات صغيرة بنية وإتقان. الجودة فوق الكمية، دائماً.',
-  },
-  {
-    icon: <Shield size={22} />,
-    title: 'أمانة وشفافية',
-    desc: 'قوائم مكونات كاملة، ادعاءات صادقة، ولا مبالغة في الوعود. نحترم ذكاءكِ.',
-  },
-];
-
-const timeline = [
-  { year: '2018', event: 'بدأتُ دراسة صياغة المنتجات الطبيعية وعلاجات النباتات.' },
-  { year: '2019', event: 'صنعتُ أول دفعة كريم الأرغان للوجه للعائلة والأصدقاء.' },
-  { year: '2021', event: 'أطلقتُ سامورا كير بـ4 منتجات أساسية وبدأتُ مشاركة المحتوى.' },
-  { year: '2023', event: 'نشرتُ دليل صانعي الجمال — مرجع تعليمي مجاني للجميع.' },
-  { year: '2025', event: 'توسّع خط الإنتاج ليشمل العناية بالوجه والجسم والشعر.' },
-  { year: '2026', event: 'نبني مجتمعاً من محبّي الجمال الطبيعي في العالم العربي وما وراءه.' },
-];
+const valueIcons = [Leaf, BookOpen, Heart, Shield];
 
 export default function About() {
+  const { about } = useAdmin();
+
   return (
     <main className="pt-28">
       {/* Hero */}
@@ -45,53 +18,25 @@ export default function About() {
           <FadeInSection>
             <p className="text-xs font-sans tracking-widest text-olive-300 mb-3">قصتنا</p>
             <h1 className="font-serif text-5xl md:text-6xl font-semibold text-white mb-4 leading-tight max-w-2xl">
-              جمال متجذّر في الطبيعة والمعرفة
+              {about.heroTitle}
             </h1>
             <p className="text-sm text-olive-300 font-sans mb-6">Beauty Rooted in Nature & Knowledge</p>
             <p className="text-neutral-200 text-base leading-relaxed max-w-xl">
-              وُلدت سامورا كير من سؤال بسيط: ماذا أضع على بشرتي حقاً؟ هذا الفضول صار شغفاً، ثم علامة تجارية، ثم رسالة.
+              {about.heroSubtitle}
             </p>
           </FadeInSection>
         </div>
       </section>
 
-      {/* Founder */}
-      <section className="bg-white py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <FadeInSection>
-              <div className="relative">
-                <div className="rounded-2xl overflow-hidden aspect-[3/4]">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=700&q=80" alt="سارة، مؤسسة سامورا كير" className="w-full h-full object-cover" />
-                </div>
-                <div className="absolute -bottom-6 -right-6 bg-neutral-900 text-white rounded-2xl p-6 shadow-xl max-w-[200px]">
-                  <p className="font-serif text-3xl font-semibold text-white">سارة</p>
-                  <p className="text-xs text-olive-200 mt-1">المؤسِّسة والمصمِّمة</p>
-                  <p className="text-xs text-olive-300 mt-0.5">Founder & Formulator</p>
-                </div>
-              </div>
-            </FadeInSection>
-
-            <FadeInSection delay={150}>
-              <div>
-                <p className="text-xs font-sans tracking-widest text-olive-500 mb-3">قصتنا</p>
-                <h2 className="font-serif text-4xl font-semibold text-neutral-800 mb-6 leading-snug">
-                  الشخص الذي يقف<br />وراء كل منتج
-                </h2>
-                <div className="space-y-4 text-base text-neutral-600 leading-relaxed">
-                  <p>
-                    اسمي سارة، وأنا مفتونة دائماً بالعلاقة بين الطبيعة والعلم. حين كنتُ أكبر، شاهدتُ نساء عائلتي يستخدمن علاجات نباتية بسيطة — زيت الزيتون، الحبة السوداء، ماء الورد — منقولة عبر الأجيال.
-                  </p>
-                  <p>
-                    لاحقاً، وسط صناعة تجميل مليئة بالمكوّنات المعقّدة والادعاءات الكبيرة، عدتُ إلى الأساسيات. درستُ صياغة المنتجات الطبيعية، وقرأتُ عن أعشاب الطب التقليدي في العالم العربي وأفريقيا وما وراءهما، وبدأتُ التجريب في مطبخي.
-                  </p>
-                  <p>
-                    سامورا كير ثمرة تلك الرحلة. كل منتج أصنعه، أصنعه لنفسي أولاً. وكل مقال أكتبه، أكتبه لأمنحكِ المعرفة لتتخذي قراراتكِ بثقة.
-                  </p>
-                </div>
-              </div>
-            </FadeInSection>
-          </div>
+      {/* Mission */}
+      <section className="bg-white py-24 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <FadeInSection>
+            <p className="text-xs font-sans tracking-widest text-olive-500 mb-3">رسالتنا</p>
+            <div className="text-base text-neutral-600 leading-relaxed max-w-3xl mx-auto whitespace-pre-line">
+              {about.mission}
+            </div>
+          </FadeInSection>
         </div>
       </section>
 
@@ -106,17 +51,20 @@ export default function About() {
             </div>
           </FadeInSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((v, i) => (
-              <FadeInSection key={v.title} delay={i * 80}>
-                <div className="bg-white rounded-2xl p-7 text-center shadow-sm border border-olive-200 h-full hover:border-olive-400 transition-colors">
-                  <div className="w-12 h-12 bg-neutral-900 rounded-full flex items-center justify-center mx-auto mb-4 text-white">
-                    {v.icon}
+            {about.values.map((v, i) => {
+              const Icon = valueIcons[i % valueIcons.length];
+              return (
+                <FadeInSection key={i} delay={i * 80}>
+                  <div className="bg-white rounded-2xl p-7 text-center shadow-sm border border-olive-200 h-full hover:border-olive-400 transition-colors">
+                    <div className="w-12 h-12 bg-neutral-900 rounded-full flex items-center justify-center mx-auto mb-4 text-white">
+                      <Icon size={22} />
+                    </div>
+                    <h3 className="font-serif text-lg text-neutral-800 mb-3">{v.title}</h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">{v.description}</p>
                   </div>
-                  <h3 className="font-serif text-lg text-neutral-800 mb-3">{v.title}</h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{v.desc}</p>
-                </div>
-              </FadeInSection>
-            ))}
+                </FadeInSection>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -132,12 +80,13 @@ export default function About() {
             </div>
           </FadeInSection>
           <div className="relative pr-8 border-r-2 border-neutral-200">
-            {timeline.map((item, i) => (
-              <FadeInSection key={item.year} delay={i * 80}>
+            {about.timeline.map((item, i) => (
+              <FadeInSection key={i} delay={i * 80}>
                 <div className="mb-8 relative">
                   <div className="absolute -right-[2.6rem] w-5 h-5 bg-neutral-400 rounded-full border-4 border-white shadow-sm" />
                   <p className="text-xs font-sans font-semibold text-olive-500 tracking-widest mb-1">{item.year}</p>
-                  <p className="text-base text-neutral-600 leading-relaxed">{item.event}</p>
+                  <p className="text-sm text-neutral-600 leading-relaxed">{item.title}</p>
+                  <p className="text-base text-neutral-500 leading-relaxed mt-1">{item.text}</p>
                 </div>
               </FadeInSection>
             ))}
@@ -151,10 +100,10 @@ export default function About() {
           <div className="max-w-2xl mx-auto">
             <p className="text-xs font-sans tracking-widest text-neutral-400 mb-4">انضمي إلى الرحلة</p>
             <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white mb-5">
-              الجمال ممارسة، لا مجرّد منتج
+              {about.ctaText}
             </h2>
             <p className="text-neutral-300 text-base mb-8 leading-relaxed">
-              سواء كنتِ تقرأين مقالاتنا أو تتعمّقين في دليل الجمال — يسعدنا وجودكِ هنا.
+              {about.ctaSubtext}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/articles" className="bg-white text-neutral-800 px-7 py-3.5 rounded-full text-sm font-sans font-medium hover:bg-neutral-100 transition-colors shadow-md">

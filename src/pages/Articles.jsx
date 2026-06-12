@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock } from 'lucide-react';
-import { articles } from '../data/articles';
+import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
 
-const categories = ['الكل', ...Array.from(new Set(articles.map(a => a.category)))];
-
 export default function Articles() {
+  const { articles } = useAdmin();
+  const categories = ['الكل', ...Array.from(new Set(articles.map(a => a.category)))];
   const [active, setActive] = useState('الكل');
   const filtered = active === 'الكل' ? articles : articles.filter(a => a.category === active);
   const [featured, ...rest] = filtered;

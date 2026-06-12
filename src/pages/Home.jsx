@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Leaf, Sparkles, BookOpen } from 'lucide-react';
-import { articles } from '../data/articles';
-import { guideCategories, guideEntries } from '../data/guide';
+import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
 
 export default function Home() {
+  const { articles, guideCategories, guideEntries, homepage } = useAdmin();
   const featuredArticles = articles.slice(0, 5);
   const featuredGuide = guideEntries.slice(0, 3);
 
@@ -21,12 +21,9 @@ export default function Home() {
           <p className="text-xs font-sans font-medium tracking-widest text-olive-600 mb-4 animate-fade-in">
             طبيعي · صادق · تعليمي — SAMURACARE
           </p>
-          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-neutral-800 leading-tight mb-6 animate-fade-up">
-            جمال طبيعي،<br />
-            <em className="not-italic text-olive-500">صُنع بعناية</em>
-          </h1>
+          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-neutral-800 leading-tight mb-6 animate-fade-up" dangerouslySetInnerHTML={{ __html: homepage.heroTitle }} />
           <p className="text-lg text-neutral-600 font-sans font-light leading-relaxed mb-10 max-w-xl mx-auto animate-fade-up">
-            اكتشفي عالم مكونات التجميل الطبيعية، ومحتوى العناية الصادق، والوصفات المصنوعة بحب.
+            {homepage.heroSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up">
             <Link to="/guide" className="bg-olive-500 text-white px-8 py-4 rounded-full text-sm font-sans font-medium hover:bg-olive-600 transition-colors duration-300 shadow-md shadow-olive-200">
@@ -143,13 +140,10 @@ export default function Home() {
               <div>
                 <p className="text-xs font-sans tracking-widest text-olive-500 mb-3">قصتنا</p>
                 <h2 className="font-serif text-4xl md:text-5xl font-semibold text-neutral-800 mb-6 leading-snug">
-                  متجذرة في الطبيعة،<br />موجَّهة بالمعرفة
+                  {homepage.aboutTitle}
                 </h2>
-                <p className="text-neutral-600 text-base leading-relaxed mb-4">
-                  وُلدت سامورا كير من فضول عميق حول ما نضعه على بشرتنا. أنا سارة — مُصمِّمة منتجات طبيعية ومعلّمة تجميل، أمضيت سنوات في دراسة علاجات النباتات التقليدية من العالم العربي وما وراءه.
-                </p>
                 <p className="text-neutral-600 text-base leading-relaxed mb-8">
-                  مهمتي بسيطة: منحكِ المعرفة لتعتني بنفسك بشكل طبيعي وصادق ومليء بالفرح.
+                  {homepage.aboutText}
                 </p>
                 <Link to="/about" className="inline-flex items-center gap-2 border border-neutral-300 text-neutral-700 px-7 py-3.5 rounded-full text-sm font-sans font-medium hover:border-olive-400 hover:text-olive-600 transition-all">
                   <ArrowLeft size={15} /> اعرفي المزيد
@@ -216,10 +210,10 @@ export default function Home() {
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xs font-sans tracking-widest text-olive-600 mb-3">ابقي على اطلاع</p>
             <h2 className="font-serif text-3xl md:text-4xl font-semibold text-neutral-800 mb-4">
-              حكمة الجمال، تصلكِ بشكل طبيعي
+              {homepage.newsletterTitle}
             </h2>
             <p className="text-neutral-600 text-sm mb-8">
-              انضمي إلى مجتمعنا لتصلكِ المقالات الجديدة والوصفات الموسمية وأدلة العناية.
+              {homepage.newsletterText}
             </p>
             <form className="flex flex-col sm:flex-row gap-3 justify-center" onSubmit={(e) => e.preventDefault()}>
               <input

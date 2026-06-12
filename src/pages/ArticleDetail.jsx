@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Clock, Calendar } from 'lucide-react';
-import { articles } from '../data/articles';
-import { guideEntries } from '../data/guide';
+import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
 
 function renderContent(text) {
@@ -23,6 +22,7 @@ function renderContent(text) {
 
 export default function ArticleDetail() {
   const { slug } = useParams();
+  const { articles, guideEntries } = useAdmin();
   const article = articles.find(a => a.slug === slug);
 
   if (!article) {
