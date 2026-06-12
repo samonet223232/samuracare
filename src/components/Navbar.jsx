@@ -88,7 +88,7 @@ export default function Navbar() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
           {navLinks.map((link) => {
-            const isActive = location.pathname.startsWith(link.to);
+            const isActive = link.to === '/' ? location.pathname === '/' : location.pathname.startsWith(link.to);
             return (
               <Link
                 key={link.to}
@@ -244,7 +244,7 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden bg-white border-t border-neutral-100 px-6 py-5 flex flex-col gap-1 shadow-lg">
           {navLinks.map((link) => {
-            const isActive = location.pathname.startsWith(link.to);
+            const isActive = link.to === '/' ? location.pathname === '/' : location.pathname.startsWith(link.to);
             return (
               <Link
                 key={link.to}
