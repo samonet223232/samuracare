@@ -106,7 +106,6 @@ export default function Navbar() {
                 }}
               >
                 {link.label}
-                {isHome && (
                   <span
                     style={{
                       position: 'absolute',
@@ -121,7 +120,6 @@ export default function Navbar() {
                       transition: 'background 0.3s ease',
                     }}
                   />
-                )}
               </Link>
             );
           })}
