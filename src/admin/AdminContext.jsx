@@ -76,7 +76,6 @@ function getInitialState() {
     guideEntries: defaultEntries,
     homepage: defaultHomepage,
     about: defaultAbout,
-    pages: [],
   };
 }
 
@@ -123,7 +122,6 @@ export function AdminProvider({ children }) {
       guideEntries: defaultEntries,
       homepage: defaultHomepage,
       about: defaultAbout,
-      pages: [],
     };
     setData(fresh);
     saveStore(fresh);
@@ -237,28 +235,6 @@ export function AdminProvider({ children }) {
     }));
   }, []);
 
-  // ---- Custom Pages ----
-  const addPage = useCallback((page) => {
-    setData(prev => ({
-      ...prev,
-      pages: [...prev.pages, { ...page, id: Date.now() }],
-    }));
-  }, []);
-
-  const updatePage = useCallback((id, updates) => {
-    setData(prev => ({
-      ...prev,
-      pages: prev.pages.map(p => p.id === id ? { ...p, ...updates } : p),
-    }));
-  }, []);
-
-  const deletePage = useCallback((id) => {
-    setData(prev => ({
-      ...prev,
-      pages: prev.pages.filter(p => p.id !== id),
-    }));
-  }, []);
-
   return (
     <AdminContext.Provider value={{
       ...data,
@@ -282,10 +258,6 @@ export function AdminProvider({ children }) {
       deleteCategory,
       updateHomepage,
       updateAbout,
-      pages,
-      addPage,
-      updatePage,
-      deletePage,
     }}>
       {children}
     </AdminContext.Provider>

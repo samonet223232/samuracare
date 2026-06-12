@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
-  LayoutDashboard, FileText, BookOpen, Tags, Home, Info, Users, File, LogOut, Menu, X
+  LayoutDashboard, FileText, BookOpen, Tags, Home, Info, Users, LogOut, Menu, X
 } from 'lucide-react';
 import { useAdmin } from './AdminContext';
 
@@ -13,7 +13,6 @@ const sidebarLinks = [
   { to: '/admin/homepage', label: 'Homepage', icon: Home },
   { to: '/admin/about', label: 'About Page', icon: Info },
   { to: '/admin/users', label: 'Users', icon: Users },
-  { to: '/admin/pages', label: 'Pages', icon: File },
 ];
 
 export default function AdminLayout({ children }) {

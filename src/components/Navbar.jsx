@@ -1,23 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Search } from 'lucide-react';
-import { useAdmin } from '../admin/AdminContext';
 
-const coreLinks = [
+const navLinks = [
   { to: '/articles', label: 'المقالات' },
   { to: '/guide', label: 'دليل الجمال' },
   { to: '/about', label: 'عنّا' },
 ];
 
 export default function Navbar() {
-  const { pages } = useAdmin();
-
-  const pageLinks = (pages || [])
-    .filter(p => p.showInHeader)
-    .sort((a, b) => a.order - b.order)
-    .map(p => ({ to: `/page/${p.slug}`, label: p.title }));
-
-  const navLinks = [...coreLinks, ...pageLinks];
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
