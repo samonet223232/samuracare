@@ -14,7 +14,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=1600&q=80)' }}
+          style={{ backgroundImage: `url(${homepage.heroImage})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-bl from-white/60 via-white/30 to-transparent" />
         <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
@@ -127,11 +127,11 @@ export default function Home() {
             <FadeInSection>
               <div className="relative">
                 <div className="rounded-2xl overflow-hidden aspect-[4/5]">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=700&q=80" alt="مؤسسة سامورا كير" className="w-full h-full object-cover" />
+                  <img src={homepage.aboutImage} alt="مؤسسة سامورا كير" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute -bottom-5 -left-5 bg-neutral-900 text-white rounded-2xl p-5 shadow-xl max-w-[190px]">
-                  <p className="font-serif text-3xl font-semibold">+8</p>
-                  <p className="text-xs font-sans mt-1 text-olive-100">سنوات في صياغة منتجات التجميل الطبيعي</p>
+                  <p className="font-serif text-3xl font-semibold">{homepage.aboutBadgeNumber}</p>
+                  <p className="text-xs font-sans mt-1 text-olive-100">{homepage.aboutBadgeText}</p>
                 </div>
               </div>
             </FadeInSection>

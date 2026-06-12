@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useAdmin } from '../AdminContext';
-import { FileText, Plus, X, Eye, EyeOff, Pencil, Trash2, ChevronUp, ChevronDown } from 'lucide-react';
+import { FileText, Plus, X, Eye, EyeOff, Pencil, Trash2, ChevronUp, ChevronDown, Home, Info, ChevronDown as ChevronDownIcon } from 'lucide-react';
 
 const emptyForm = { title: '', slug: '', content: '', showInHeader: true, order: 0 };
 
 export default function PagesManager() {
-  const { pages, addPage, updatePage, deletePage } = useAdmin();
+  const { pages, addPage, updatePage, deletePage, homepage, updateHomepage, about, updateAbout } = useAdmin();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(emptyForm);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [expandedSite, setExpandedSite] = useState(null);
 
   const pageList = pages || [];
   const sortedPages = [...pageList].sort((a, b) => a.order - b.order);
@@ -74,21 +75,116 @@ export default function PagesManager() {
     updatePage(next.id, { order: curr.order });
   };
 
+  const inputClass = "w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent bg-white text-neutral-800";
+  const labelClass = "block text-xs font-medium text-neutral-500 mb-1.5";
+
+  const sitePages = [
+    {
+      id: 'site-home',
+      icon: Home,
+      label: 'Homepage',
+      description: 'Hero image, about image, titles',
+      expanded: expandedSite === 'home',
+      fields: [
+        { key: 'heroImage', label: 'Hero Background Image', type: 'image' },
+        { key: 'heroTitle', label: 'Hero Title (HTML)', type: 'text' },
+        { key: 'heroSubtitle', label: 'Hero Subtitle', type: 'textarea' },
+        { key: 'aboutImage', label: 'About Section Image', type: 'image' },
+        { key: 'aboutBadgeNumber', label: 'Badge Number', type: 'text' },
+        { key: 'aboutBadgeText', label: 'Badge Text', type: 'text' },
+        { key: 'aboutTitle', label: 'About Title', type: 'text' },
+        { key: 'aboutText', label: 'About Text', type: 'textarea' },
+      ],
+      data: homepage,
+      updater: updateHomepage,
+    },
+    {
+      id: 'site-about',
+      icon: Info,
+      label: 'About Page',
+      description: 'Hero image, mission, values, timeline',
+      expanded: expandedSite === 'about',
+      fields: [
+        { key: 'heroImage', label: 'Hero Background Image', type: 'image' },
+        { key: 'heroTitle', label: 'Hero Title', type: 'text' },
+        { key: 'heroSubtitle', label: 'Hero Subtitle', type: 'textarea' },
+        { key: 'mission', label: 'Mission', type: 'textarea' },
+      ],
+      data: about,
+      updater: updateAbout,
+    },
+  ];
+
+  const toggleSite = (id) => {
+    setExpandedSite(prev => prev === id ? null : id);
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-xl font-semibold text-neutral-800">Pages</h1>
-          <p className="text-sm text-neutral-500 mt-0.5">Manage custom pages and header navigation</p>
+          <p className="text-sm text-neutral-500 mt-0.5">Manage all site pages and photos</p>
         </div>
-        <button
-          onClick={openNew}
-          className="flex items-center gap-2 px-4 py-2 bg-olive-500 text-white rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium"
-        >
-          <Plus size={16} />
-          New Page
+        <button onClick={openNew}
+          className="flex items-center gap-2 px-4 py-2 bg-olive-500 text-white rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
+          <Plus size={16} /> New Custom Page
         </button>
       </div>
+
+      {/* Site Pages */}
+      <div className="mb-8">
+        <h2 className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">Site Pages</h2>
+        <div className="bg-white rounded-2xl border border-neutral-100 overflow-hidden divide-y divide-neutral-100">
+          {sitePages.map((site) => {
+            const Icon = site.icon;
+            return (
+              <div key={site.id}>
+                <button onClick={() => toggleSite(site.id)}
+                  className="w-full flex items-center gap-4 px-5 py-4 hover:bg-neutral-50 transition-colors text-left">
+                  <Icon size={18} className="text-olive-500 shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-neutral-800">{site.label}</p>
+                    <p className="text-xs text-neutral-400">{site.description}</p>
+                  </div>
+                  <ChevronDownIcon size={16} className={`text-neutral-400 transition-transform ${site.expanded ? 'rotate-180' : ''}`} />
+                </button>
+                {site.expanded && (
+                  <div className="px-5 pb-5 pt-1 border-t border-neutral-50">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {site.fields.map(field => (
+                        <div key={field.key} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
+                          <label className={labelClass}>{field.label}</label>
+                          {field.type === 'image' ? (
+                            <>
+                              <input className={inputClass} value={site.data[field.key] || ''}
+                                onChange={e => site.updater({ [field.key]: e.target.value })} placeholder="https://..." />
+                              {site.data[field.key] && (
+                                <img src={site.data[field.key]} alt=""
+                                  className="mt-2 w-full h-24 object-cover rounded-lg border border-neutral-100"
+                                  onError={e => e.target.style.display='none'} />
+                              )}
+                            </>
+                          ) : field.type === 'textarea' ? (
+                            <textarea className={inputClass + ' h-24'} value={site.data[field.key] || ''}
+                              onChange={e => site.updater({ [field.key]: e.target.value })} />
+                          ) : (
+                            <input className={inputClass} value={site.data[field.key] || ''}
+                              onChange={e => site.updater({ [field.key]: e.target.value })} />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Custom Pages */}
+      <h2 className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">Custom Pages</h2>
 
       {sortedPages.length === 0 && !showForm && (
         <div className="bg-white rounded-2xl p-10 border border-neutral-100 text-center">
@@ -138,6 +234,7 @@ export default function PagesManager() {
         </div>
       )}
 
+      {/* Custom page form modal */}
       {showForm && (
         <>
           <div className="fixed inset-0 z-40 bg-black/30" onClick={() => setShowForm(false)} />
@@ -145,32 +242,26 @@ export default function PagesManager() {
             <div className="bg-white rounded-2xl w-full max-w-2xl shadow-xl border border-neutral-100 max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
               <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
                 <h2 className="text-base font-semibold text-neutral-800">{editingId ? 'Edit Page' : 'New Page'}</h2>
-                <button onClick={() => setShowForm(false)} className="p-1.5 text-neutral-400 hover:text-neutral-600 rounded-lg hover:bg-neutral-100 transition-colors">
-                  <X size={18} />
-                </button>
+                <button onClick={() => setShowForm(false)} className="p-1.5 text-neutral-400 hover:text-neutral-600 rounded-lg hover:bg-neutral-100 transition-colors"><X size={18} /></button>
               </div>
               <form onSubmit={handleSave} className="p-6 space-y-5">
                 <div>
-                  <label className="block text-xs font-medium text-neutral-500 mb-1.5">Page Title</label>
+                  <label className={labelClass}>Page Title</label>
                   <input type="text" value={form.title} onChange={e => handleTitleChange(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent"
-                    placeholder="e.g. Our Story" autoFocus />
+                    className={inputClass} placeholder="e.g. Our Story" autoFocus />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-neutral-500 mb-1.5">URL Slug</label>
+                  <label className={labelClass}>URL Slug</label>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-neutral-400">/</span>
                     <input type="text" value={form.slug} onChange={e => setForm(prev => ({ ...prev, slug: e.target.value }))}
-                      className="flex-1 px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent"
-                      placeholder="our-story" />
+                      className={inputClass} placeholder="our-story" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-neutral-500 mb-1.5">Content</label>
+                  <label className={labelClass}>Content</label>
                   <textarea value={form.content} onChange={e => setForm(prev => ({ ...prev, content: e.target.value }))}
-                    rows={12}
-                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent resize-y font-mono"
-                    placeholder="HTML content or text..." />
+                    rows={12} className={inputClass + ' resize-y font-mono'} placeholder="HTML content or text..." />
                   <p className="text-xs text-neutral-400 mt-1">You can use HTML tags for formatting (h1, h2, p, ul, etc.)</p>
                 </div>
                 <div className="flex items-center gap-6">

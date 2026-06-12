@@ -9,9 +9,13 @@ const USERS_KEY = 'samura-users';
 const defaultHomepage = {
   heroTitle: 'اكتشفي جمالاً طبيعياً،<br/>صُنع بعناية',
   heroSubtitle: 'موسوعة المكونات الطبيعية، أدلة الجمال، وعناية مصنوعة بالحب — كل ما تحتاجينه لرحلة جمالكِ الطبيعية',
+  heroImage: 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=1600&q=80',
   trustBarText: 'طبيعي ١٠٠٪ • خالٍ من القسوة • مكوّنات نظيفة',
   aboutTitle: 'عناية بسيطة، مكوّنات حقيقية',
   aboutText: 'نؤمن بأن الجمال الحقيقي يبدأ بالمكونات الطبيعية النقية. كل زيت، زبدة، ومستخلص في موقعنا تم اختياره بعناية بناءً على صفاته الطبيعية وفوائده المثبتة.',
+  aboutImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=700&q=80',
+  aboutBadgeNumber: '+8',
+  aboutBadgeText: 'سنوات في صياغة منتجات التجميل الطبيعي',
   stats: [
     { number: '٤٠+', label: 'مكوناً موثّقاً' },
     { number: '١٥+', label: 'مصدراً علمياً' },
@@ -24,6 +28,7 @@ const defaultHomepage = {
 const defaultAbout = {
   heroTitle: 'جمال طبيعي بقلب عربي',
   heroSubtitle: 'موسوعة حيّة لكل ما يخص الجمال الطبيعي — مكونات، وصفات، ومعرفة.',
+  heroImage: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1400&q=80',
   mission: 'نحو عالمٍ تعرف فيه كل امرأة ما تضعه على بشرتها وشعرها. نُبسّط علم المكونات الطبيعية لتكون العناية واعية، بسيطة، وجميلة.',
   values: [
     { title: 'الشفافية', description: 'لا أسرار، لا مبالغات. نشرح كل مكون بوضوح.' },

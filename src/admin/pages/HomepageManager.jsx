@@ -55,6 +55,11 @@ export default function HomepageManager() {
           <h2 className="font-bold text-neutral-800 mb-4">Hero Section</h2>
           <div className="space-y-4">
             <div>
+              <label className={labelClass}>Background Image URL</label>
+              <input className={inputClass} value={form.heroImage} onChange={e => handleChange('heroImage', e.target.value)} placeholder="https://..." />
+              {form.heroImage && <img src={form.heroImage} alt="" className="mt-2 w-full h-32 object-cover rounded-xl" onError={e => e.target.style.display='none'} />}
+            </div>
+            <div>
               <label className={labelClass}>Title (supports HTML)</label>
               <input className={inputClass} value={form.heroTitle} onChange={e => handleChange('heroTitle', e.target.value)} />
             </div>
@@ -69,6 +74,21 @@ export default function HomepageManager() {
         <div className="bg-white rounded-2xl border border-neutral-100 p-6">
           <h2 className="font-bold text-neutral-800 mb-4">About Preview Section</h2>
           <div className="space-y-4">
+            <div>
+              <label className={labelClass}>Image URL</label>
+              <input className={inputClass} value={form.aboutImage} onChange={e => handleChange('aboutImage', e.target.value)} placeholder="https://..." />
+              {form.aboutImage && <img src={form.aboutImage} alt="" className="mt-2 w-full h-32 object-cover rounded-xl" onError={e => e.target.style.display='none'} />}
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className={labelClass}>Badge Number</label>
+                <input className={inputClass} value={form.aboutBadgeNumber} onChange={e => handleChange('aboutBadgeNumber', e.target.value)} placeholder="+8" />
+              </div>
+              <div>
+                <label className={labelClass}>Badge Text</label>
+                <input className={inputClass} value={form.aboutBadgeText} onChange={e => handleChange('aboutBadgeText', e.target.value)} placeholder="سنوات..." />
+              </div>
+            </div>
             <div>
               <label className={labelClass}>Title</label>
               <input className={inputClass} value={form.aboutTitle} onChange={e => handleChange('aboutTitle', e.target.value)} />

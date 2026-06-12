@@ -12,7 +12,7 @@ export default function About() {
     <main className="pt-28">
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1400&q=80)' }} />
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${about.heroImage})` }} />
         <div className="absolute inset-0 bg-gradient-to-l from-neutral-900/80 via-neutral-900/40 to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
           <FadeInSection>

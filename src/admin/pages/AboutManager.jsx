@@ -71,6 +71,11 @@ export default function AboutManager() {
           <h2 className="font-bold text-neutral-800 mb-4">Hero Section</h2>
           <div className="space-y-4">
             <div>
+              <label className={labelClass}>Background Image URL</label>
+              <input className={inputClass} value={form.heroImage} onChange={e => handleChange('heroImage', e.target.value)} placeholder="https://..." />
+              {form.heroImage && <img src={form.heroImage} alt="" className="mt-2 w-full h-32 object-cover rounded-xl" onError={e => e.target.style.display='none'} />}
+            </div>
+            <div>
               <label className={labelClass}>Title</label>
               <input className={inputClass} value={form.heroTitle} onChange={e => handleChange('heroTitle', e.target.value)} />
             </div>
