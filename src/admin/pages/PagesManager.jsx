@@ -84,7 +84,7 @@ export default function PagesManager() {
       icon: Home,
       label: 'Homepage',
       description: 'Hero image, about image, titles, stats, newsletter',
-      expanded: expandedSite === 'home',
+      expanded: expandedSite === 'site-home',
       fields: [
         { key: 'heroImage', label: 'Hero Background Image', type: 'image' },
         { key: 'heroTitle', label: 'Hero Title (HTML)', type: 'text' },
@@ -103,7 +103,7 @@ export default function PagesManager() {
       icon: Info,
       label: 'About Page',
       description: 'Hero image, mission, values, timeline, CTA',
-      expanded: expandedSite === 'about',
+      expanded: expandedSite === 'site-about',
       fields: [
         { key: 'heroImage', label: 'Hero Background Image', type: 'image' },
         { key: 'heroTitle', label: 'Hero Title', type: 'text' },
@@ -118,7 +118,7 @@ export default function PagesManager() {
       icon: Newspaper,
       label: 'Articles Page',
       description: 'Listing page banner, title, subtitle',
-      expanded: expandedSite === 'articles',
+      expanded: expandedSite === 'site-articles',
       fields: [
         { key: 'heroImage', label: 'Banner Image', type: 'image' },
         { key: 'heroTitle', label: 'Page Title', type: 'text' },
@@ -132,7 +132,7 @@ export default function PagesManager() {
       icon: BookOpen,
       label: 'Beauty Guide Page',
       description: 'Listing page banner, title, subtitle',
-      expanded: expandedSite === 'guide',
+      expanded: expandedSite === 'site-guide',
       fields: [
         { key: 'heroImage', label: 'Banner Image', type: 'image' },
         { key: 'heroTitle', label: 'Page Title', type: 'text' },
