@@ -9,6 +9,7 @@ import ArticleDetail from './pages/ArticleDetail';
 import Guide from './pages/Guide';
 import GuideDetail from './pages/GuideDetail';
 import About from './pages/About';
+import PageDetail from './pages/PageDetail';
 
 // Admin imports
 import AdminLayout from './admin/AdminLayout';
@@ -19,6 +20,7 @@ import CategoriesManager from './admin/pages/CategoriesManager';
 import HomepageManager from './admin/pages/HomepageManager';
 import AboutManager from './admin/pages/AboutManager';
 import UsersManager from './admin/pages/UsersManager';
+import PagesManager from './admin/pages/PagesManager';
 import Login from './admin/pages/Login';
 
 function ScrollToTop() {
@@ -51,6 +53,7 @@ function AdminRoutes() {
           <Route path="/homepage" element={<HomepageManager />} />
           <Route path="/about" element={<AboutManager />} />
           <Route path="/users" element={<UsersManager />} />
+          <Route path="/pages" element={<PagesManager />} />
         </Routes>
       </AdminLayout>
     </ProtectedRoute>
@@ -71,6 +74,7 @@ function MainLayout() {
         <Route path="/guide" element={<Guide />} />
         <Route path="/guide/:slug" element={<GuideDetail />} />
         <Route path="/about" element={<About />} />
+        <Route path="/page/:slug" element={<PageDetail />} />
       </Routes>
       {!isAdmin && <Footer />}
     </>
