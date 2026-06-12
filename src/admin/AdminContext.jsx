@@ -45,6 +45,18 @@ const defaultAbout = {
   ctaSubtext: 'انضمي إلى آلاف السيدات اللواتي يثقن بمعرفتنا.',
 };
 
+const defaultArticlesPage = {
+  heroImage: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1400&q=80',
+  heroTitle: 'المقالات',
+  heroSubtitle: 'موسوعة من المقالات التعليمية حول مكونات التجميل الطبيعية، العناية بالبشرة والشعر.',
+};
+
+const defaultGuidePage = {
+  heroImage: 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=1400&q=80',
+  heroTitle: 'دليل صانعي الجمال',
+  heroSubtitle: 'موسوعة منسّقة لمكونات الجمال الطبيعي — أصولها، فوائدها، وطرق استخدامها.',
+};
+
 function loadStore() {
   try {
     const raw = localStorage.getItem(STORE_KEY);
@@ -80,10 +92,19 @@ function getInitialState() {
     guideEntries: defaultEntries,
     homepage: defaultHomepage,
     about: defaultAbout,
+    articlesPage: defaultArticlesPage,
+    guidePage: defaultGuidePage,
     pages: [],
   };
   if (saved) {
-    return { ...defaults, ...saved };
+    return {
+      ...defaults,
+      ...saved,
+      homepage: { ...defaults.homepage, ...(saved.homepage || {}) },
+      about: { ...defaults.about, ...(saved.about || {}) },
+      articlesPage: { ...defaults.articlesPage, ...(saved.articlesPage || {}) },
+      guidePage: { ...defaults.guidePage, ...(saved.guidePage || {}) },
+    };
   }
   return defaults;
 }
@@ -131,6 +152,8 @@ export function AdminProvider({ children }) {
       guideEntries: defaultEntries,
       homepage: defaultHomepage,
       about: defaultAbout,
+      articlesPage: defaultArticlesPage,
+      guidePage: defaultGuidePage,
       pages: [],
     };
     setData(fresh);
@@ -245,6 +268,22 @@ export function AdminProvider({ children }) {
     }));
   }, []);
 
+  // ---- Articles Page ----
+  const updateArticlesPage = useCallback((updates) => {
+    setData(prev => ({
+      ...prev,
+      articlesPage: { ...prev.articlesPage, ...updates },
+    }));
+  }, []);
+
+  // ---- Guide Page ----
+  const updateGuidePage = useCallback((updates) => {
+    setData(prev => ({
+      ...prev,
+      guidePage: { ...prev.guidePage, ...updates },
+    }));
+  }, []);
+
   // ---- Custom Pages ----
   const addPage = useCallback((page) => {
     setData(prev => ({
@@ -290,6 +329,10 @@ export function AdminProvider({ children }) {
       deleteCategory,
       updateHomepage,
       updateAbout,
+      articlesPage,
+      updateArticlesPage,
+      guidePage,
+      updateGuidePage,
       addPage,
       updatePage,
       deletePage,

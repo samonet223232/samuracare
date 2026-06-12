@@ -5,7 +5,7 @@ import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
 
 export default function Articles() {
-  const { articles } = useAdmin();
+  const { articles, articlesPage } = useAdmin();
   const categories = ['الكل', ...Array.from(new Set(articles.map(a => a.category)))];
   const [active, setActive] = useState('الكل');
   const filtered = active === 'الكل' ? articles : articles.filter(a => a.category === active);
@@ -14,15 +14,17 @@ export default function Articles() {
   return (
     <main className="pt-28">
       {/* Header */}
-      <section className="bg-cream-50 py-20 px-6 text-center border-b border-cream-200">
-        <FadeInSection>
-          <p className="text-xs font-sans tracking-widest text-olive-600 mb-3">معرفة الجمال</p>
-          <h1 className="font-serif text-5xl md:text-6xl font-semibold text-neutral-800 mb-4">المقالات والأدلة</h1>
-          <p className="text-xs text-olive-500 font-sans mb-5">Articles & Beauty Guides</p>
-          <p className="text-neutral-600 max-w-xl mx-auto text-base">
-            محتوى عميق وصادق عن الجمال الطبيعي. تعرّفي على ما تفعله المكونات، وكيف تستخدمينها، وكيف تبنين روتيناً بسيطاً وفعّالاً.
-          </p>
-        </FadeInSection>
+      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${articlesPage.heroImage})` }} />
+        <div className="absolute inset-0 bg-gradient-to-bl from-white/70 via-white/30 to-transparent" />
+        <div className="relative z-10 text-center max-w-3xl mx-auto px-6 py-20">
+          <FadeInSection>
+            <p className="text-xs font-sans tracking-widest text-olive-600 mb-3">معرفة الجمال</p>
+            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-neutral-800 mb-4">{articlesPage.heroTitle}</h1>
+            <p className="text-xs text-olive-500 font-sans mb-5">Articles & Beauty Guides</p>
+            <p className="text-neutral-600 max-w-xl mx-auto text-base">{articlesPage.heroSubtitle}</p>
+          </FadeInSection>
+        </div>
       </section>
 
       {/* Filter */}

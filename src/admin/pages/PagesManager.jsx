@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useAdmin } from '../AdminContext';
-import { FileText, Plus, X, Eye, EyeOff, Pencil, Trash2, ChevronUp, ChevronDown, Home, Info, ChevronDown as ChevronDownIcon } from 'lucide-react';
+import { FileText, Plus, X, Eye, EyeOff, Pencil, Trash2, ChevronUp, ChevronDown, Home, Info, BookOpen, Newspaper, ChevronDown as ChevronDownIcon } from 'lucide-react';
 
 const emptyForm = { title: '', slug: '', content: '', showInHeader: true, order: 0 };
 
 export default function PagesManager() {
-  const { pages, addPage, updatePage, deletePage, homepage, updateHomepage, about, updateAbout } = useAdmin();
+  const { pages, addPage, updatePage, deletePage, homepage, updateHomepage, about, updateAbout, articlesPage, updateArticlesPage, guidePage, updateGuidePage } = useAdmin();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(emptyForm);
@@ -83,7 +83,7 @@ export default function PagesManager() {
       id: 'site-home',
       icon: Home,
       label: 'Homepage',
-      description: 'Hero image, about image, titles',
+      description: 'Hero image, about image, titles, stats, newsletter',
       expanded: expandedSite === 'home',
       fields: [
         { key: 'heroImage', label: 'Hero Background Image', type: 'image' },
@@ -102,7 +102,7 @@ export default function PagesManager() {
       id: 'site-about',
       icon: Info,
       label: 'About Page',
-      description: 'Hero image, mission, values, timeline',
+      description: 'Hero image, mission, values, timeline, CTA',
       expanded: expandedSite === 'about',
       fields: [
         { key: 'heroImage', label: 'Hero Background Image', type: 'image' },
@@ -112,6 +112,34 @@ export default function PagesManager() {
       ],
       data: about,
       updater: updateAbout,
+    },
+    {
+      id: 'site-articles',
+      icon: Newspaper,
+      label: 'Articles Page',
+      description: 'Listing page banner, title, subtitle',
+      expanded: expandedSite === 'articles',
+      fields: [
+        { key: 'heroImage', label: 'Banner Image', type: 'image' },
+        { key: 'heroTitle', label: 'Page Title', type: 'text' },
+        { key: 'heroSubtitle', label: 'Page Subtitle', type: 'textarea' },
+      ],
+      data: articlesPage,
+      updater: updateArticlesPage,
+    },
+    {
+      id: 'site-guide',
+      icon: BookOpen,
+      label: 'Beauty Guide Page',
+      description: 'Listing page banner, title, subtitle',
+      expanded: expandedSite === 'guide',
+      fields: [
+        { key: 'heroImage', label: 'Banner Image', type: 'image' },
+        { key: 'heroTitle', label: 'Page Title', type: 'text' },
+        { key: 'heroSubtitle', label: 'Page Subtitle', type: 'textarea' },
+      ],
+      data: guidePage,
+      updater: updateGuidePage,
     },
   ];
 

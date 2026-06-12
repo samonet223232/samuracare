@@ -5,7 +5,7 @@ import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
 
 export default function Guide() {
-  const { guideCategories, guideEntries } = useAdmin();
+  const { guideCategories, guideEntries, guidePage } = useAdmin();
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const categoryParam = searchParams.get('category') || 'all';
@@ -26,16 +26,14 @@ export default function Guide() {
     <main className="pt-28">
       {/* Header */}
       <section className="relative py-28 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=1400&q=80)' }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${guidePage.heroImage})` }} />
         <div className="absolute inset-0 bg-neutral-900/75" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <FadeInSection>
             <p className="text-xs font-sans tracking-widest text-olive-300 mb-3">مكتبة المرجع</p>
-            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-white mb-4">دليل صانعي الجمال</h1>
+            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-white mb-4">{guidePage.heroTitle}</h1>
             <p className="text-sm text-olive-300 font-sans mb-3">Beauty Makers Guide</p>
-            <p className="text-neutral-200 max-w-xl mx-auto text-base">
-              موسوعة حيّة لمكونات الجمال الطبيعي. اعرفي ما تستخدمينه — أصله، فوائده، طريقة استخدامه، وأي تحذيرات ضرورية.
-            </p>
+            <p className="text-neutral-200 max-w-xl mx-auto text-base">{guidePage.heroSubtitle}</p>
           </FadeInSection>
         </div>
       </section>
