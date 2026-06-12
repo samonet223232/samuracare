@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAdmin } from '../AdminContext';
 import { FileText, Plus, X, Eye, EyeOff, Pencil, Trash2, ChevronUp, ChevronDown, Home, Info, BookOpen, Newspaper, ChevronDown as ChevronDownIcon } from 'lucide-react';
+import ImageUpload from '../components/ImageUpload';
 
 const emptyForm = { title: '', slug: '', content: '', showInHeader: true, order: 0 };
 
@@ -86,10 +87,10 @@ export default function PagesManager() {
       description: 'Hero image, about image, titles, stats, newsletter',
       expanded: expandedSite === 'site-home',
       fields: [
-        { key: 'heroImage', label: 'Hero Background Image', type: 'image' },
+        { key: 'heroImage', label: 'Hero Background Image', type: 'image', sizeHint: 'hero' },
         { key: 'heroTitle', label: 'Hero Title (HTML)', type: 'text' },
         { key: 'heroSubtitle', label: 'Hero Subtitle', type: 'textarea' },
-        { key: 'aboutImage', label: 'About Section Image', type: 'image' },
+        { key: 'aboutImage', label: 'About Section Image', type: 'image', sizeHint: 'square' },
         { key: 'aboutBadgeNumber', label: 'Badge Number', type: 'text' },
         { key: 'aboutBadgeText', label: 'Badge Text', type: 'text' },
         { key: 'aboutTitle', label: 'About Title', type: 'text' },
@@ -105,7 +106,7 @@ export default function PagesManager() {
       description: 'Hero image, mission, values, timeline, CTA',
       expanded: expandedSite === 'site-about',
       fields: [
-        { key: 'heroImage', label: 'Hero Background Image', type: 'image' },
+        { key: 'heroImage', label: 'Hero Background Image', type: 'image', sizeHint: 'hero' },
         { key: 'heroTitle', label: 'Hero Title', type: 'text' },
         { key: 'heroSubtitle', label: 'Hero Subtitle', type: 'textarea' },
         { key: 'mission', label: 'Mission', type: 'textarea' },
@@ -120,7 +121,7 @@ export default function PagesManager() {
       description: 'Listing page banner, title, subtitle',
       expanded: expandedSite === 'site-articles',
       fields: [
-        { key: 'heroImage', label: 'Banner Image', type: 'image' },
+        { key: 'heroImage', label: 'Banner Image', type: 'image', sizeHint: 'banner' },
         { key: 'heroTitle', label: 'Page Title', type: 'text' },
         { key: 'heroSubtitle', label: 'Page Subtitle', type: 'textarea' },
       ],
@@ -134,7 +135,7 @@ export default function PagesManager() {
       description: 'Listing page banner, title, subtitle',
       expanded: expandedSite === 'site-guide',
       fields: [
-        { key: 'heroImage', label: 'Banner Image', type: 'image' },
+        { key: 'heroImage', label: 'Banner Image', type: 'image', sizeHint: 'banner' },
         { key: 'heroTitle', label: 'Page Title', type: 'text' },
         { key: 'heroSubtitle', label: 'Page Subtitle', type: 'textarea' },
       ],
@@ -184,15 +185,11 @@ export default function PagesManager() {
                         <div key={field.key} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
                           <label className={labelClass}>{field.label}</label>
                           {field.type === 'image' ? (
-                            <>
-                              <input className={inputClass} value={site.data[field.key] || ''}
-                                onChange={e => site.updater({ [field.key]: e.target.value })} placeholder="https://..." />
-                              {site.data[field.key] && (
-                                <img src={site.data[field.key]} alt=""
-                                  className="mt-2 w-full h-24 object-cover rounded-lg border border-neutral-100"
-                                  onError={e => e.target.style.display='none'} />
-                              )}
-                            </>
+                            <ImageUpload
+                              value={site.data[field.key] || ''}
+                              onChange={(val) => site.updater({ [field.key]: val })}
+                              sizeHint={field.sizeHint || 'hero'}
+                            />
                           ) : field.type === 'textarea' ? (
                             <textarea className={inputClass + ' h-24'} value={site.data[field.key] || ''}
                               onChange={e => site.updater({ [field.key]: e.target.value })} />

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Plus, Edit3, Trash2, ArrowLeft } from 'lucide-react';
 import { useAdmin } from '../AdminContext';
+import ImageUpload from '../components/ImageUpload';
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim() || 'untitled';
@@ -76,9 +77,12 @@ function ArticleForm({ article, onSave, onCancel }) {
             <input className={inputClass} type="date" value={form.date} onChange={e => handleChange('date', e.target.value)} />
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 mb-1.5">Image URL</label>
-            <input className={inputClass} value={form.image} onChange={e => handleChange('image', e.target.value)} placeholder="https://..." dir="ltr" />
-            {form.image && <img src={form.image} alt="" className="mt-2 w-full h-32 rounded-xl object-cover" />}
+            <ImageUpload
+              value={form.image}
+              onChange={(val) => handleChange('image', val)}
+              label="Article Image"
+              sizeHint="thumbnail"
+            />
           </div>
           <label className="flex items-center gap-3 cursor-pointer">
             <input type="checkbox" checked={form.featured} onChange={e => handleChange('featured', e.target.checked)} className="w-4 h-4 rounded border-neutral-300 text-olive-500 focus:ring-olive-400" />

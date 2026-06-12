@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Plus, Edit3, Trash2, ArrowLeft } from 'lucide-react';
 import { useAdmin } from '../AdminContext';
+import ImageUpload from '../components/ImageUpload';
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim() || 'untitled';
@@ -111,9 +112,12 @@ function GuideForm({ entry, onSave, onCancel }) {
         </div>
       </div>
       <div>
-        <label className="block text-xs font-medium text-neutral-500 mb-1.5">Image URL</label>
-        <input className={inputClass} value={form.image} onChange={e => handleChange('image', e.target.value)} placeholder="https://..." dir="ltr" />
-        {form.image && <img src={form.image} alt="" className="mt-2 h-28 rounded-xl object-cover" />}
+        <ImageUpload
+          value={form.image}
+          onChange={(val) => handleChange('image', val)}
+          label="Entry Image"
+          sizeHint="square"
+        />
       </div>
       <div>
         <label className="block text-xs font-medium text-neutral-500 mb-1.5">Related Articles (one slug per line)</label>
