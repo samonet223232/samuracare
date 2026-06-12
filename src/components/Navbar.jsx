@@ -4,6 +4,7 @@ import { Menu, X, Search } from 'lucide-react';
 import { useAdmin } from '../admin/AdminContext';
 
 const coreLinks = [
+  { to: '/', label: 'الرئيسية' },
   { to: '/articles', label: 'المقالات' },
   { to: '/guide', label: 'دليل الجمال' },
   { to: '/about', label: 'عنّا' },
