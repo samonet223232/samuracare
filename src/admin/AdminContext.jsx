@@ -95,7 +95,7 @@ function getInitialState() {
     articlesPage: defaultArticlesPage,
     guidePage: defaultGuidePage,
     pages: [],
-    maintenanceMode: false,
+    maintenanceMode: true,
   };
   if (saved) {
     return {
@@ -105,6 +105,7 @@ function getInitialState() {
       about: { ...defaults.about, ...(saved.about || {}) },
       articlesPage: { ...defaults.articlesPage, ...(saved.articlesPage || {}) },
       guidePage: { ...defaults.guidePage, ...(saved.guidePage || {}) },
+      maintenanceMode: true,
     };
   }
   return defaults;
@@ -156,7 +157,7 @@ export function AdminProvider({ children }) {
       articlesPage: defaultArticlesPage,
       guidePage: defaultGuidePage,
       pages: [],
-      maintenanceMode: false,
+      maintenanceMode: true,
     };
     setData(fresh);
     saveStore(fresh);
