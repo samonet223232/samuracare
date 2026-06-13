@@ -66,7 +66,7 @@ function MainLayout() {
   const isAdmin = location.pathname.startsWith('/admin');
   const { maintenanceMode } = useAdmin();
 
-  if (maintenanceMode) {
+  if (maintenanceMode && location.pathname !== '/maintenance') {
     return <MaintenancePage />;
   }
 
@@ -81,6 +81,7 @@ function MainLayout() {
         <Route path="/guide/:slug" element={<GuideDetail />} />
         <Route path="/about" element={<About />} />
         <Route path="/page/:slug" element={<PageDetail />} />
+        <Route path="/maintenance" element={<MaintenancePage />} />
       </Routes>
       {!isAdmin && <Footer />}
     </>
