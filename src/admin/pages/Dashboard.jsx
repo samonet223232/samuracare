@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { FileText, BookOpen, Tags, Home, Info } from 'lucide-react';
+import { FileText, BookOpen, Tags, Home, Info, Shield } from 'lucide-react';
 import { useAdmin } from '../AdminContext';
 
 export default function Dashboard() {
-  const { articles, guideEntries, guideCategories } = useAdmin();
+  const { articles, guideEntries, guideCategories, maintenanceMode, toggleMaintenance } = useAdmin();
 
   const stats = [
     { label: 'Articles', count: articles.length, icon: FileText, to: '/admin/articles', color: 'text-blue-600 bg-blue-50' },
@@ -31,6 +31,48 @@ export default function Dashboard() {
             <p className="text-sm text-neutral-500 mt-0.5">{s.label}</p>
           </Link>
         ))}
+      </div>
+
+      {/* Maintenance Mode */}
+      <div className="bg-white rounded-2xl border border-neutral-100 p-6 mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${maintenanceMode ? 'bg-amber-50 text-amber-600' : 'bg-olive-50 text-olive-500'}`}>
+              <Shield size={20} />
+            </div>
+            <div>
+              <h2 className="font-bold text-neutral-800">Maintenance Mode</h2>
+              <p className="text-sm text-neutral-500 mt-0.5">
+                {maintenanceMode
+                  ? 'Your website is currently hidden from visitors'
+                  : 'Visitors can see your website normally'}
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={toggleMaintenance}
+            className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-olive-400 focus:ring-offset-2 ${
+              maintenanceMode ? 'bg-amber-500' : 'bg-neutral-200'
+            }`}
+          >
+            <span
+              className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform duration-300 ${
+                maintenanceMode ? 'translate-x-6' : 'translate-x-1'
+              }`}
+            />
+          </button>
+        </div>
+        {maintenanceMode && (
+          <div className="mt-4 pt-4 border-t border-neutral-100">
+            <div className="flex items-start gap-2 text-sm text-amber-600 bg-amber-50 rounded-xl px-4 py-3">
+              <Shield size={16} className="shrink-0 mt-0.5" />
+              <p>
+                Visitors are seeing a maintenance page. Only admins can access the website.
+                Disable maintenance mode to restore public access.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Recent articles */}

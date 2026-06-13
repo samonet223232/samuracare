@@ -95,6 +95,7 @@ function getInitialState() {
     articlesPage: defaultArticlesPage,
     guidePage: defaultGuidePage,
     pages: [],
+    maintenanceMode: false,
   };
   if (saved) {
     return {
@@ -155,6 +156,7 @@ export function AdminProvider({ children }) {
       articlesPage: defaultArticlesPage,
       guidePage: defaultGuidePage,
       pages: [],
+      maintenanceMode: false,
     };
     setData(fresh);
     saveStore(fresh);
@@ -306,6 +308,14 @@ export function AdminProvider({ children }) {
     }));
   }, []);
 
+  // ---- Maintenance Mode ----
+  const toggleMaintenance = useCallback(() => {
+    setData(prev => ({
+      ...prev,
+      maintenanceMode: !prev.maintenanceMode,
+    }));
+  }, []);
+
   return (
     <AdminContext.Provider value={{
       ...data,
@@ -334,6 +344,7 @@ export function AdminProvider({ children }) {
       addPage,
       updatePage,
       deletePage,
+      toggleMaintenance,
     }}>
       {children}
     </AdminContext.Provider>

@@ -10,6 +10,7 @@ import Guide from './pages/Guide';
 import GuideDetail from './pages/GuideDetail';
 import About from './pages/About';
 import PageDetail from './pages/PageDetail';
+import MaintenancePage from './pages/MaintenancePage';
 
 // Admin imports
 import AdminLayout from './admin/AdminLayout';
@@ -63,6 +64,11 @@ function AdminRoutes() {
 function MainLayout() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
+  const { maintenanceMode } = useAdmin();
+
+  if (maintenanceMode) {
+    return <MaintenancePage />;
+  }
 
   return (
     <>
