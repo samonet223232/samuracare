@@ -39,7 +39,7 @@ export default function Login() {
               value={username}
               onChange={e => { setUsername(e.target.value); setError(false); }}
               className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-olive-400 focus:border-transparent transition-all"
-              placeholder="admin"
+              placeholder="Enter username"
               autoFocus
             />
           </div>
@@ -64,10 +64,6 @@ export default function Login() {
           >
             Sign In
           </button>
-
-          <p className="text-center text-xs text-neutral-400 mt-4">
-            Default: <span className="font-mono text-neutral-500">admin / admin123</span>
-          </p>
         </form>
       </div>
     </div>
