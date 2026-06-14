@@ -115,7 +115,7 @@ try {
     echo "<ol>";
     echo "<li>Delete this file (<code>api/init.php</code>) from your server for security</li>";
     echo "<li>Configure <code>api/db.php</code> with your actual MySQL credentials</li>";
-    echo "<li>Visit your admin panel at <code>/admin</code> and login with: <strong>admin / admin123</strong></li>";
+    echo "<li>Visit your admin panel at <code>/backend</code> and login with: <strong>admin / admin123</strong></li>";
     echo "</ol>";
 
 } catch (Exception $e) {

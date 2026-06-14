@@ -85,13 +85,14 @@ if ($action === 'checkAuth') {
         jsonResponse([
             'authenticated' => true,
             'user' => [
-                'id' => $_SESSION['user_id'],
+                'id' => (int)$_SESSION['user_id'],
                 'username' => $_SESSION['username'],
                 'role' => $_SESSION['role'],
             ]
         ]);
     }
-    jsonResponse(['authenticated' => false], 401);
+    // Return 200 with authenticated:false (not 401) so the frontend can detect unauthenticated state cleanly
+    jsonResponse(['authenticated' => false]);
 }
 
 // ─── ALL ROUTES BELOW REQUIRE AUTH ─────────────────────
