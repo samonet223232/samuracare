@@ -22,7 +22,9 @@ import HomepageManager from './admin/pages/HomepageManager';
 import AboutManager from './admin/pages/AboutManager';
 import UsersManager from './admin/pages/UsersManager';
 import PagesManager from './admin/pages/PagesManager';
+import SEOManager from './admin/pages/SEOManager';
 import Login from './admin/pages/Login';
+import { HelmetProvider } from 'react-helmet-async';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -55,6 +57,7 @@ function AdminRoutes() {
           <Route path="/about" element={<AboutManager />} />
           <Route path="/users" element={<UsersManager />} />
           <Route path="/pages" element={<PagesManager />} />
+          <Route path="/seo" element={<SEOManager />} />
         </Routes>
       </AdminLayout>
     </ProtectedRoute>
@@ -90,12 +93,14 @@ function MainLayout() {
 
 export default function App() {
   return (
-    <AdminProvider>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/admin/*" element={<AdminRoutes />} />
-        <Route path="/*" element={<MainLayout />} />
-      </Routes>
-    </AdminProvider>
+    <HelmetProvider>
+      <AdminProvider>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/admin/*" element={<AdminRoutes />} />
+          <Route path="/*" element={<MainLayout />} />
+        </Routes>
+      </AdminProvider>
+    </HelmetProvider>
   );
 }

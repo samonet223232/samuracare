@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock } from 'lucide-react';
 import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
+import SeoMeta from '../components/SeoMeta';
 
 export default function Articles() {
-  const { articles, articlesPage } = useAdmin();
+  const { articles, articlesPage, seo } = useAdmin();
+  const meta = seo?.pageMeta?.articles;
   const categories = ['الكل', ...Array.from(new Set(articles.map(a => a.category)))];
   const [active, setActive] = useState('الكل');
   const filtered = active === 'الكل' ? articles : articles.filter(a => a.category === active);
@@ -13,6 +15,7 @@ export default function Articles() {
 
   return (
     <main>
+      <SeoMeta title={meta?.title || 'المقالات'} description={meta?.description} />
       {/* Header */}
       <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${articlesPage.heroImage})` }} />

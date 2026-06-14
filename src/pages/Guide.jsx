@@ -3,9 +3,11 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Search } from 'lucide-react';
 import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
+import SeoMeta from '../components/SeoMeta';
 
 export default function Guide() {
-  const { guideCategories, guideEntries, guidePage } = useAdmin();
+  const { guideCategories, guideEntries, guidePage, seo } = useAdmin();
+  const meta = seo?.pageMeta?.guide;
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const categoryParam = searchParams.get('category') || 'all';
@@ -24,6 +26,7 @@ export default function Guide() {
 
   return (
     <main>
+      <SeoMeta title={meta?.title || 'دليل الجمال'} description={meta?.description} />
       {/* Header */}
       <section className="relative py-28 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${guidePage.heroImage})` }} />

@@ -2,14 +2,29 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Leaf, Sparkles, BookOpen } from 'lucide-react';
 import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
+import SeoMeta from '../components/SeoMeta';
 
 export default function Home() {
-  const { articles, guideCategories, guideEntries, homepage } = useAdmin();
+  const { articles, guideCategories, guideEntries, homepage, seo } = useAdmin();
   const featuredArticles = articles.slice(0, 5);
   const featuredGuide = guideEntries.slice(0, 3);
 
+  const meta = seo?.pageMeta?.home;
+
   return (
     <main>
+      <SeoMeta
+        title={meta?.title || ''}
+        description={meta?.description}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "SamuraCare",
+          "url": typeof window !== 'undefined' ? window.location.origin : '',
+          "inLanguage": "ar",
+          "description": seo?.siteDescription || 'موسوعة المكونات الطبيعية للعناية بالبشرة والشعر',
+        }}
+      />
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div

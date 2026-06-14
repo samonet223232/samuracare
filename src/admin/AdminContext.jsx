@@ -57,6 +57,14 @@ const defaultGuidePage = {
   heroSubtitle: 'موسوعة منسّقة لمكونات الجمال الطبيعي — أصولها، فوائدها، وطرق استخدامها.',
 };
 
+const defaultSEO = {
+  siteTitle: 'SamuraCare | سامورا كير',
+  siteDescription: 'موسوعة المكونات الطبيعية للعناية بالبشرة والشعر. أدلة جمال، مقالات، ووصفات طبيعية.',
+  ogImage: '',
+  twitterHandle: '',
+  pageMeta: {},
+};
+
 function loadStore() {
   try {
     const raw = localStorage.getItem(STORE_KEY);
@@ -95,6 +103,7 @@ function getInitialState() {
     articlesPage: defaultArticlesPage,
     guidePage: defaultGuidePage,
     pages: [],
+    seo: defaultSEO,
     maintenanceMode: false,
   };
   if (saved) {
@@ -105,6 +114,7 @@ function getInitialState() {
       about: { ...defaults.about, ...(saved.about || {}) },
       articlesPage: { ...defaults.articlesPage, ...(saved.articlesPage || {}) },
       guidePage: { ...defaults.guidePage, ...(saved.guidePage || {}) },
+      seo: { ...defaults.seo, ...(saved.seo || {}) },
       maintenanceMode: false,
     };
   }
@@ -157,6 +167,7 @@ export function AdminProvider({ children }) {
       articlesPage: defaultArticlesPage,
       guidePage: defaultGuidePage,
       pages: [],
+      seo: defaultSEO,
       maintenanceMode: false,
     };
     setData(fresh);
@@ -309,6 +320,14 @@ export function AdminProvider({ children }) {
     }));
   }, []);
 
+  // ---- SEO ----
+  const updateSEO = useCallback((updates) => {
+    setData(prev => ({
+      ...prev,
+      seo: { ...prev.seo, ...updates },
+    }));
+  }, []);
+
   // ---- Maintenance Mode ----
   const toggleMaintenance = useCallback(() => {
     setData(prev => ({
@@ -346,6 +365,7 @@ export function AdminProvider({ children }) {
       updatePage,
       deletePage,
       toggleMaintenance,
+      updateSEO,
     }}>
       {children}
     </AdminContext.Provider>

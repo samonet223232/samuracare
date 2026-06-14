@@ -2,14 +2,17 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Heart, Leaf, BookOpen, Shield } from 'lucide-react';
 import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
+import SeoMeta from '../components/SeoMeta';
 
 const valueIcons = [Leaf, BookOpen, Heart, Shield];
 
 export default function About() {
-  const { about } = useAdmin();
+  const { about, seo } = useAdmin();
+  const meta = seo?.pageMeta?.about;
 
   return (
     <main>
+      <SeoMeta title={meta?.title || 'عنّا'} description={meta?.description} />
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${about.heroImage})` }} />

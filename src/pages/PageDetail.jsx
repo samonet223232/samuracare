@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useAdmin } from '../admin/AdminContext';
 import { ArrowRight } from 'lucide-react';
+import SeoMeta from '../components/SeoMeta';
 
 export default function PageDetail() {
   const { slug } = useParams();
@@ -24,7 +25,9 @@ export default function PageDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-cream-50 pt-24">
+    <>
+      <SeoMeta title={page.title} canonical={`/page/${page.slug}`} />
+      <div className="min-h-screen bg-cream-50 pt-24">
       <div className="bg-white border-b border-neutral-100">
         <div className="max-w-4xl mx-auto px-8 py-16">
           <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-neutral-400 hover:text-olive-500 transition-colors mb-4">
@@ -40,5 +43,6 @@ export default function PageDetail() {
           dangerouslySetInnerHTML={{ __html: page.content }} />
       </div>
     </div>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Clock, Calendar } from 'lucide-react';
 import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
+import SeoMeta from '../components/SeoMeta';
 
 function renderContent(text) {
   const lines = text.split('\n');
@@ -39,6 +40,33 @@ export default function ArticleDetail() {
 
   return (
     <main>
+      <SeoMeta
+        title={article.title}
+        description={article.excerpt}
+        ogImage={article.image}
+        ogType="article"
+        canonical={`/articles/${article.slug}`}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": article.title,
+            "description": article.excerpt,
+            "image": article.image,
+            "datePublished": article.date,
+            "inLanguage": "ar",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "/" },
+              { "@type": "ListItem", "position": 2, "name": "المقالات", "item": "/articles" },
+              { "@type": "ListItem", "position": 3, "name": article.title, "item": `/articles/${article.slug}` },
+            ],
+          },
+        ]}
+      />
       <section className="relative h-72 md:h-96 overflow-hidden">
         <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -50,6 +78,14 @@ export default function ArticleDetail() {
       </section>
 
       <article className="max-w-4xl mx-auto px-6 py-12">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-xs text-neutral-400 mb-4" aria-label="Breadcrumb">
+          <Link to="/" className="hover:text-olive-500 transition-colors">الرئيسية</Link>
+          <span>/</span>
+          <Link to="/articles" className="hover:text-olive-500 transition-colors">المقالات</Link>
+          <span>/</span>
+          <span className="text-neutral-600">{article.title}</span>
+        </nav>
         <Link to="/articles" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-olive-500 transition-colors mb-8">
           <ArrowRight size={15} /> العودة إلى المقالات
         </Link>

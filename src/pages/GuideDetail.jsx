@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle } from 'lucide-react';
 import { useAdmin } from '../admin/AdminContext';
 import FadeInSection from '../components/FadeInSection';
+import SeoMeta from '../components/SeoMeta';
 
 export default function GuideDetail() {
   const { guideEntries, guideCategories, articles } = useAdmin();
@@ -23,6 +24,31 @@ export default function GuideDetail() {
 
   return (
     <main>
+      <SeoMeta
+        title={entry.nameAr}
+        description={entry.taglineAr}
+        ogImage={entry.image}
+        canonical={`/guide/${entry.slug}`}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": entry.nameAr,
+            "description": entry.taglineAr,
+            "image": entry.image,
+            "inLanguage": "ar",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "/" },
+              { "@type": "ListItem", "position": 2, "name": "دليل الجمال", "item": "/guide" },
+              { "@type": "ListItem", "position": 3, "name": entry.nameAr, "item": `/guide/${entry.slug}` },
+            ],
+          },
+        ]}
+      />
       <section className="relative h-72 md:h-96 overflow-hidden">
         <img src={entry.image} alt={entry.nameAr} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
@@ -36,6 +62,14 @@ export default function GuideDetail() {
       </section>
 
       <div className="max-w-5xl mx-auto px-6 py-12">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-xs text-neutral-400 mb-4" aria-label="Breadcrumb">
+          <Link to="/" className="hover:text-olive-500 transition-colors">الرئيسية</Link>
+          <span>/</span>
+          <Link to="/guide" className="hover:text-olive-500 transition-colors">دليل الجمال</Link>
+          <span>/</span>
+          <span className="text-neutral-600">{entry.nameAr}</span>
+        </nav>
         <Link to="/guide" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-olive-500 transition-colors mb-10">
           <ArrowRight size={15} /> العودة إلى دليل صانعي الجمال
         </Link>
