@@ -2,8 +2,9 @@ import { createContext, useContext, useState, useEffect, useCallback } from 'rea
 import { articles as defaultArticles } from '../data/articles';
 import { guideCategories as defaultCategories, guideEntries as defaultEntries } from '../data/guide';
 
-const API_URL = '/api/index.php';
+const API_URL = '/api';
 const ADMIN_KEY = 'samura-admin-auth';
+const TOKEN_KEY = 'samura-admin-token';
 
 const defaultHomepage = {
   heroTitle: 'اكتشفي جمالاً طبيعياً،<br/>صُنع بعناية',
@@ -77,14 +78,28 @@ const defaults = {
   maintenanceMode: false,
 };
 
+// ─── TOKEN HELPERS ─────────────────────────────────────
+
+function getToken() {
+  return sessionStorage.getItem(TOKEN_KEY);
+}
+
+function setToken(token) {
+  if (token) sessionStorage.setItem(TOKEN_KEY, token);
+  else sessionStorage.removeItem(TOKEN_KEY);
+}
+
 // ─── API HELPER ─────────────────────────────────────────
 
 async function apiCall(action, extra = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  const token = getToken();
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
   const res = await fetch(API_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({ action, ...extra }),
-    credentials: 'include',
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || 'API request failed');
@@ -214,6 +229,7 @@ export function AdminProvider({ children }) {
         const res = await apiCall('login', { username, password });
         setCurrentUser(res.user);
         setIsAuthenticated(true);
+        setToken(res.token);
         sessionStorage.setItem(ADMIN_KEY, 'true');
         sessionStorage.setItem('samura-current-user', JSON.stringify(res.user));
         return true;
@@ -242,6 +258,7 @@ export function AdminProvider({ children }) {
     setCurrentUser(null);
     sessionStorage.removeItem(ADMIN_KEY);
     sessionStorage.removeItem('samura-current-user');
+    setToken(null);
   }, [apiAvailable]);
 
   // ─── RESET ────────────────────────────────────────────
@@ -260,7 +277,7 @@ export function AdminProvider({ children }) {
   const addUser = useCallback(async (userData) => {
     if (apiAvailable) {
       try {
-        const res = await apiCall('saveUser', { user: { ...userData, id: Date.now() } });
+        await apiCall('saveUser', { user: { ...userData } });
         const fresh = await apiCall('getUsers');
         setUsers(fresh);
         return;
