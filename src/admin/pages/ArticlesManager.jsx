@@ -118,7 +118,7 @@ export default function ArticlesManager() {
           <h1 className="text-2xl font-bold text-neutral-800">Manage Articles</h1>
           <p className="text-sm text-neutral-500 mt-1">{articles.length} article{articles.length !== 1 ? 's' : ''}</p>
         </div>
-        <Link to="/admin/articles/new" className="flex items-center gap-2 bg-olive-500 text-white px-5 py-2.5 rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
+        <Link to="/backend/articles/new" className="flex items-center gap-2 bg-olive-500 text-white px-5 py-2.5 rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
           <Plus size={16} /> New Article
         </Link>
       </div>
@@ -159,7 +159,7 @@ export default function ArticlesManager() {
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex items-center justify-end gap-2">
-                        <Link to={`/admin/articles/${a.id}`} className="p-2 rounded-lg text-neutral-400 hover:text-olive-500 hover:bg-olive-50 transition-all">
+                        <Link to={`/backend/articles/${a.id}`} className="p-2 rounded-lg text-neutral-400 hover:text-olive-500 hover:bg-olive-50 transition-all">
                           <Edit3 size={15} />
                         </Link>
                         <button onClick={() => setDeleteConfirm(a.id)} className="p-2 rounded-lg text-neutral-400 hover:text-red-500 hover:bg-red-50 transition-all">
@@ -208,19 +208,19 @@ export function ArticleEditor() {
     } else {
       updateArticle(article.id, data);
     }
-    navigate('/admin/articles');
+    navigate('/backend/articles');
   };
 
   return (
     <div>
       <div className="flex items-center gap-3 mb-6">
-        <Link to="/admin/articles" className="p-2 rounded-lg text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-all">
+        <Link to="/backend/articles" className="p-2 rounded-lg text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-all">
           <ArrowLeft size={18} />
         </Link>
         <h1 className="text-2xl font-bold text-neutral-800">{isNew ? 'New Article' : 'Edit Article'}</h1>
       </div>
       <div className="bg-white rounded-2xl border border-neutral-100 p-6">
-        <ArticleForm article={article} onSave={handleSave} onCancel={() => navigate('/admin/articles')} />
+        <ArticleForm article={article} onSave={handleSave} onCancel={() => navigate('/backend/articles')} />
       </div>
     </div>
   );

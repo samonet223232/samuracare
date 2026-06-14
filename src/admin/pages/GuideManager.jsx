@@ -152,7 +152,7 @@ export default function GuideManager() {
           <h1 className="text-2xl font-bold text-neutral-800">Manage Beauty Guide</h1>
           <p className="text-sm text-neutral-500 mt-1">{guideEntries.length} entr{guideEntries.length !== 1 ? 'ies' : 'y'}</p>
         </div>
-        <Link to="/admin/guide/new" className="flex items-center gap-2 bg-olive-500 text-white px-5 py-2.5 rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
+        <Link to="/backend/guide/new" className="flex items-center gap-2 bg-olive-500 text-white px-5 py-2.5 rounded-xl hover:bg-olive-600 transition-colors text-sm font-medium">
           <Plus size={16} /> New Entry
         </Link>
       </div>
@@ -187,7 +187,7 @@ export default function GuideManager() {
                     <td className="px-5 py-4 text-neutral-400 text-xs font-mono">{e.id}</td>
                     <td className="px-5 py-4">
                       <div className="flex items-center justify-end gap-2">
-                        <Link to={`/admin/guide/${e.id}`} className="p-2 rounded-lg text-neutral-400 hover:text-olive-500 hover:bg-olive-50 transition-all">
+                        <Link to={`/backend/guide/${e.id}`} className="p-2 rounded-lg text-neutral-400 hover:text-olive-500 hover:bg-olive-50 transition-all">
                           <Edit3 size={15} />
                         </Link>
                         <button onClick={() => setDeleteConfirm(e.id)} className="p-2 rounded-lg text-neutral-400 hover:text-red-500 hover:bg-red-50 transition-all">
@@ -236,19 +236,19 @@ export function GuideEntryEditor() {
     } else {
       updateGuideEntry(id, data);
     }
-    navigate('/admin/guide');
+    navigate('/backend/guide');
   };
 
   return (
     <div>
       <div className="flex items-center gap-3 mb-6">
-        <Link to="/admin/guide" className="p-2 rounded-lg text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-all">
+        <Link to="/backend/guide" className="p-2 rounded-lg text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-all">
           <ArrowLeft size={18} />
         </Link>
         <h1 className="text-2xl font-bold text-neutral-800">{isNew ? 'New Entry' : 'Edit Entry'}</h1>
       </div>
       <div className="bg-white rounded-2xl border border-neutral-100 p-6">
-        <GuideForm entry={entry} onSave={handleSave} onCancel={() => navigate('/admin/guide')} />
+        <GuideForm entry={entry} onSave={handleSave} onCancel={() => navigate('/backend/guide')} />
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     const success = login(username, password);
     if (success) {
-      navigate('/admin');
+      navigate('/backend');
     } else {
       setError(true);
       setTimeout(() => setError(false), 2000);

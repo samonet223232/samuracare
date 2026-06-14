@@ -66,7 +66,7 @@ function AdminRoutes() {
 
 function MainLayout() {
   const location = useLocation();
-  const isAdmin = location.pathname.startsWith('/admin');
+  const isAdmin = location.pathname.startsWith('/backend');
   const { maintenanceMode } = useAdmin();
 
   if (maintenanceMode && location.pathname !== '/maintenance') {
@@ -97,7 +97,7 @@ export default function App() {
       <AdminProvider>
         <ScrollToTop />
         <Routes>
-          <Route path="/admin/*" element={<AdminRoutes />} />
+          <Route path="/backend/*" element={<AdminRoutes />} />
           <Route path="/*" element={<MainLayout />} />
         </Routes>
       </AdminProvider>

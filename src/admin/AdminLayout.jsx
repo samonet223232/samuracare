@@ -6,15 +6,15 @@ import {
 import { useAdmin } from './AdminContext';
 
 const sidebarLinks = [
-  { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
-  { to: '/admin/articles', label: 'Articles', icon: FileText },
-  { to: '/admin/guide', label: 'Beauty Guide', icon: BookOpen },
-  { to: '/admin/categories', label: 'Categories', icon: Tags },
-  { to: '/admin/homepage', label: 'Homepage', icon: Home },
-  { to: '/admin/about', label: 'About Page', icon: Info },
-  { to: '/admin/users', label: 'Users', icon: Users },
-  { to: '/admin/pages', label: 'Pages', icon: File },
-  { to: '/admin/seo', label: 'SEO', icon: Search },
+  { to: '/backend', label: 'Dashboard', icon: LayoutDashboard, exact: true },
+  { to: '/backend/articles', label: 'Articles', icon: FileText },
+  { to: '/backend/guide', label: 'Beauty Guide', icon: BookOpen },
+  { to: '/backend/categories', label: 'Categories', icon: Tags },
+  { to: '/backend/homepage', label: 'Homepage', icon: Home },
+  { to: '/backend/about', label: 'About Page', icon: Info },
+  { to: '/backend/users', label: 'Users', icon: Users },
+  { to: '/backend/pages', label: 'Pages', icon: File },
+  { to: '/backend/seo', label: 'SEO', icon: Search },
 ];
 
 export default function AdminLayout({ children }) {
@@ -46,7 +46,7 @@ export default function AdminLayout({ children }) {
       }`}>
         {/* Sidebar header */}
         <div className="px-6 h-16 flex items-center justify-between border-b border-neutral-100">
-          <Link to="/admin" className="flex items-center gap-2">
+          <Link to="/backend" className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-full bg-olive-500 flex items-center justify-center">
               <span className="text-white text-xs font-bold">A</span>
             </div>
