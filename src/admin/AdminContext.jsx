@@ -2,9 +2,8 @@ import { createContext, useContext, useState, useEffect, useCallback } from 'rea
 import { articles as defaultArticles } from '../data/articles';
 import { guideCategories as defaultCategories, guideEntries as defaultEntries } from '../data/guide';
 
+const API_URL = '/api/index.php';
 const ADMIN_KEY = 'samura-admin-auth';
-const STORE_KEY = 'samura-content';
-const USERS_KEY = 'samura-users';
 
 const defaultHomepage = {
   heroTitle: 'اكتشفي جمالاً طبيعياً،<br/>صُنع بعناية',
@@ -65,19 +64,50 @@ const defaultSEO = {
   pageMeta: {},
 };
 
-function loadStore() {
-  try {
-    const raw = localStorage.getItem(STORE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return null;
+const defaults = {
+  articles: defaultArticles,
+  guideCategories: defaultCategories,
+  guideEntries: defaultEntries,
+  homepage: defaultHomepage,
+  about: defaultAbout,
+  articlesPage: defaultArticlesPage,
+  guidePage: defaultGuidePage,
+  pages: [],
+  seo: defaultSEO,
+  maintenanceMode: false,
+};
+
+// ─── API HELPER ─────────────────────────────────────────
+
+async function apiCall(action, extra = {}) {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action, ...extra }),
+    credentials: 'include',
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'API request failed');
+  return data;
 }
 
-function saveStore(data) {
+// ─── LOCALSTORAGE FALLBACK ─────────────────────────────
+
+const STORE_KEY = 'samura-content';
+const USERS_KEY = 'samura-users';
+
+function loadLocalStore() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+function saveLocalStore(data) {
   localStorage.setItem(STORE_KEY, JSON.stringify(data));
 }
 
-function loadUsers() {
+function loadLocalUsers() {
   try {
     const raw = localStorage.getItem(USERS_KEY);
     if (raw) {
@@ -88,253 +118,371 @@ function loadUsers() {
   return [{ id: 1, username: 'admin', password: 'admin123', role: 'admin' }];
 }
 
-function saveUsers(users) {
+function saveLocalUsers(users) {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
-
-function getInitialState() {
-  const saved = loadStore();
-  const defaults = {
-    articles: defaultArticles,
-    guideCategories: defaultCategories,
-    guideEntries: defaultEntries,
-    homepage: defaultHomepage,
-    about: defaultAbout,
-    articlesPage: defaultArticlesPage,
-    guidePage: defaultGuidePage,
-    pages: [],
-    seo: defaultSEO,
-    maintenanceMode: false,
-  };
-  if (saved) {
-    return {
-      ...defaults,
-      ...saved,
-      homepage: { ...defaults.homepage, ...(saved.homepage || {}) },
-      about: { ...defaults.about, ...(saved.about || {}) },
-      articlesPage: { ...defaults.articlesPage, ...(saved.articlesPage || {}) },
-      guidePage: { ...defaults.guidePage, ...(saved.guidePage || {}) },
-      seo: { ...defaults.seo, ...(saved.seo || {}) },
-      maintenanceMode: false,
-    };
-  }
-  return defaults;
 }
 
 const AdminContext = createContext(null);
 
 export function AdminProvider({ children }) {
-  const [data, setData] = useState(getInitialState);
-  const [users, setUsers] = useState(loadUsers);
+  const [data, setData] = useState(defaults);
+  const [users, setUsers] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return sessionStorage.getItem(ADMIN_KEY) === 'true';
   });
-  const [currentUser, setCurrentUser] = useState(() => {
-    const raw = sessionStorage.getItem('samura-current-user');
-    return raw ? JSON.parse(raw) : null;
-  });
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [apiAvailable, setApiAvailable] = useState(false);
 
-  // Persist
-  useEffect(() => { saveStore(data); }, [data]);
-  useEffect(() => { saveUsers(users); }, [users]);
+  // ─── INIT: Load from API or localStorage ──────────────
 
-  const login = useCallback((username, password) => {
+  useEffect(() => {
+    let cancelled = false;
+
+    async function init() {
+      try {
+        // Try API first
+        const check = await apiCall('checkAuth');
+        if (check.authenticated) {
+          setCurrentUser(check.user);
+          setIsAuthenticated(true);
+          sessionStorage.setItem(ADMIN_KEY, 'true');
+        }
+
+        const content = await apiCall('getAll');
+        if (!cancelled) {
+          setData(prev => ({
+            ...prev,
+            ...content,
+            homepage: { ...prev.homepage, ...(content.homepage || {}) },
+            about: { ...prev.about, ...(content.about || {}) },
+            articlesPage: { ...prev.articlesPage, ...(content.articlesPage || {}) },
+            guidePage: { ...prev.guidePage, ...(content.guidePage || {}) },
+            seo: { ...prev.seo, ...(content.seo || {}) },
+          }));
+          setApiAvailable(true);
+        }
+      } catch {
+        // API unavailable — fall back to localStorage
+        const saved = loadLocalStore();
+        if (saved && !cancelled) {
+          setData(prev => ({
+            ...prev,
+            ...saved,
+            homepage: { ...prev.homepage, ...(saved.homepage || {}) },
+            about: { ...prev.about, ...(saved.about || {}) },
+            articlesPage: { ...prev.articlesPage, ...(saved.articlesPage || {}) },
+            guidePage: { ...prev.guidePage, ...(saved.guidePage || {}) },
+            seo: { ...prev.seo, ...(saved.seo || {}) },
+          }));
+        }
+        if (!cancelled) {
+          setUsers(loadLocalUsers());
+        }
+      }
+
+      if (!cancelled) setLoading(false);
+    }
+
+    init();
+    return () => { cancelled = true; };
+  }, []);
+
+  // ─── FALLBACK PERSISTENCE ─────────────────────────────
+
+  useEffect(() => {
+    if (!apiAvailable) saveLocalStore(data);
+  }, [data, apiAvailable]);
+
+  useEffect(() => {
+    if (!apiAvailable) saveLocalUsers(users);
+  }, [users, apiAvailable]);
+
+  // ─── API PERSISTENCE HELPERS ──────────────────────────
+
+  const apiSave = useCallback((key, value) => {
+    if (apiAvailable) {
+      apiCall('saveContent', { key, value }).catch(() => {});
+    }
+  }, [apiAvailable]);
+
+  // ─── AUTH ─────────────────────────────────────────────
+
+  const login = useCallback(async (username, password) => {
+    if (apiAvailable) {
+      try {
+        const res = await apiCall('login', { username, password });
+        setCurrentUser(res.user);
+        setIsAuthenticated(true);
+        sessionStorage.setItem(ADMIN_KEY, 'true');
+        sessionStorage.setItem('samura-current-user', JSON.stringify(res.user));
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    // Fallback: localStorage auth
     const user = users.find(u => u.username === username && u.password === password);
     if (user) {
-      setIsAuthenticated(true);
       setCurrentUser(user);
+      setIsAuthenticated(true);
       sessionStorage.setItem(ADMIN_KEY, 'true');
       sessionStorage.setItem('samura-current-user', JSON.stringify(user));
       return true;
     }
     return false;
-  }, [users]);
+  }, [apiAvailable, users]);
 
   const logout = useCallback(() => {
+    if (apiAvailable) {
+      apiCall('logout').catch(() => {});
+    }
     setIsAuthenticated(false);
     setCurrentUser(null);
     sessionStorage.removeItem(ADMIN_KEY);
     sessionStorage.removeItem('samura-current-user');
-  }, []);
+  }, [apiAvailable]);
+
+  // ─── RESET ────────────────────────────────────────────
 
   const resetData = useCallback(() => {
-    const fresh = {
-      articles: defaultArticles,
-      guideCategories: defaultCategories,
-      guideEntries: defaultEntries,
-      homepage: defaultHomepage,
-      about: defaultAbout,
-      articlesPage: defaultArticlesPage,
-      guidePage: defaultGuidePage,
-      pages: [],
-      seo: defaultSEO,
-      maintenanceMode: false,
-    };
-    setData(fresh);
-    saveStore(fresh);
-  }, []);
+    setData(defaults);
+    if (apiAvailable) {
+      Object.entries(defaults).forEach(([key, value]) => {
+        apiCall('saveContent', { key, value }).catch(() => {});
+      });
+    }
+  }, [apiAvailable]);
 
-  // ---- User Management ----
-  const addUser = useCallback((user) => {
-    setUsers(prev => [...prev, { ...user, id: Date.now() }]);
-  }, []);
+  // ─── USERS ────────────────────────────────────────────
 
-  const updateUser = useCallback((id, updates) => {
+  const addUser = useCallback(async (userData) => {
+    if (apiAvailable) {
+      try {
+        const res = await apiCall('saveUser', { user: { ...userData, id: Date.now() } });
+        const fresh = await apiCall('getUsers');
+        setUsers(fresh);
+        return;
+      } catch {}
+    }
+    setUsers(prev => [...prev, { ...userData, id: Date.now() }]);
+  }, [apiAvailable]);
+
+  const updateUser = useCallback(async (id, updates) => {
+    if (apiAvailable) {
+      try {
+        await apiCall('saveUser', { user: { id, ...updates } });
+        const fresh = await apiCall('getUsers');
+        setUsers(fresh);
+        if (currentUser && currentUser.id === id) {
+          const updated = fresh.find(u => u.id === id);
+          if (updated) {
+            setCurrentUser(updated);
+            sessionStorage.setItem('samura-current-user', JSON.stringify(updated));
+          }
+        }
+        return;
+      } catch {}
+    }
     setUsers(prev => prev.map(u => u.id === id ? { ...u, ...updates } : u));
-    // If updating current user's own record, sync session
     if (currentUser && currentUser.id === id) {
-      const updated = users.find(u => u.id === id);
-      if (updated) {
-        const synced = { ...updated, ...updates };
-        setCurrentUser(synced);
-        sessionStorage.setItem('samura-current-user', JSON.stringify(synced));
-      }
+      const synced = { ...currentUser, ...updates };
+      setCurrentUser(synced);
+      sessionStorage.setItem('samura-current-user', JSON.stringify(synced));
     }
-  }, [currentUser, users]);
+  }, [apiAvailable, currentUser]);
 
-  const deleteUser = useCallback((id) => {
+  const deleteUser = useCallback(async (id) => {
+    if (apiAvailable) {
+      try {
+        await apiCall('deleteUser', { id });
+        const fresh = await apiCall('getUsers');
+        setUsers(fresh);
+        if (currentUser && currentUser.id === id) {
+          logout();
+        }
+        return;
+      } catch {}
+    }
     setUsers(prev => prev.filter(u => u.id !== id));
-    // Log out if deleting own account
-    if (currentUser && currentUser.id === id) {
-      logout();
-    }
-  }, [currentUser, logout]);
+    if (currentUser && currentUser.id === id) logout();
+  }, [apiAvailable, currentUser, logout]);
 
-  // ---- Articles ----
+  // ─── ARTICLES ─────────────────────────────────────────
+
   const addArticle = useCallback((article) => {
-    setData(prev => ({
-      ...prev,
-      articles: [{ ...article, id: Date.now() }, ...prev.articles],
-    }));
-  }, []);
+    const newArticle = { ...article, id: Date.now() };
+    setData(prev => ({ ...prev, articles: [newArticle, ...prev.articles] }));
+    if (apiAvailable) {
+      apiCall('saveArticle', { article: newArticle }).catch(() => {});
+    }
+  }, [apiAvailable]);
 
   const updateArticle = useCallback((id, updates) => {
-    setData(prev => ({
-      ...prev,
-      articles: prev.articles.map(a => a.id === id ? { ...a, ...updates } : a),
-    }));
-  }, []);
+    setData(prev => {
+      const articles = prev.articles.map(a => a.id === id ? { ...a, ...updates } : a);
+      if (apiAvailable) {
+        const updated = articles.find(a => a.id === id);
+        if (updated) apiCall('saveArticle', { article: updated }).catch(() => {});
+      }
+      return { ...prev, articles };
+    });
+  }, [apiAvailable]);
 
   const deleteArticle = useCallback((id) => {
-    setData(prev => ({
-      ...prev,
-      articles: prev.articles.filter(a => a.id !== id),
-    }));
-  }, []);
+    setData(prev => ({ ...prev, articles: prev.articles.filter(a => a.id !== id) }));
+    if (apiAvailable) {
+      apiCall('deleteArticle', { id }).catch(() => {});
+    }
+  }, [apiAvailable]);
 
-  // ---- Guide Entries ----
+  // ─── GUIDE ENTRIES ────────────────────────────────────
+
   const addGuideEntry = useCallback((entry) => {
-    setData(prev => ({
-      ...prev,
-      guideEntries: [...prev.guideEntries, entry],
-    }));
-  }, []);
+    setData(prev => ({ ...prev, guideEntries: [...prev.guideEntries, entry] }));
+    if (apiAvailable) {
+      apiCall('saveGuideEntry', { entry }).catch(() => {});
+    }
+  }, [apiAvailable]);
 
   const updateGuideEntry = useCallback((id, updates) => {
-    setData(prev => ({
-      ...prev,
-      guideEntries: prev.guideEntries.map(e => e.id === id ? { ...e, ...updates } : e),
-    }));
-  }, []);
+    setData(prev => {
+      const entries = prev.guideEntries.map(e => e.id === id ? { ...e, ...updates } : e);
+      if (apiAvailable) {
+        const updated = entries.find(e => e.id === id);
+        if (updated) apiCall('saveGuideEntry', { entry: updated }).catch(() => {});
+      }
+      return { ...prev, guideEntries: entries };
+    });
+  }, [apiAvailable]);
 
   const deleteGuideEntry = useCallback((id) => {
-    setData(prev => ({
-      ...prev,
-      guideEntries: prev.guideEntries.filter(e => e.id !== id),
-    }));
-  }, []);
+    setData(prev => ({ ...prev, guideEntries: prev.guideEntries.filter(e => e.id !== id) }));
+    if (apiAvailable) {
+      apiCall('deleteGuideEntry', { id }).catch(() => {});
+    }
+  }, [apiAvailable]);
 
-  // ---- Guide Categories ----
+  // ─── GUIDE CATEGORIES ─────────────────────────────────
+
   const addCategory = useCallback((cat) => {
-    setData(prev => ({
-      ...prev,
-      guideCategories: [...prev.guideCategories, cat],
-    }));
-  }, []);
+    setData(prev => ({ ...prev, guideCategories: [...prev.guideCategories, cat] }));
+    if (apiAvailable) {
+      apiCall('saveCategory', { category: cat }).catch(() => {});
+    }
+  }, [apiAvailable]);
 
   const updateCategory = useCallback((id, updates) => {
-    setData(prev => ({
-      ...prev,
-      guideCategories: prev.guideCategories.map(c => c.id === id ? { ...c, ...updates } : c),
-    }));
-  }, []);
+    setData(prev => {
+      const cats = prev.guideCategories.map(c => c.id === id ? { ...c, ...updates } : c);
+      if (apiAvailable) {
+        const updated = cats.find(c => c.id === id);
+        if (updated) apiCall('saveCategory', { category: updated }).catch(() => {});
+      }
+      return { ...prev, guideCategories: cats };
+    });
+  }, [apiAvailable]);
 
   const deleteCategory = useCallback((id) => {
-    setData(prev => ({
-      ...prev,
-      guideCategories: prev.guideCategories.filter(c => c.id !== id),
-    }));
-  }, []);
+    setData(prev => ({ ...prev, guideCategories: prev.guideCategories.filter(c => c.id !== id) }));
+    if (apiAvailable) {
+      apiCall('deleteCategory', { id }).catch(() => {});
+    }
+  }, [apiAvailable]);
 
-  // ---- Homepage ----
+  // ─── SITE PAGES ───────────────────────────────────────
+
   const updateHomepage = useCallback((updates) => {
-    setData(prev => ({
-      ...prev,
-      homepage: { ...prev.homepage, ...updates },
-    }));
-  }, []);
+    setData(prev => {
+      const homepage = { ...prev.homepage, ...updates };
+      apiSave('homepage', homepage);
+      return { ...prev, homepage };
+    });
+  }, [apiSave]);
 
-  // ---- About ----
   const updateAbout = useCallback((updates) => {
-    setData(prev => ({
-      ...prev,
-      about: { ...prev.about, ...updates },
-    }));
-  }, []);
+    setData(prev => {
+      const about = { ...prev.about, ...updates };
+      apiSave('about', about);
+      return { ...prev, about };
+    });
+  }, [apiSave]);
 
-  // ---- Articles Page ----
   const updateArticlesPage = useCallback((updates) => {
-    setData(prev => ({
-      ...prev,
-      articlesPage: { ...prev.articlesPage, ...updates },
-    }));
-  }, []);
+    setData(prev => {
+      const articlesPage = { ...prev.articlesPage, ...updates };
+      apiSave('articlesPage', articlesPage);
+      return { ...prev, articlesPage };
+    });
+  }, [apiSave]);
 
-  // ---- Guide Page ----
   const updateGuidePage = useCallback((updates) => {
-    setData(prev => ({
-      ...prev,
-      guidePage: { ...prev.guidePage, ...updates },
-    }));
-  }, []);
+    setData(prev => {
+      const guidePage = { ...prev.guidePage, ...updates };
+      apiSave('guidePage', guidePage);
+      return { ...prev, guidePage };
+    });
+  }, [apiSave]);
 
-  // ---- Custom Pages ----
+  // ─── CUSTOM PAGES ─────────────────────────────────────
+
   const addPage = useCallback((page) => {
-    setData(prev => ({
-      ...prev,
-      pages: [...(prev.pages || []), { ...page, id: Date.now() }],
-    }));
-  }, []);
+    setData(prev => {
+      const pages = [...(prev.pages || []), { ...page, id: Date.now() }];
+      apiSave('pages', pages);
+      return { ...prev, pages };
+    });
+  }, [apiSave]);
 
   const updatePage = useCallback((id, updates) => {
-    setData(prev => ({
-      ...prev,
-      pages: (prev.pages || []).map(p => p.id === id ? { ...p, ...updates } : p),
-    }));
-  }, []);
+    setData(prev => {
+      const pages = (prev.pages || []).map(p => p.id === id ? { ...p, ...updates } : p);
+      apiSave('pages', pages);
+      return { ...prev, pages };
+    });
+  }, [apiSave]);
 
   const deletePage = useCallback((id) => {
-    setData(prev => ({
-      ...prev,
-      pages: (prev.pages || []).filter(p => p.id !== id),
-    }));
-  }, []);
+    setData(prev => {
+      const pages = (prev.pages || []).filter(p => p.id !== id);
+      apiSave('pages', pages);
+      return { ...prev, pages };
+    });
+  }, [apiSave]);
 
-  // ---- SEO ----
+  // ─── SEO ──────────────────────────────────────────────
+
   const updateSEO = useCallback((updates) => {
-    setData(prev => ({
-      ...prev,
-      seo: { ...prev.seo, ...updates },
-    }));
-  }, []);
+    setData(prev => {
+      const seo = { ...prev.seo, ...updates };
+      apiSave('seo', seo);
+      return { ...prev, seo };
+    });
+  }, [apiSave]);
 
-  // ---- Maintenance Mode ----
+  // ─── MAINTENANCE MODE ─────────────────────────────────
+
   const toggleMaintenance = useCallback(() => {
-    setData(prev => ({
-      ...prev,
-      maintenanceMode: !prev.maintenanceMode,
-    }));
-  }, []);
+    setData(prev => {
+      const maintenanceMode = !prev.maintenanceMode;
+      if (apiAvailable) {
+        apiCall('saveContent', { key: 'maintenanceMode', value: maintenanceMode }).catch(() => {});
+      }
+      return { ...prev, maintenanceMode };
+    });
+  }, [apiAvailable]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-cream-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 rounded-full border-4 border-olive-200 border-t-olive-500 animate-spin mx-auto mb-4" />
+          <p className="text-neutral-500 text-sm">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <AdminContext.Provider value={{
@@ -345,6 +493,7 @@ export function AdminProvider({ children }) {
       login,
       logout,
       resetData,
+      apiAvailable,
       addUser,
       updateUser,
       deleteUser,
